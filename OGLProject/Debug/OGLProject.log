@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\lasak\desktop\oglproject\oglproject\main.cpp(41): warning C4101: window: neodkazovaná lokální proměnná
+main.obj : error LNK2019: Nerozpoznan² externφ symbol __imp__glfwInit odkazovan² ve funkci _main
+main.obj : error LNK2019: Nerozpoznan² externφ symbol __imp__glfwTerminate odkazovan² ve funkci _main
+C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.exe : fatal error LNK1120: Pocet nerozpoznan²ch externφch typu: 2

@@ -1,52 +1,107 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <iostream>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/vec3.hpp> // glm::vec3
-#include <glm/vec4.hpp> // glm::vec4
-#include <glm/mat4x4.hpp> // glm::mat4
-#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
-#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
-#include <assimp/Importer.hpp> // C++ importer interface
-#include <assimp/scene.h> // aiScene output data structure
-#include <assimp/postprocess.h> // Post processing flags
-
-using namespace glm;
-using namespace std;
-
-//float points[] = {
-//	0.0f, 0.5f, 0.0f,
-//	0.5f, -0.5f, 0.0f,
-//	-0.5f, -0.5f, 0.0f
-//};
-//
-//const char* vertex_shader =
-//"#version 330\n"
-//"layout(location=0) in vec3 vp;"
-//"void main () {"
-//"     gl_Position = vec4 (vp, 1.0);"
-//"}";
-//
-//const char* fragment_shader =
-//"#version 330\n"
-//"out vec4 frag_colour;"
-//"void main () {"
-//"     frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
-//"}";
+#include "Std.hpp"
+#include "Scene.hpp"
+#include "Shader.hpp"
+#include "Texture.hpp"
+#include "Controls.hpp"
+#include "Loader.hpp"
 
 int main(int argc, char **argv) {
 
-	GLFWwindow* window;
-	if (!glfwInit()) {
-		fprintf(stderr, "ERROR: could not start GLFW3\n");
-		exit(EXIT_FAILURE);
-	}
-	glfwTerminate();
+	GLFWwindow   *window = NULL;
+	Scene        *scene = new Scene();
+	Shader       *shader = new Shader();
+	Texture      *texture = new Texture();
+	Controls     *controls = new Controls();
+	Loader       *loader = new Loader();
 
-	Assimp::Importer importer;
-	vec4 Position = glm::vec4(glm::vec3(0.0), 1.0);
+	window = scene->initScene();
+	if (window == NULL) {
+		return -1;
+	}
+
+	GLuint VertexArrayID, vertexbuffer, uvbuffer, indexbuffer;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
+
+	GLuint programID = shader->LoadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
+	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+
+	GLuint Texture = texture->load("Models/cube/test.png");
+	GLuint TextureID = glGetUniformLocation(programID, "OGLProject");
+
+	std::vector<unsigned short> indices;
+	std::vector<glm::vec3> vertices;
+	std::vector<glm::vec2> uvs;
+	std::vector<glm::vec3> normals;
+	bool res = loader->loadAssImp("Models/cube/test.obj", indices, vertices, uvs, normals);
+
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+
+	do {
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glUseProgram(programID);
+		controls->computeMatricesFromInputs( window );
+		glm::mat4 MVP = controls->getMVP();
+
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, Texture);
+		glUniform1i(TextureID, 0);
+
+		// 1rst attribute buffer : vertices
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glVertexAttribPointer(
+			0,                  // attribute
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+		);
+
+		// 2nd attribute buffer : UVs
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+		glVertexAttribPointer(
+			1,                                // attribute
+			2,                                // size
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+		);
+
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+
+	}
+	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+		glfwWindowShouldClose(window) == 0);
+
+	scene->deleteBuffers(&VertexArrayID, &vertexbuffer, &uvbuffer, programID);
+	glDeleteTextures(1, &Texture); // TODO
+
+	delete scene;
+	delete shader;
+	delete texture;
+	delete controls;
+	delete loader;
 
 	return 0;
 

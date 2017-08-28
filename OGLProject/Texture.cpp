@@ -18,8 +18,6 @@ void Texture::rotate90(unsigned char *buffer, int width, int height)
 		}
 	}
 
-	// Copy rotated pixels
-
 	memcpy(buffer, tempBuffer, sizeBuffer);
 	delete[] tempBuffer;
 
@@ -32,27 +30,15 @@ GLuint Texture::load(const char *name) {
 
 	int width, height;
 	unsigned char* image = SOIL_load_image(name, &width, &height, 0, SOIL_LOAD_RGB);
-
-	/*for (unsigned int i = 0, j = (width * height * 3) - 1; i <= j; i++, j--) {
-		unsigned char temp = image[i];
-		image[i] = image[j];
-		image[j] = temp;
-	}*/
-
-	rotate90(image, width, height);
-	rotate90(image, width, height);
-
+	
+	/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-
-	/*SOIL_free_image_data(image);
-	GLuint flip = SOIL_load_OGL_texture(name, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);*/
-
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	// ... which requires mipmaps. Generate them automatically.
 	glGenerateMipmap(GL_TEXTURE_2D);
+
+	SOIL_free_image_data(image);
 	
 	return textureID;
 }

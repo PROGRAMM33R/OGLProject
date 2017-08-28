@@ -67,5 +67,8 @@
     <ClInclude Include="Scene.hpp">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

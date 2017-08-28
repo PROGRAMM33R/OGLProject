@@ -13,7 +13,9 @@ public:
 	void deleteBuffers(
 		GLuint *VertexArrayID, 
 		GLuint *vertexbuffer, 
-		GLuint *uvbuffer, 
+		GLuint *uvbuffer,
+		GLuint *normalbuffer,
+		GLuint *indexbuffer,
 		GLuint programID) const;
 
 };

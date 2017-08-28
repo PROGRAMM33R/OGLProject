@@ -14,6 +14,7 @@ bool Loader::loadAssImp(
 
 	unsigned int importOptions = aiProcess_Triangulate
 		| aiProcess_OptimizeMeshes              // sloučení malých plošek
+		| aiProcess_JoinIdenticalVertices       // NUTNÉ jinak hodně duplikuje
 		| aiProcess_Triangulate                 // prevod vsech ploch na trojuhelniky
 		| aiProcess_CalcTangentSpace;           // vypocet tangenty, nutny pro spravne pouziti normalove mapy
 
@@ -55,6 +56,5 @@ bool Loader::loadAssImp(
 		indices.push_back(mesh->mFaces[i].mIndices[2]);
 	}
 
-	// The "scene" pointer will be deleted automatically by "importer"
 	return true;
 }

@@ -13,10 +13,11 @@ bool Loader::loadAssImp(
 	Assimp::Importer importer;
 
 	unsigned int importOptions = aiProcess_Triangulate
-		| aiProcess_OptimizeMeshes              // sloučení malých plošek
-		| aiProcess_JoinIdenticalVertices       // NUTNÉ jinak hodně duplikuje
-		| aiProcess_Triangulate                 // prevod vsech ploch na trojuhelniky
-		| aiProcess_CalcTangentSpace;           // vypocet tangenty, nutny pro spravne pouziti normalove mapy
+		| aiProcess_OptimizeMeshes  
+		| aiProcess_JoinIdenticalVertices
+		| aiProcess_Triangulate
+		| aiProcess_CalcTangentSpace
+		| aiProcess_FlipUVs;
 
 	const aiScene* scene = importer.ReadFile(path, importOptions);
 	if (!scene) {

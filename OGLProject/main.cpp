@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 	GLuint programID = shader->LoadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
-	GLuint Texture = texture->load("Models/cube/test.jpg");
+	GLuint Texture = texture->load("Models/cube/test.png");
 	GLuint TextureID = glGetUniformLocation(programID, "HauseTexture");
 
 	std::vector<unsigned short> indices;

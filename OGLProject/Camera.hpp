@@ -20,7 +20,7 @@ public:
 	Camera()
 		: position(config::INIT_CAMERA_POSITION),
 		horizontalAngle(3.14f),
-		verticalAngle(0.0f),
+		verticalAngle(-0.4f),
 		initialFoV(config::FOV)
 	{}
 	~Camera() {}
@@ -28,5 +28,7 @@ public:
 	void calculateMVP(float initialFoV);
 	void setPosition(float position, string side);
 	glm::mat4 getMVP_(void) const;
+	glm::mat4 getProjectionMatrix_(void) const;
+	glm::mat4 getViewMatrix_(void) const;
 
 };

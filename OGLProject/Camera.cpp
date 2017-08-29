@@ -63,3 +63,10 @@ glm::mat4 Camera::getMVP_(void) const {
 	glm::mat4 ModelMatrix = glm::mat4(1.0);
 	return ProjectionMatrix * ViewMatrix * ModelMatrix;
 }
+
+glm::mat4 Camera::getProjectionMatrix_(void) const {
+	return this->ProjectionMatrix;
+}
+glm::mat4 Camera::getViewMatrix_(void) const {
+	return this->ViewMatrix;
+}

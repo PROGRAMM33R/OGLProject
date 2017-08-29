@@ -1,3 +1,11 @@
-﻿  Loader.cpp
+﻿  main.cpp
+  Controls.cpp
+  Config.hpp
+  Scene.cpp
+  Model.cpp
+  Mesh.cpp
+  Camera.cpp
+  Generování kódu...
+LINK : warning LNK4098: Výchozí knihovna MSVCRT je v konfliktu s použitím jiných knihoven. Použijte /NODEFAULTLIB:library.
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.pdb (Partial PDB)

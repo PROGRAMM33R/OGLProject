@@ -7,6 +7,9 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -21,6 +24,10 @@
 #include <assimp/postprocess.h> // Post processing flags
 #include <IL\il.h>
 #include <SOIL.h>
+
+#include "Vertex.hpp"
+#include "Texture.hpp"
+
 
 using namespace glm;
 using namespace std;

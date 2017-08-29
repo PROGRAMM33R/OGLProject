@@ -47,18 +47,3 @@ GLFWwindow *Scene::initScene(void) const {
 	glEnable(GL_CULL_FACE);
 	return window;
 }
-
-void Scene::deleteBuffers(
-	GLuint *VertexArrayID, 
-	GLuint *vertexbuffer, 
-	GLuint *uvbuffer, 
-	GLuint *normalbuffer,
-	GLuint *indexbuffer,
-	GLuint programID) const {
-	glDeleteVertexArrays(1, VertexArrayID);
-	glDeleteBuffers(1, vertexbuffer);
-	glDeleteBuffers(1, uvbuffer);
-	glDeleteBuffers(1, normalbuffer);
-	glDeleteBuffers(1, indexbuffer);
-	glDeleteProgram(programID);
-}

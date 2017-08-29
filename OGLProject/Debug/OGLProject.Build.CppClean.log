@@ -1,13 +1,14 @@
 c:\users\lasak\desktop\oglproject\oglproject\debug\vc141.pdb
 c:\users\lasak\desktop\oglproject\oglproject\debug\vc141.idb
 c:\users\lasak\desktop\oglproject\oglproject\debug\camera.obj
+c:\users\lasak\desktop\oglproject\oglproject\debug\mesh.obj
 c:\users\lasak\desktop\oglproject\oglproject\debug\scene.obj
 c:\users\lasak\desktop\oglproject\oglproject\debug\config.obj
 c:\users\lasak\desktop\oglproject\oglproject\debug\controls.obj
 c:\users\lasak\desktop\oglproject\oglproject\debug\loader.obj
 c:\users\lasak\desktop\oglproject\oglproject\debug\main.obj
-c:\users\lasak\desktop\oglproject\oglproject\debug\shader.obj
-c:\users\lasak\desktop\oglproject\oglproject\debug\texture.obj
+c:\users\lasak\desktop\oglproject\oglproject\debug\textureloader.obj
+c:\users\lasak\desktop\oglproject\oglproject\debug\model.obj
 c:\users\lasak\desktop\oglproject\debug\oglproject.exe
 c:\users\lasak\desktop\oglproject\debug\oglproject.ilk
 c:\users\lasak\desktop\oglproject\debug\oglproject.pdb

@@ -20,13 +20,13 @@ void Mesh::Draw(GLuint ID) {
 		stringstream ss;
 		string number;
 		string name = textures[i].type;
-		if (name == "texture_diffuse")
+		if (name == "material.diffuse")
 			ss << diffuseNr++; 
-		else if (name == "texture_specular")
+		else if (name == "material.specular")
 			ss << specularNr++;
-		else if (name == "texture_normal")
+		else if (name == "material.normal")
 			ss << normalNr++;
-		else if (name == "texture_height")
+		else if (name == "material.height")
 			ss << heightNr++;
 		number = ss.str();
 		glUniform1i(glGetUniformLocation(ID, (name + number).c_str()), i);

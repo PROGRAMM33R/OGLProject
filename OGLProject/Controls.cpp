@@ -40,3 +40,14 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 glm::mat4 Controls::getMVP() const {
 	return camera->getMVP_();
 }
+
+glm::mat4 Controls::getViewMatrix() const {
+	return camera->getViewMatrix_();
+}
+glm::mat4 Controls::getProjectionMatrix() const {
+	return camera->getProjectionMatrix_();
+}
+
+glm::vec3 Controls::getCameraPosition() const {
+	return camera->getPosition_();
+}

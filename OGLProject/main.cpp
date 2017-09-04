@@ -27,6 +27,19 @@ int main(int argc, char **argv) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader->use();
+
+		glm::mat4 ModelMatrix = glm::mat4(1.0);
+		shader->setMat4("Model", ModelMatrix);
+		shader->setVec3("light.position", glm::vec3(14.0f, 10.0f, 6.0f));
+		shader->setVec3("viewPos", controls->getCameraPosition());
+
+		shader->setVec3("light.ambient", 0.1f, 0.1f, 0.1f);
+		shader->setVec3("light.diffuse", 0.9f, 0.9f, 0.9f);
+		shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		
+		shader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+		shader->setFloat("material.shininess", 64.0f);
+
 		controls->computeMatricesFromInputs( window );
 		glm::mat4 MVP = controls->getMVP();
 

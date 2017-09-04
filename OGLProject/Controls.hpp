@@ -22,5 +22,8 @@ public:
 	~Controls();
 	void computeMatricesFromInputs(GLFWwindow* window);
 	glm::mat4 getMVP() const;
+	glm::mat4 getViewMatrix() const;
+	glm::mat4 getProjectionMatrix() const;
+	glm::vec3 getCameraPosition() const;
 
 };

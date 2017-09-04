@@ -70,3 +70,6 @@ glm::mat4 Camera::getProjectionMatrix_(void) const {
 glm::mat4 Camera::getViewMatrix_(void) const {
 	return this->ViewMatrix;
 }
+glm::vec3 Camera::getPosition_(void) const {
+	return this->position;
+}

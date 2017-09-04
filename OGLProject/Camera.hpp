@@ -30,5 +30,6 @@ public:
 	glm::mat4 getMVP_(void) const;
 	glm::mat4 getProjectionMatrix_(void) const;
 	glm::mat4 getViewMatrix_(void) const;
+	glm::vec3 getPosition_(void) const;
 
 };

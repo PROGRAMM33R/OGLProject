@@ -70,9 +70,6 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
 			vec.x = mesh->mTextureCoords[0][i].x;
 			vec.y = mesh->mTextureCoords[0][i].y;
 			vertex.TexCoords = vec;
-			/*cout << "x:" << mesh->mTextureCoords[0][i].x << endl;
-			cout << "y:" << mesh->mTextureCoords[0][i].y << endl;
-			cout << "------------------" << endl;*/
 		}
 		else {
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);

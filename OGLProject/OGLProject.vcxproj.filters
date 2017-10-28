@@ -39,8 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TextureFragmentShader.fragmentshader" />
-    <None Include="TransformVertexShader.vertexshader" />
+    <None Include="VertexShader.shader" />
+    <None Include="FragmentShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controls.hpp">

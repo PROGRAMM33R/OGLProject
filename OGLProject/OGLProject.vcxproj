@@ -137,6 +137,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="MyVector.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Config.hpp" />
     <ClCompile Include="Controls.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Controls.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />
+    <ClInclude Include="MyVector.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Scene.hpp" />
     <ClInclude Include="Shader.hpp" />

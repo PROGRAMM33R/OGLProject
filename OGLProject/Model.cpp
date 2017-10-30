@@ -1,10 +1,10 @@
 
 #include "Model.hpp"
 
-void Model::Draw(GLuint ID)
+void Model::Draw(Shader *shader, Actor *actor)
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)
-		meshes[i].Draw(ID);
+		meshes[i].Draw(shader, actor);
 }
 
 void Model::loadModel(string const &path) {

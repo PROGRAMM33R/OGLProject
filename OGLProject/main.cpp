@@ -4,6 +4,7 @@
 #include "Shader.hpp"
 #include "Controls.hpp"
 #include "Model.hpp"
+#include "Actor.hpp"
 
 int main(int argc, char **argv) {
 
@@ -21,6 +22,16 @@ int main(int argc, char **argv) {
 
 	Model *surface = new Model("Models/surface/surface.obj");
 
+	const GLuint numberOfActors = 1;
+
+	Model **cubes = new Model*[numberOfActors];
+	Actor **actors = new Actor*[numberOfActors];
+
+	for (register int i = 0; i < numberOfActors; i++) {
+		cubes[i] = new Model("Models/cube/cube.obj");
+		actors[i] = new Actor(glm::vec3(i*10, 1, 0), glm::vec2(1, 1), 0.0f, 0.01f);
+	}
+
 	do {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -29,6 +40,7 @@ int main(int argc, char **argv) {
 
 		glm::mat4 ModelMatrix = glm::mat4(1.0);
 		shader->setMat4("Model", ModelMatrix);
+
 		shader->setVec3("light.position", glm::vec3(14.0f, 10.0f, 6.0f));
 		shader->setVec3("viewPos", controls->getCameraPosition());
 
@@ -40,7 +52,6 @@ int main(int argc, char **argv) {
 		shader->setFloat("material.shininess", 64.0f);
 
 		// directional light
-		shader->setVec3("viewPos", controls->getCameraPosition());
 		shader->setVec3("dirLight.position", glm::vec3(14.0f, 10.0f, 6.0f));
 		shader->setVec3("dirLight.ambient", 0.9f, 0.9f, 0.9f);
 		shader->setVec3("dirLight.diffuse", 0.3f, 0.3f, 0.3f);
@@ -51,7 +62,12 @@ int main(int argc, char **argv) {
 
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
-		surface->Draw(shader->ID);
+		surface->Draw(shader, NULL);
+
+		for (register int i = 0; i < numberOfActors; i++) {
+			actors[i]->move();
+			cubes[i]->Draw(shader, actors[i]);
+		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

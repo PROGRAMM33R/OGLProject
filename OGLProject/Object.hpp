@@ -6,14 +6,12 @@
 class Object {
 
 public:
-	glm::vec3   Position, Color;
-	glm::vec2   Size;
+	glm::vec3 position;
+	glm::vec2 size;
 
 	Object()
-		: Position(0, 0, 0), Size(1, 1), Color(1.0f) { }
-	Object(glm::vec3 pos, glm::vec2 size, glm::vec3 color = glm::vec3(1.0f))
-		: Position(pos), Size(size), Color(color) { }
-	
-	virtual void Draw(Model &renderer);
+		: position(0, 1, 0), size(1, 1) { }
+	Object(glm::vec3 pos, glm::vec2 size)
+		: position(pos), size(size) { }
 	
 };

@@ -1,5 +1,7 @@
 
+#include "Std.hpp"
 #include "Mesh.hpp"
+#include "Actor.hpp"
 
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures) {
 	this->vertices = vertices;
@@ -8,11 +10,30 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 	setupMesh();
 }
 
-void Mesh::Draw(GLuint ID) {
+void Mesh::Draw(Shader *shader, Actor *actor) {
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
 	unsigned int normalNr = 1;
 	unsigned int heightNr = 1;
+
+	if (actor != NULL) {
+
+		float directionLine[] = {
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.0f,  0.5f, 0.0f
+		};
+
+		glm::mat4 model;
+		
+		model = glm::translate(model, actor->position);  // First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
+		model = glm::translate(model, glm::vec3(0.5f * actor->size.x, 0.5f * actor->size.y, 0.0f)); // Move origin of rotation to center of quad
+		model = glm::rotate(model, actor->direction, glm::vec3(0.0f, 1.0f, 0.0f)); // Then rotate
+		model = glm::translate(model, glm::vec3(-0.5f * actor->size.x, -0.5f * actor->size.y, 0.0f)); // Move origin back
+		model = glm::scale(model, glm::vec3(actor->size, 1.0f)); // Last scale
+
+		shader->setMat4("Model", model);
+	}
 
 	for (unsigned int i = 0; i < textures.size(); i++) {
 		glActiveTexture(GL_TEXTURE0 + i); 
@@ -29,7 +50,7 @@ void Mesh::Draw(GLuint ID) {
 		else if (name == "material.height")
 			ss << heightNr++;
 		number = ss.str();
-		glUniform1i(glGetUniformLocation(ID, (name + number).c_str()), i);
+		glUniform1i(glGetUniformLocation(shader->ID, (name + number).c_str()), i);
 		glBindTexture(GL_TEXTURE_2D, textures[i].id);
 	}
 

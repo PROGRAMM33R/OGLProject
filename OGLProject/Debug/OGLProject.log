@@ -1,11 +1,7 @@
-﻿  main.cpp
-  Controls.cpp
-  Config.hpp
-  Scene.cpp
-  Model.cpp
-  Mesh.cpp
-  Camera.cpp
-  Generování kódu...
-LINK : warning LNK4098: Výchozí knihovna MSVCRT je v konfliktu s použitím jiných knihoven. Použijte /NODEFAULTLIB:library.
+﻿  MyVector.cpp
+c:\users\lasak\desktop\oglproject\oglproject\myvector.hpp(49): warning C4305: inicializování: zkrácení z: double na: const float
+c:\users\lasak\desktop\oglproject\oglproject\myvector.cpp(80): warning C4244: argument: double se převádí na float; může dojít ke ztrátě dat.
+c:\users\lasak\desktop\oglproject\oglproject\myvector.cpp(129): warning C4244: inicializování: double se převádí na float; může dojít ke ztrátě dat.
+LINK : warning LNK4098: V²chozφ knihovna MSVCRT je v konfliktu s pou₧itφm jin²ch knihoven. Pou₧ijte /NODEFAULTLIB:library.
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.pdb (Partial PDB)

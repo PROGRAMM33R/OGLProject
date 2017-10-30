@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Std.hpp"
+#include "Shader.hpp"
 
+class Actor;
 class Mesh {
 
 public:
@@ -11,7 +13,7 @@ public:
 	unsigned int VAO;
 
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
-	void Draw(GLuint ID);
+	void Draw(Shader *shader, Actor *actor);
 
 private:
 	unsigned int VBO, EBO;

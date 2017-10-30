@@ -5,6 +5,7 @@
 #include "Mesh.hpp"
 #include "Shader.hpp"
 
+class Actor;
 class Model {
 
 public:
@@ -18,7 +19,7 @@ public:
 		loadModel(path);
 	}
 	~Model() {}
-	void Draw(GLuint ID);
+	void Draw(Shader *shader, Actor *actor);
 
 private:
 	void loadModel(string const &path);

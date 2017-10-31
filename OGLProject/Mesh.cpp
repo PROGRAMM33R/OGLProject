@@ -25,10 +25,12 @@ void Mesh::Draw(Shader *shader, Actor *actor) {
 		};
 
 		glm::mat4 model;
+		glm::vec3 position = glm::vec3(actor->location->vec.x, 1, actor->location->vec.y);
+		GLfloat direction = actor->angle(actor->location);
 		
-		model = glm::translate(model, actor->position);  // First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
+		model = glm::translate(model, position);  // First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
 		model = glm::translate(model, glm::vec3(0.5f * actor->size.x, 0.5f * actor->size.y, 0.0f)); // Move origin of rotation to center of quad
-		model = glm::rotate(model, actor->direction, glm::vec3(0.0f, 1.0f, 0.0f)); // Then rotate
+		model = glm::rotate(model, direction, glm::vec3(0.0f, 1.0f, 0.0f)); // Then rotate
 		model = glm::translate(model, glm::vec3(-0.5f * actor->size.x, -0.5f * actor->size.y, 0.0f)); // Move origin back
 		model = glm::scale(model, glm::vec3(actor->size, 1.0f)); // Last scale
 

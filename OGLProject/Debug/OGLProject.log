@@ -1,7 +1,22 @@
-﻿  MyVector.cpp
-c:\users\lasak\desktop\oglproject\oglproject\myvector.hpp(49): warning C4305: inicializování: zkrácení z: double na: const float
-c:\users\lasak\desktop\oglproject\oglproject\myvector.cpp(80): warning C4244: argument: double se převádí na float; může dojít ke ztrátě dat.
-c:\users\lasak\desktop\oglproject\oglproject\myvector.cpp(129): warning C4244: inicializování: double se převádí na float; může dojít ke ztrátě dat.
-LINK : warning LNK4098: V²chozφ knihovna MSVCRT je v konfliktu s pou₧itφm jin²ch knihoven. Pou₧ijte /NODEFAULTLIB:library.
+﻿  Config.hpp
+  Actor.cpp
+c:\users\lasak\desktop\oglproject\oglproject\myvector.hpp(47): warning C4305: inicializování: zkrácení z: double na: const float
+c:\users\lasak\desktop\oglproject\oglproject\actor.hpp(40): warning C4305: inicializování: zkrácení z: double na: const float
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(7): warning C4244: argument: double se převádí na GLfloat; může dojít ke ztrátě dat.
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(9): warning C4305: =: zkrácení z: double na: GLfloat
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(23): warning C4305: =: zkrácení z: double na: GLfloat
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(24): warning C4305: =: zkrácení z: double na: GLfloat
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(25): warning C4244: argument: double se převádí na GLfloat; může dojít ke ztrátě dat.
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(28): warning C4305: =: zkrácení z: double na: GLfloat
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(29): warning C4305: =: zkrácení z: double na: GLfloat
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(30): warning C4244: argument: double se převádí na GLfloat; může dojít ke ztrátě dat.
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(53): warning C4018: <: signed/unsigned – neshoda
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(108): warning C4018: <: signed/unsigned – neshoda
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(140): warning C4018: <: signed/unsigned – neshoda
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(148): warning C4244: argument: int se převádí na GLfloat; může dojít ke ztrátě dat.
+c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(177): warning C4305: argument: zkrácení z: double na: GLfloat
+  Generování kódu...
+  Přeskakuje se... (nezjistily se žádné relevantní změny)
+  main.cpp
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.pdb (Partial PDB)

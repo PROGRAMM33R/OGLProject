@@ -22,14 +22,14 @@ int main(int argc, char **argv) {
 
 	Model *surface = new Model("Models/surface/surface.obj");
 
-	const GLuint numberOfActors = 1;
+	const GLuint numberOfActors = 6;
 
 	Model **cubes = new Model*[numberOfActors];
-	Actor **actors = new Actor*[numberOfActors];
+	vector <Actor*> *actors = new vector<Actor*>();
 
 	for (register int i = 0; i < numberOfActors; i++) {
 		cubes[i] = new Model("Models/cube/cube.obj");
-		actors[i] = new Actor(glm::vec3(i*10, 1, 0), glm::vec2(1, 1), 0.0f, 0.01f);
+		actors->push_back(new Actor(i * 8, 0.0));
 	}
 
 	do {
@@ -65,8 +65,8 @@ int main(int argc, char **argv) {
 		surface->Draw(shader, NULL);
 
 		for (register int i = 0; i < numberOfActors; i++) {
-			actors[i]->move();
-			cubes[i]->Draw(shader, actors[i]);
+			cubes[i]->Draw(shader, actors->at(i));
+			actors->at(i)->run(actors);
 		}
 
 		glfwSwapBuffers(window);

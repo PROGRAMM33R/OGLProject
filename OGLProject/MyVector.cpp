@@ -1,123 +1,118 @@
 
 #include "MyVector.hpp"
 
-void MyVector::set(float i, float o)
+void MyVector::set(GLfloat i, GLfloat o)
 {
-	x = i;
-	y = o;
+	vec.x = i; vec.y = o;
 }
 
-void MyVector::addVector(MyVector v)
+void MyVector::addVector(MyVector *v)
 {
-	x += v.x;
-	y += v.y;
+	vec.x += v->vec.x;
+	vec.y += v->vec.y;
 }
 
 // Adds to a MyVector by a constant number
-void MyVector::addScalar(float s)
+void MyVector::addScalar(GLfloat s)
 {
-	x += s;
-	y += s;
+	vec.x += s; vec.y += s;
 }
 
 // Subtracts 2 vectors
-void MyVector::subVector(MyVector v)
+void MyVector::subVector(MyVector *v)
 {
-	x -= v.x;
-	y -= v.y;
+	vec.x -= v->vec.x;
+	vec.y -= v->vec.y;
 }
 
 // Subtracts two vectors and returns the difference as a vector
-MyVector MyVector::subTwoVector(MyVector v, MyVector v2)
+MyVector *MyVector::subTwoVector(MyVector *v, MyVector *v2)
 {
-	MyVector tmp;
-	v.x -= v2.x;
-	v.y -= v2.y;
-	tmp.set(v.x, v.y);
+	MyVector *tmp = new MyVector();
+	v->vec.x -= v2->vec.x;
+	v->vec.y -= v2->vec.y;
+	tmp->set(v->vec.x, v->vec.y);
 	return tmp;
 }
 
 // Adds to a MyVector by a constant number
-void MyVector::subScalar(float s)
+void MyVector::subScalar(GLfloat s)
 {
-	x -= s;
-	y -= s;
+	vec.x -= s; vec.y -= s;
 }
 
 // Multiplies 2 vectors
-void MyVector::mulVector(MyVector v)
+void MyVector::mulVector(MyVector *v)
 {
-	x *= v.x;
-	y *= v.y;
+	vec.x *= v->vec.x;
+	vec.y *= v->vec.y;
 }
 
 // Adds to a MyVector by a constant number
-void MyVector::mulScalar(float s)
+void MyVector::mulScalar(GLfloat s)
 {
-	x *= s;
-	y *= s;
+	vec.x *= s; vec.y *= s;
 }
 
 // Divides 2 vectors
-void MyVector::divVector(MyVector v)
+void MyVector::divVector(MyVector *v)
 {
-	x /= v.x;
-	y /= v.y;
+	vec.x /= v->vec.x;
+	vec.y /= v->vec.y;
 }
 
 // Adds to a MyVector by a constant number
-void MyVector::divScalar(float s)
+void MyVector::divScalar(GLfloat s)
 {
-	x /= s;
-	y /= s;
+	vec.x /= s; vec.y /= s;
 }
 
-void MyVector::limit(double max)
+void MyVector::limit(GLfloat max)
 {
-	double size = magnitude();
+	GLfloat size = magnitude();
 
 	if (size > max) {
-		set(x / size, y / size);
+		set(vec.x / size, vec.y / size);
 	}
 }
 
 // Calculates the distance between the first MyVector and second MyVector
-float MyVector::distance(MyVector v)
+GLfloat MyVector::distance(MyVector *v)
 {
-	float dx = x - v.x;
-	float dy = y - v.y;
-	float dist = sqrt(dx*dx + dy*dy);
+	GLfloat dx = vec.x - v->vec.x;
+	GLfloat dy = vec.y - v->vec.y;
+	GLfloat dist = sqrt(dx*dx + dy*dy);
 	return dist;
 }
 
 // Calculates the dot product of a vector
-float MyVector::dotProduct(MyVector v)
+GLfloat MyVector::dotProduct(MyVector *v)
 {
-	float dot = x * v.x + y * v.y;
+	GLfloat dot = vec.x * v->vec.x + vec.y * v->vec.y;
 	return dot;
 }
 
 // Calculates magnitude of referenced object
-float MyVector::magnitude()
+GLfloat MyVector::magnitude()
 {
-	return sqrt(x*x + y*y);
+	return sqrt(vec.x*vec.x + vec.y*vec.y);
 }
 
-void MyVector::setMagnitude(float x)
+void MyVector::setMagnitude(GLfloat x)
 {
 	normalize();
 	mulScalar(x);
 }
 
 // Calculate the angle between MyVector 1 and MyVector 2
-float MyVector::angleBetween(MyVector v)
+GLfloat MyVector::angleBetween(MyVector *v)
 {
-	if (x == 0 && y == 0) return 0.0f;
-	if (v.x == 0 && v.y == 0) return 0.0f;
+	if (vec.x == 0 && vec.y == 0) return 0.0f;
+	if (v->vec.x == 0 && v->vec.y == 0) return 0.0f;
 
-	double dot = x * v.x + y * v.y;
-	double v1mag = sqrt(x * x + y * y);
-	double v2mag = sqrt(v.x * v.x + v.y * v.y);
+	double dot = vec.x * v->vec.x + vec.y * v->vec.y;
+	double v1mag = sqrt(vec.x * vec.x + vec.y * vec.y);
+	double v2mag = sqrt(v->vec.x * v->vec.x + v->vec.y * v->vec.y);
 	double amt = dot / (v1mag * v2mag); //Based of definition of dot product
 										//dot product / product of magnitudes gives amt
 	if (amt <= -1) {
@@ -126,26 +121,26 @@ float MyVector::angleBetween(MyVector v)
 	else if (amt >= 1) {
 		return 0;
 	}
-	float tmp = acos(amt);
+	GLfloat tmp = acos(amt);
 	return tmp;
 }
 
 // normalize divides x and y by magnitude if it has a magnitude.
 void MyVector::normalize()
 {
-	float m = magnitude();
+	GLfloat m = magnitude();
 
 	if (m > 0) {
-		set(x / m, y / m);
+		set(vec.x / m, vec.y / m);
 	}
 	else {
-		set(x, y);
+		set(vec.x, vec.y);
 	}
 }
 
 // Creates and returns a copy of the MyVector used as a parameter
-MyVector MyVector::copy(MyVector v)
+MyVector *MyVector::copy(MyVector v)
 {
-	MyVector copy(v.x, v.y);
+	MyVector *copy = new MyVector(v.vec.x, v.vec.y);
 	return copy;
 }

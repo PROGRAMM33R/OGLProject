@@ -85,6 +85,10 @@
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;DevIL.lib;ILU.lib;ILUT.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)..\packages\Simple OpenGL Image Library\lib;$(ProjectDir)..\packages\DevIL Windows SDK\lib\x86\Release;$(ProjectDir)..\packages\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ProjectDir)..\packages\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -133,8 +137,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Boids.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Flock.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MyVector.cpp" />
@@ -149,13 +154,13 @@
     <None Include="VertexShader.shader" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.hpp" />
+    <ClInclude Include="Boids.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Controls.hpp" />
+    <ClInclude Include="Flock.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />
     <ClInclude Include="MyVector.hpp" />
-    <ClInclude Include="Object.hpp" />
     <ClInclude Include="Scene.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Std.hpp" />

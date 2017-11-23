@@ -5,7 +5,7 @@
 #include "Mesh.hpp"
 #include "Shader.hpp"
 
-class Actor;
+class Boids;
 class Model {
 
 public:
@@ -18,8 +18,15 @@ public:
 	{
 		loadModel(path);
 	}
+	Model(const Model& model) 
+	: 
+		textures_loaded(model.textures_loaded),
+		meshes(model.meshes),
+		directory(model.directory),
+		gammaCorrection(model.gammaCorrection)
+	{}
 	~Model() {}
-	void Draw(Shader *shader, Actor *actor);
+	void Draw(Shader *shader, Boids *boids);
 
 private:
 	void loadModel(string const &path);

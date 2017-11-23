@@ -1,7 +1,7 @@
 
 #include "Std.hpp"
 #include "Mesh.hpp"
-#include "Actor.hpp"
+#include "Boids.hpp"
 
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures) {
 	this->vertices = vertices;
@@ -10,13 +10,13 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 	setupMesh();
 }
 
-void Mesh::Draw(Shader *shader, Actor *actor) {
+void Mesh::Draw(Shader *shader, Boids *Boids) {
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
 	unsigned int normalNr = 1;
 	unsigned int heightNr = 1;
 
-	if (actor != NULL) {
+	if (Boids != NULL) {
 
 		float directionLine[] = {
 			-0.5f, -0.5f, 0.0f,
@@ -25,14 +25,16 @@ void Mesh::Draw(Shader *shader, Actor *actor) {
 		};
 
 		glm::mat4 model;
-		glm::vec3 position = glm::vec3(actor->location->vec.x, 1, actor->location->vec.y);
-		GLfloat direction = actor->angle(actor->location);
+		glm::vec3 position = glm::vec3(Boids->location->vec.x, 1, Boids->location->vec.y);
+		GLfloat direction = Boids->angle(Boids->location);
 		
 		model = glm::translate(model, position);  // First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
-		model = glm::translate(model, glm::vec3(0.5f * actor->size.x, 0.5f * actor->size.y, 0.0f)); // Move origin of rotation to center of quad
-		model = glm::rotate(model, direction, glm::vec3(0.0f, 1.0f, 0.0f)); // Then rotate
-		model = glm::translate(model, glm::vec3(-0.5f * actor->size.x, -0.5f * actor->size.y, 0.0f)); // Move origin back
-		model = glm::scale(model, glm::vec3(actor->size, 1.0f)); // Last scale
+		//model = glm::translate(model, glm::vec3(0.2f * Boids->size.x, 0.2f * Boids->size.y, 0.0f)); // Move origin of rotation to center of quad
+		model = glm::translate(model, glm::vec3(0.2f * Boids->size.x, 3.0f, 0.2f * Boids->size.y));
+		//model = glm::rotate(model, direction, glm::vec3(0.0f, 3.0f, 0.0f)); // Then rotate
+		//model = glm::translate(model, glm::vec3(-0.2f * Boids->size.x, -0.2f * Boids->size.y, 0.0f)); // Move origin back
+		model = glm::translate(model, glm::vec3(-0.2f * Boids->size.x, 3.0f, -0.2f * Boids->size.y));
+		model = glm::scale(model, glm::vec3(Boids->size, Boids->size.y)); // Last scale
 
 		shader->setMat4("Model", model);
 	}

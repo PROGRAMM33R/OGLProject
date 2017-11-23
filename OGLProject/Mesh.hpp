@@ -3,7 +3,7 @@
 #include "Std.hpp"
 #include "Shader.hpp"
 
-class Actor;
+class Boids;
 class Mesh {
 
 public:
@@ -13,7 +13,7 @@ public:
 	unsigned int VAO;
 
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
-	void Draw(Shader *shader, Actor *actor);
+	void Draw(Shader *shader, Boids *Boids);
 
 private:
 	unsigned int VBO, EBO;

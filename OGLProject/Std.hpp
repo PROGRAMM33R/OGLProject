@@ -25,6 +25,7 @@
 #include <IL\il.h>
 #include <SOIL.h>
 
+#include "Config.hpp"
 #include "Vertex.hpp"
 #include "Texture.hpp"
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Std.hpp"
-#include "Config.hpp"
 
 class Camera {
 
@@ -18,10 +17,11 @@ private:
 
 public:
 	Camera()
-		: position(config::INIT_CAMERA_POSITION),
+	: 
 		horizontalAngle(3.14f),
 		verticalAngle(-0.4f),
-		initialFoV(config::FOV)
+		position(Config::INIT_CAMERA_POSITION),
+		initialFoV(Config::FOV)
 	{}
 	~Camera() {}
 	void calculateCamera(GLFWwindow* window, float mouseSpeed);

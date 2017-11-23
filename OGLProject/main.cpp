@@ -4,13 +4,16 @@
 #include "Shader.hpp"
 #include "Controls.hpp"
 #include "Model.hpp"
-#include "Actor.hpp"
+#include "Boids.hpp"
+#include "Flock.hpp"
 
 int main(int argc, char **argv) {
 
+	Config::init();
 	GLFWwindow      *window = NULL;
 	Scene           *scene = new Scene();
 	Controls        *controls = new Controls();
+	Flock           *flock = new Flock();
 
 	window = scene->initScene();
 	if (window == NULL) {
@@ -20,17 +23,9 @@ int main(int argc, char **argv) {
 	Shader *shader = new Shader("VertexShader.shader", "FragmentShader.shader");
 	GLuint MatrixID = glGetUniformLocation(shader->ID, "MVP");
 
-	Model *surface = new Model("Models/surface/surface.obj");
+	Model *surface = new Model(Config::OBJ_SURFACE);
 
-	const GLuint numberOfActors = 6;
-
-	Model **cubes = new Model*[numberOfActors];
-	vector <Actor*> *actors = new vector<Actor*>();
-
-	for (register int i = 0; i < numberOfActors; i++) {
-		cubes[i] = new Model("Models/cube/cube.obj");
-		actors->push_back(new Actor(i * 8, 0.0));
-	}
+	Model **boidsModel = flock->getBoidsModel();
 
 	do {
 
@@ -64,10 +59,7 @@ int main(int argc, char **argv) {
 
 		surface->Draw(shader, NULL);
 
-		for (register int i = 0; i < numberOfActors; i++) {
-			cubes[i]->Draw(shader, actors->at(i));
-			actors->at(i)->run(actors);
-		}
+		flock->flocking(shader);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

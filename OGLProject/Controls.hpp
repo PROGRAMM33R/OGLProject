@@ -2,7 +2,6 @@
 
 #include "Std.hpp"
 #include "Camera.hpp"
-#include "Config.hpp"
 
 class Controls {
 
@@ -14,10 +13,10 @@ private:
 public:
 	Controls() 
 	: 
-	  initialFoV(config::FOV),
-	  speed(config::SPEED), 
-	  mouseSpeed(config::MOUSE_SPEED),
-	  camera(new Camera())
+		camera(new Camera()),
+		initialFoV(Config::FOV),
+		speed(Config::SPEED),
+		mouseSpeed(Config::MOUSE_SPEED)
 	{}
 	~Controls();
 	void computeMatricesFromInputs(GLFWwindow* window);

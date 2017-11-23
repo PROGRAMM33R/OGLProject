@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Std.hpp"
-#include "Config.hpp"
 
 class Scene {
 

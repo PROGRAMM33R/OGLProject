@@ -1,22 +1,7 @@
-﻿  Config.hpp
-  Actor.cpp
+﻿  main.cpp
 c:\users\lasak\desktop\oglproject\oglproject\myvector.hpp(47): warning C4305: inicializování: zkrácení z: double na: const float
-c:\users\lasak\desktop\oglproject\oglproject\actor.hpp(40): warning C4305: inicializování: zkrácení z: double na: const float
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(7): warning C4244: argument: double se převádí na GLfloat; může dojít ke ztrátě dat.
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(9): warning C4305: =: zkrácení z: double na: GLfloat
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(23): warning C4305: =: zkrácení z: double na: GLfloat
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(24): warning C4305: =: zkrácení z: double na: GLfloat
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(25): warning C4244: argument: double se převádí na GLfloat; může dojít ke ztrátě dat.
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(28): warning C4305: =: zkrácení z: double na: GLfloat
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(29): warning C4305: =: zkrácení z: double na: GLfloat
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(30): warning C4244: argument: double se převádí na GLfloat; může dojít ke ztrátě dat.
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(53): warning C4018: <: signed/unsigned – neshoda
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(108): warning C4018: <: signed/unsigned – neshoda
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(140): warning C4018: <: signed/unsigned – neshoda
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(148): warning C4244: argument: int se převádí na GLfloat; může dojít ke ztrátě dat.
-c:\users\lasak\desktop\oglproject\oglproject\actor.cpp(177): warning C4305: argument: zkrácení z: double na: GLfloat
-  Generování kódu...
-  Přeskakuje se... (nezjistily se žádné relevantní změny)
-  main.cpp
+c:\users\lasak\desktop\oglproject\oglproject\boids.hpp(40): warning C4305: inicializování: zkrácení z: double na: const float
+c:\users\lasak\desktop\oglproject\oglproject\main.cpp(35): warning C4244: argument: int se převádí na GLfloat; může dojít ke ztrátě dat.
+c:\users\lasak\desktop\oglproject\oglproject\main.cpp(39): warning C4244: argument: int se převádí na GLfloat; může dojít ke ztrátě dat.
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.pdb (Partial PDB)

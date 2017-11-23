@@ -72,6 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,9 +87,20 @@
       <AdditionalLibraryDirectories>$(ProjectDir)..\packages\Simple OpenGL Image Library\lib;$(ProjectDir)..\packages\DevIL Windows SDK\lib\x86\Release;$(ProjectDir)..\packages\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ProjectDir)..\packages\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy /Y "$(SolutionDir)packages\Assimp.redist.3.0.0\build\native\bin\Win32.dll" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y "$(SolutionDir)packages\DevIL Windows SDK\lib\x86\Release\DevIL.dll" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y "$(SolutionDir)packages\DevIL Windows SDK\lib\x86\Release\ILU.dll" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y "$(SolutionDir)packages\DevIL Windows SDK\lib\x86\Release\ILUT.dll" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y "$(SolutionDir)packages\glew-2.1.0\bin\Release\Win32\glew32.dll" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y "$(SolutionDir)packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y "$(SolutionDir)packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y /S "$(ProjectDir)Models" "$(SolutionDir)Debug\Models" &lt;NUL
+xcopy /Y "$(ProjectDir)FragmentShader.shader" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Debug" &lt;NUL</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>if not exist "$(SolutionDir)Debug\Models" mkdir "$(SolutionDir)Debug\Models"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,6 +130,9 @@
       <AdditionalLibraryDirectories>C:\Users\lasak\Desktop\OGLProject\packages\opencv\build\x64\vc14\lib;C:\Users\lasak\Desktop\OGLProject\packages\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\Users\lasak\Desktop\OGLProject\packages\glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;opencv_world330.lib;opencv_world330d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d  "$(SolutionDir)packages\*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -149,6 +164,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="FragmentShader.shader" />
     <None Include="VertexShader.shader" />

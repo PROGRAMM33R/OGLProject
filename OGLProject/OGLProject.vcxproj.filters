@@ -50,6 +50,7 @@
     <None Include="packages.config" />
     <None Include="VertexShader.shader" />
     <None Include="FragmentShader.shader" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controls.hpp">

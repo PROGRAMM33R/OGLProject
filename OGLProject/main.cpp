@@ -56,7 +56,6 @@ int main(int argc, char **argv) {
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
 		surface->Draw(shader);
-
 		flock->flocking(shader);
 
 		glfwSwapBuffers(window);

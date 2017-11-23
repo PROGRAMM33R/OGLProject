@@ -1,7 +1,8 @@
-﻿  main.cpp
+﻿  Flock.cpp
 c:\users\lasak\desktop\oglproject\oglproject\myvector.hpp(47): warning C4305: inicializování: zkrácení z: double na: const float
 c:\users\lasak\desktop\oglproject\oglproject\boids.hpp(40): warning C4305: inicializování: zkrácení z: double na: const float
-c:\users\lasak\desktop\oglproject\oglproject\main.cpp(35): warning C4244: argument: int se převádí na GLfloat; může dojít ke ztrátě dat.
-c:\users\lasak\desktop\oglproject\oglproject\main.cpp(39): warning C4244: argument: int se převádí na GLfloat; může dojít ke ztrátě dat.
+c:\users\lasak\desktop\oglproject\oglproject\flock.cpp(15): warning C4804: -: Potenciálně nebezpečné používání typu bool v operaci
+c:\users\lasak\desktop\oglproject\oglproject\flock.cpp(16): warning C4244: argument: int se převádí na GLfloat; může dojít ke ztrátě dat.
+c:\users\lasak\desktop\oglproject\oglproject\flock.cpp(21): warning C4244: argument: int se převádí na GLfloat; může dojít ke ztrátě dat.
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.pdb (Partial PDB)

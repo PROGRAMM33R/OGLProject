@@ -20,10 +20,6 @@ public:
 	Flock();
 	~Flock() {}
 	
-	int getSize();
-	Boids *getBoid(int i);
-	Model **getBoidsModel(void);
-	
 	void addBoid(Boids *b);
 	void flocking(Shader *shader);
 

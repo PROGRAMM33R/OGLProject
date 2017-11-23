@@ -13,7 +13,6 @@ int main(int argc, char **argv) {
 	GLFWwindow      *window = NULL;
 	Scene           *scene = new Scene();
 	Controls        *controls = new Controls();
-	Flock           *flock = new Flock();
 
 	window = scene->initScene();
 	if (window == NULL) {
@@ -23,9 +22,8 @@ int main(int argc, char **argv) {
 	Shader *shader = new Shader("VertexShader.shader", "FragmentShader.shader");
 	GLuint MatrixID = glGetUniformLocation(shader->ID, "MVP");
 
+	Flock *flock = new Flock();
 	Model *surface = new Model(Config::OBJ_SURFACE);
-
-	Model **boidsModel = flock->getBoidsModel();
 
 	do {
 
@@ -57,7 +55,7 @@ int main(int argc, char **argv) {
 
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
-		surface->Draw(shader, NULL);
+		surface->Draw(shader);
 
 		flock->flocking(shader);
 
@@ -71,6 +69,7 @@ int main(int argc, char **argv) {
 	delete scene;
 	delete shader;
 	delete controls;
+	delete flock;
 
 	return 0;
 

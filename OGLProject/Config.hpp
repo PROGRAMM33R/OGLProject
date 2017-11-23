@@ -31,7 +31,7 @@ namespace Config {
 	static int				NUMBER_OF_PREDATORS = 0;
 	static int				GENERATE_SPACE = 4000;
 
-	static std::string		OBJ_SURFACE = "Models / surface / surface.obj";
+	static std::string		OBJ_SURFACE = "Models/surface/surface.obj";
 	static std::string		OBJ_BOID = "Models/cube/cube.obj";
 	static std::string		OBJ_PREDATOR = "Models/cube_predator/cube.obj";
 

@@ -3,8 +3,8 @@
 #include "Std.hpp"
 #include "stb_image.hpp"
 #include "Mesh.hpp"
-#include "Shader.hpp"
 
+class Shader;
 class Boids;
 class Model {
 
@@ -26,7 +26,7 @@ public:
 		gammaCorrection(model.gammaCorrection)
 	{}
 	~Model() {}
-	void Draw(Shader *shader, Boids *boids);
+	void Draw(Shader *shader, Boids *boids = NULL);
 
 private:
 	void loadModel(string const &path);

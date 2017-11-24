@@ -12,12 +12,12 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 
 		if (i < numberOfPredators) {
 			addBoid(new Boids(
-				rand() % initialSpacingBetweenBoids, -(rand() % initialSpacingBetweenBoids, true))
+				rand() % initialSpacingBetweenBoids, rand() % initialSpacingBetweenBoids, true)
 			);
 		}
 		else {
 			addBoid(new Boids(
-				rand() % initialSpacingBetweenBoids, -(rand() % initialSpacingBetweenBoids))
+				rand() % initialSpacingBetweenBoids, rand() % initialSpacingBetweenBoids)
 			);
 		}
 		

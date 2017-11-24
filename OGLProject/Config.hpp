@@ -27,9 +27,9 @@ namespace Config {
 	static float			SPEED = 1500.0f;
 	static float			MOUSE_SPEED = 0.005f;
 
-	static int				NUMBER_OF_BOIDS = 25;
+	static int				NUMBER_OF_BOIDS = 30;
 	static int				NUMBER_OF_PREDATORS = 0;
-	static int				GENERATE_SPACE = 4000;
+	static int				GENERATE_SPACE = 5000;
 
 	static std::string		OBJ_SURFACE = "Models/surface/surface.obj";
 	static std::string		OBJ_BOID = "Models/cube/cube.obj";

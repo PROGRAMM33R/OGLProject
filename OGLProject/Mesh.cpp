@@ -10,31 +10,24 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 	setupMesh();
 }
 
-void Mesh::Draw(Shader *shader, Boids *Boids) {
+void Mesh::Draw(Shader *shader, Boids *Boidss) {
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
 	unsigned int normalNr = 1;
 	unsigned int heightNr = 1;
 
-	if (Boids != NULL) {
-
-		float directionLine[] = {
-			-0.5f, -0.5f, 0.0f,
-			0.5f, -0.5f, 0.0f,
-			0.0f,  0.5f, 0.0f
-		};
+	if (Boidss != NULL) {
 
 		glm::mat4 model;
-		glm::vec3 position = glm::vec3(Boids->location->vec.x, 1, Boids->location->vec.y);
-		GLfloat direction = Boids->angle(Boids->location);
+		glm::vec3 position = glm::vec3(Boidss->location->vec.x, 1, Boidss->location->vec.y);
 		
 		model = glm::translate(model, position);  // First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
-		//model = glm::translate(model, glm::vec3(0.2f * Boids->size.x, 0.2f * Boids->size.y, 0.0f)); // Move origin of rotation to center of quad
-		model = glm::translate(model, glm::vec3(0.2f * Boids->size.x, 3.0f, 0.2f * Boids->size.y));
-		//model = glm::rotate(model, direction, glm::vec3(0.0f, 3.0f, 0.0f)); // Then rotate
-		//model = glm::translate(model, glm::vec3(-0.2f * Boids->size.x, -0.2f * Boids->size.y, 0.0f)); // Move origin back
-		model = glm::translate(model, glm::vec3(-0.2f * Boids->size.x, 3.0f, -0.2f * Boids->size.y));
-		model = glm::scale(model, glm::vec3(Boids->size, Boids->size.y)); // Last scale
+		
+		//model = glm::translate(model, glm::vec3(0.2f * Boidss->size.x, 3.0f, 0.2f * Boidss->size.y));
+		model = glm::rotate(model, Boidss->angle(Boidss->location), glm::vec3(0.0f, 3.0f, 0.0f));
+		
+		model = glm::translate(model, glm::vec3(-0.2f * Boidss->size.x, 3.0f, -0.2f * Boidss->size.y));
+		model = glm::scale(model, glm::vec3(Boidss->size, Boidss->size.y));
 
 		shader->setMat4("Model", model);
 	}

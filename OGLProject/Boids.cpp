@@ -6,8 +6,8 @@ Boids::Boids(GLfloat x, GLfloat y)
 	acceleration = new MyVector(0, 0);
 	velocity = new MyVector(rand() % 3 - 2, rand() % 3 - 2);
 	location = new MyVector(x, y);
-	maxSpeed = 0.5;
-	maxForce = 0.3;
+	maxSpeed = 5.5;
+	maxForce = 0.5;
 	size.x = 7;
 	size.y = 7;
 }
@@ -20,13 +20,13 @@ Boids::Boids(GLfloat x, GLfloat y, bool predCheck)
 {
 	predator = predCheck;
 	if (predCheck == true) {
-		maxSpeed = 3.0;
-		maxForce = 0.3;
+		maxSpeed = 2.5;
+		maxForce = 0.5;
 		velocity = new MyVector(rand() % 3 - 1, rand() % 3 - 1);
 	}
 	else {
-		maxSpeed = 0.5;
-		maxForce = 0.3;
+		maxSpeed = 5.5;
+		maxForce = 0.5;
 		velocity = new MyVector(rand() % 3 - 2, rand() % 3 - 2);
 	}
 	acceleration = new MyVector(0, 0);
@@ -41,10 +41,10 @@ void Boids::applyForce(MyVector *force)
 }
 
 // Separation
-// Keeps Boidss from getting too close to one another
+// Keeps Boids from getting too close to one another
 MyVector *Boids::Separation(vector<Boids*> *Boidss)
 {
-	float desiredseparation = 100;
+	float desiredseparation = 20;
 	MyVector *steer = new MyVector(0, 0);
 	int count = 0;
 	
@@ -74,7 +74,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 		else if ((d > 0) && (d < desiredseparation + 150) && Boidss->at(i)->predator == true) {
 			MyVector *pred = new MyVector(0, 0);
 			pred = pred->subTwoVector(location, Boidss->at(i)->location);
-			pred->mulScalar(900);
+			pred->mulScalar(5);
 			steer->addVector(pred);
 			count++;
 		}
@@ -93,11 +93,11 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 }
 
 // Alignment
-// Calculates the average velocity of Boidss in the field of vision and
+// Calculates the average velocity of Boids in the field of vision and
 // manipulates the velocity of the current Boids in order to match it
 MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 {
-	float neighbordist = 130;
+	float neighbordist = 50;
 
 	MyVector *sum = new MyVector(0, 0);
 	int count = 0;
@@ -108,9 +108,9 @@ MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 			count++;
 		}
 	}
-	// If there are Boidss close enough for alignment...
+	// If there are Boids close enough for alignment...
 	if (count > 0) {
-		sum->divScalar((float)count);// Divide sum by the number of close Boidss (average of velocity)
+		sum->divScalar((float)count);// Divide sum by the number of close Boids (average of velocity)
 		sum->normalize();            // Turn sum into a unit vector, and
 		sum->mulScalar(maxSpeed);  
 									// Steer = Desired - Velocity
@@ -126,11 +126,11 @@ MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 }
 
 // Cohesion
-// Finds the average location of nearby Boidss and manipulates the
+// Finds the average location of nearby Boids and manipulates the
 // steering force to move in that direction.
 MyVector *Boids::Cohesion(vector<Boids*> *Boidss)
 {
-	float neighbordist = 130;
+	float neighbordist = 50;
 	MyVector *sum = new MyVector(0, 0);
 	int count = 0;
 	for (int i = 0; i < Boidss->size(); i++) {
@@ -178,32 +178,55 @@ void Boids::run(vector <Boids*> *v)
 {
 	flock(v);
 	update();
-	borders();
 }
 
 void Boids::flock(vector<Boids*> *v)
 {
-	MyVector *sep = Separation(v);
-	MyVector *ali = Alignment(v);
-	MyVector *coh = Cohesion(v);
+	MyVector *separation = Separation(v);
+	MyVector *aligment   = Alignment(v);
+	MyVector *cohesion   = Cohesion(v);
+	MyVector *borders    = Borders(v);
 	
-	sep->mulScalar(0.5);
-	ali->mulScalar(0.1);
-	coh->mulScalar(0.1);
+	separation->mulScalar(1.5);
+	aligment->mulScalar(1.0);
+	cohesion->mulScalar(1.0);
 	
-	applyForce(sep);
-	applyForce(ali);
-	applyForce(coh);
+	applyForce(separation);
+	applyForce(aligment);
+	applyForce(cohesion);
+	applyForce(borders);
 }
 
-void Boids::borders()
+MyVector *Boids::Borders(vector <Boids*> *Boidss)
 {
 	int widthHalf = w_width / 2;
 	int heightHalf = w_height / 2;
-	if (location->vec.x < -widthHalf)    location->vec.x += w_width;
-	if (location->vec.y < -heightHalf)   location->vec.y += w_height;
-	if (location->vec.x > widthHalf)     location->vec.x -= w_width;
-	if (location->vec.y > heightHalf)    location->vec.y -= w_height;
+	
+	MyVector *boidsNearBorders = new MyVector(0, 0);
+	MyVector *tmpVector = new MyVector(0, 0);
+
+	for (int i = 0; i < Boidss->size(); i++) {
+
+		if (Boidss->at(i)->location->vec.x <= -widthHalf) {
+			//Boidss->at(i)->location->vec.x += 10;
+
+		}
+
+		if (Boidss->at(i)->location->vec.y <= -heightHalf) {
+			//Boidss->at(i)->location->vec.y += 10;
+		}
+
+		if (Boidss->at(i)->location->vec.x >= widthHalf) {
+			//Boidss->at(i)->location->vec.x -= 10;
+		}
+
+		if (Boidss->at(i)->location->vec.y >= heightHalf) {
+			//Boidss->at(i)->location->vec.y -= 10;
+		}
+
+	}
+
+	return boidsNearBorders;
 }
 
 float Boids::angle(MyVector *v)

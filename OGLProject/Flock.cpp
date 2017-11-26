@@ -70,8 +70,6 @@ void Flock::loadModels(void) {
 
 }
 
-// Runs the run function for every boid in the flock checking against the flock
-// itself. Which in turn applies all the rules to the flock.
 void Flock::flocking(Shader *shader)
 {
 	for (register int i = 0; i < this->numberOfBoids; i++) {

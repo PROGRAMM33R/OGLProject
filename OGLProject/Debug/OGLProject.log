@@ -12,3 +12,48 @@
 LINK : warning LNK4098: Výchozí knihovna MSVCRT je v konfliktu s použitím jiných knihoven. Použijte /NODEFAULTLIB:library.
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.pdb (Partial PDB)
+  0 File(s) copied
+  File not found - Win32.dll
+  C:\Users\lasak\Desktop\OGLProject\packages\DevIL Windows SDK\lib\x86\Release\DevIL.dll
+  1 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\packages\DevIL Windows SDK\lib\x86\Release\ILU.dll
+  1 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\packages\DevIL Windows SDK\lib\x86\Release\ILUT.dll
+  1 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\packages\glew-2.1.0\bin\Release\Win32\glew32.dll
+  1 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
+  1 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
+  1 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\cube.obj
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\test.mtl
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\test.obj
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\test.png
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\test2.png
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\cube.mtl
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\cube.obj
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\surface - Copy.jpg
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\surface.jpg
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\untitled.blend
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\untitled.blend1
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\cube.mtl
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\cube.obj
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\surface - Copy.jpg
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\surface.jpg
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\untitled.blend
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\untitled.blend1
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\grass.jpg
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\surface.mtl
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\surface.obj
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\untitled.blend
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\untitled.blend1
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\untitled.mtl
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\untitled.obj
+  24 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\config.cfg
+  1 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\FragmentShader.shader
+  1 File(s) copied
+  C:\Users\lasak\Desktop\OGLProject\OGLProject\VertexShader.shader
+  1 File(s) copied

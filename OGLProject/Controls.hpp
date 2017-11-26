@@ -15,7 +15,7 @@ public:
 	: 
 		camera(new Camera()),
 		initialFoV(Config::FOV),
-		speed(Config::SPEED),
+		speed(Config::PLAYER_SPEED),
 		mouseSpeed(Config::MOUSE_SPEED)
 	{}
 	~Controls();

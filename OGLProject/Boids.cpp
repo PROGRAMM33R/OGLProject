@@ -199,7 +199,7 @@ MyVector *Boids::seek(MyVector *v)
 
 void Boids::update()
 {
-	//acceleration->mulScalar((float)(.4));
+	acceleration->mulScalar((float)(.4));
 	velocity->addVector(acceleration);
 	velocity->limit(maxSpeed);
 	location->addVector(velocity);

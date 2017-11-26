@@ -1,15 +1,16 @@
 
-#include "Std.hpp"
+#include "Config.hpp"
 #include "Scene.hpp"
 #include "Shader.hpp"
 #include "Controls.hpp"
 #include "Model.hpp"
 #include "Boids.hpp"
 #include "Flock.hpp"
+#include "Std.hpp"
 
 int main(int argc, char **argv) {
 
-	Config::init();
+	initConfig();
 	GLFWwindow      *window = NULL;
 	Scene           *scene = new Scene();
 	Controls        *controls = new Controls();

@@ -5,45 +5,40 @@
 class MyVector {
 
 public:
-	glm::vec2 vec;
+	glm::vec3 vec;
 
-	MyVector() {}
+	MyVector();
 
-	MyVector(GLfloat xComp, GLfloat yComp)
-	{
-		vec.x = xComp; vec.y = yComp;
-	}
+	MyVector(float xComp, float yComp, float zComp);
 
-	//Mutator Functions
-	void set(GLfloat x, GLfloat y);
+	void set(float x, float y, float z);
+	void set(void);
 
-	//Scalar functions scale a vector by a float
 	void addVector(MyVector *v);
-	void addScalar(GLfloat x);
+	void addScalar(float x);
 
 	void subVector(MyVector *v);
 	MyVector *subTwoVector(MyVector *v, MyVector *v2);
-	void subScalar(GLfloat x);
+	void subScalar(float x);
 
 	void mulVector(MyVector *v);
-	void mulScalar(GLfloat x);
+	void mulScalar(float x);
 
 	void divVector(MyVector *v);
-	void divScalar(GLfloat x);
+	void divScalar(float x);
 
-	void limit(GLfloat max);
+	void limit(float max);
 
-	//Calculating Functions
-	GLfloat distance(MyVector *v);
-	GLfloat dotProduct(MyVector *v);
-	GLfloat magnitude();
-	void setMagnitude(GLfloat x);
-	GLfloat angleBetween(MyVector *v);
-	void normalize();
+	float distance(MyVector *v) const;
+	float dotProduct(MyVector *v) const;
+	float magnitude() const;
+	void setMagnitude(float x);
+	float angleBetween(MyVector *v);
+	void normalize(void);
 
-	MyVector *copy(MyVector v);
+	MyVector *copy(MyVector v) const;
 
 private:
-	const float PI = 3.141592654;
+	const double PI = 3.141592654;
 
 };

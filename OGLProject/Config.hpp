@@ -27,9 +27,17 @@ namespace Config {
 	static float			SPEED = 1500.0f;
 	static float			MOUSE_SPEED = 0.005f;
 
-	static int				NUMBER_OF_BOIDS = 30;
-	static int				NUMBER_OF_PREDATORS = 0;
-	static int				GENERATE_SPACE = 5000;
+	static int				BOID_CUBE_SIZE = 4100;
+	static int				BOID_OBJ_SIZE = 7;
+	static int				BOID_NUMBER_OF_BOIDS = 50;
+	static int				BOID_NUMBER_OF_PREDATORS = 2;
+	static int				BOID_GENERATE_SPACE = 800;
+	static int				BOID_DESIRED_SEPARATION = 80;
+	static int				BOID_NEIGHTBORDIST = 200;
+	static float			BOID_MAX_SPEED = 25.5;
+	static float			BOID_MAX_FORCE = 10.5;
+	static float			BOID_MAX_SPEED_PREDATOR = 15.5;
+	static float			BOID_MAX_FORCE_PREDATOR = 0.5;
 
 	static std::string		OBJ_SURFACE = "Models/surface/surface.obj";
 	static std::string		OBJ_BOID = "Models/cube/cube.obj";

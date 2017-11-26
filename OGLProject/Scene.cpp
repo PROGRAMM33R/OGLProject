@@ -40,7 +40,7 @@ GLFWwindow *Scene::initScene(void) const {
 
 	glfwPollEvents();
 	glfwSetCursorPos(window, Config::WINDOW_WIDTH / 2, Config::WINDOW_HEIGHT / 2);
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.15f, 0.15f, 0.15f, 0.0f);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

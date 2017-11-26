@@ -12,12 +12,19 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 
 		if (i < numberOfPredators) {
 			addBoid(new Boids(
-				rand() % initialSpacingBetweenBoids, rand() % initialSpacingBetweenBoids, true)
+				(float)(rand() % initialSpacingBetweenBoids), 
+				(float)(rand() % initialSpacingBetweenBoids),
+				(float)(rand() % initialSpacingBetweenBoids),
+				true
+			)
 			);
 		}
 		else {
 			addBoid(new Boids(
-				rand() % initialSpacingBetweenBoids, rand() % initialSpacingBetweenBoids)
+				(float)(rand() % initialSpacingBetweenBoids),
+				(float)(rand() % initialSpacingBetweenBoids),
+				(float)(rand() % initialSpacingBetweenBoids)
+			)
 			);
 		}
 		
@@ -27,9 +34,9 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 
 Flock::Flock() 
 	: Flock(
-		Config::NUMBER_OF_BOIDS, 
-		Config::NUMBER_OF_PREDATORS, 
-		Config::GENERATE_SPACE
+		Config::BOID_NUMBER_OF_BOIDS, 
+		Config::BOID_NUMBER_OF_PREDATORS, 
+		Config::BOID_GENERATE_SPACE
 	) 
 {}
 
@@ -44,7 +51,7 @@ void Flock::loadModels(void) {
 	if (this->numberOfBoids >= 1) {
 		tmpBoidsModel = new Model(Config::OBJ_BOID);
 	}
-	else if (this->numberOfPredators >= 1) {
+	if (this->numberOfPredators >= 1) {
 		tmpBoidsModelPredator = new Model(Config::OBJ_PREDATOR);
 	}
 

@@ -17,6 +17,10 @@ public:
 
 private:
 	unsigned int VBO, EBO;
+	unsigned int diffuseNr = 1;
+	unsigned int specularNr = 1;
+	unsigned int normalNr = 1;
+	unsigned int heightNr = 1;
 	void setupMesh();
 
 };

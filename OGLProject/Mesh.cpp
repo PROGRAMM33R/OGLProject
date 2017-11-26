@@ -11,28 +11,31 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 }
 
 void Mesh::Draw(Shader *shader, Boids *Boidss) {
-	unsigned int diffuseNr = 1;
-	unsigned int specularNr = 1;
-	unsigned int normalNr = 1;
-	unsigned int heightNr = 1;
 
 	if (Boidss != NULL) {
 
 		glm::mat4 model;
-		glm::vec3 position = glm::vec3(Boidss->location->vec.x, 1, Boidss->location->vec.y);
+		glm::vec3 position = glm::vec3(Boidss->location->vec.x, Boidss->location->vec.y, Boidss->location->vec.z);
 		
-		model = glm::translate(model, position);  // First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
+		// First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
+		model = glm::translate(model, position);  
 		
 		//model = glm::translate(model, glm::vec3(0.2f * Boidss->size.x, 3.0f, 0.2f * Boidss->size.y));
-		model = glm::rotate(model, Boidss->angle(Boidss->location), glm::vec3(0.0f, 3.0f, 0.0f));
+		model = glm::rotate(model, Boidss->angle(Boidss->acceleration), glm::vec3(1.0f, 1.0f, 1.0f));
 		
-		model = glm::translate(model, glm::vec3(-0.2f * Boidss->size.x, 3.0f, -0.2f * Boidss->size.y));
-		model = glm::scale(model, glm::vec3(Boidss->size, Boidss->size.y));
+		model = glm::translate(model, glm::vec3(-0.2f * Boidss->size.x, -0.2 * Boidss->size.y, -0.2f * Boidss->size.z));
+		model = glm::scale(model, glm::vec3(Boidss->size));
 
 		shader->setMat4("Model", model);
 	}
+	else { // surface
+		glm::mat4 model;
+		glm::vec3 position = glm::vec3(0, -(Config::BOID_CUBE_SIZE / 2), 0);
+		model = glm::translate(model, position);
+		shader->setMat4("Model", model);
+	}
 
-	for (unsigned int i = 0; i < textures.size(); i++) {
+	for (register unsigned int i = 0; i < textures.size(); i++) {
 		glActiveTexture(GL_TEXTURE0 + i); 
 										 
 		stringstream ss;

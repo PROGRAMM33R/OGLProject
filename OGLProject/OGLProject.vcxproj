@@ -72,7 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
     <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -96,6 +96,7 @@ xcopy /Y "$(SolutionDir)packages\glew-2.1.0\bin\Release\Win32\glew32.dll" "$(Sol
 xcopy /Y "$(SolutionDir)packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll" "$(SolutionDir)Debug" &lt;NUL
 xcopy /Y "$(SolutionDir)packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll" "$(SolutionDir)Debug" &lt;NUL
 xcopy /Y /S "$(ProjectDir)Models" "$(SolutionDir)Debug\Models" &lt;NUL
+xcopy /Y "$(ProjectDir)config.cfg" "$(SolutionDir)Debug" &lt;NUL
 xcopy /Y "$(ProjectDir)FragmentShader.shader" "$(SolutionDir)Debug" &lt;NUL
 xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Debug" &lt;NUL</Command>
     </PostBuildEvent>

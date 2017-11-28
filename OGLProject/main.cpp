@@ -10,10 +10,10 @@
 
 int main(int argc, char **argv) {
 
-	initConfig();
-	GLFWwindow      *window = NULL;
-	Scene           *scene = new Scene();
-	Controls        *controls = new Controls();
+	Config		*cfg = new Config();
+	GLFWwindow  *window = NULL;
+	Scene       *scene = new Scene(cfg);
+	Controls    *controls = new Controls(cfg);
 
 	window = scene->initScene();
 	if (window == NULL) {
@@ -23,8 +23,8 @@ int main(int argc, char **argv) {
 	Shader *shader = new Shader("VertexShader.shader", "FragmentShader.shader");
 	GLuint MatrixID = glGetUniformLocation(shader->ID, "MVP");
 
-	Flock *flock = new Flock();
-	Model *surface = new Model(Config::OBJ_SURFACE);
+	Flock *flock = new Flock(cfg);
+	Model *surface = new Model(cfg->OBJ_SURFACE, cfg);
 
 	do {
 
@@ -66,6 +66,7 @@ int main(int argc, char **argv) {
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
 
+	delete cfg;
 	delete scene;
 	delete shader;
 	delete controls;

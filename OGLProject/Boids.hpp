@@ -6,6 +6,7 @@
 class Boids {
 
 private:
+	Config *cfg;
 	int cubeSize;
 	const double PI = 3.141592635;
 	MyVector *oppositeVector;
@@ -28,10 +29,10 @@ public:
 
 	glm::vec3 size;
 
-	Boids();
+	Boids(Config *cfg);
 	~Boids();
-	Boids(float x, float y, float z);
-	Boids(float x, float y, float z, bool predCheck);
+	Boids(float x, float y, float z, Config *cfg);
+	Boids(float x, float y, float z, Config *cfg, bool predCheck);
 	
 	void applyForce(MyVector *force);
 
@@ -46,5 +47,6 @@ public:
 	void update();
 	void flock(vector <Boids*> *v);
 	float angle(MyVector *v);
+	glm::vec3 rotationVector(MyVector *v);
 
 };

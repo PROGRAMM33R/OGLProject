@@ -14,15 +14,18 @@ private:
 	glm::vec3 up;
 	glm::vec3 right;
 	glm::vec3 direction;
+	Config *cfg;
 
 public:
-	Camera()
+	Camera(Config *cfg)
 	: 
 		horizontalAngle(3.14f),
 		verticalAngle(-0.4f),
-		position(Config::INIT_CAMERA_POSITION),
-		initialFoV(Config::FOV)
-	{}
+		cfg(cfg)
+	{
+		this->position = this->cfg->INIT_CAMERA_POSITION;
+		this->initialFoV = this->cfg->FOV;
+	}
 	~Camera() {}
 	void calculateCamera(GLFWwindow* window, float mouseSpeed);
 	void calculateMVP(float initialFoV);

@@ -12,10 +12,11 @@ public:
 	vector<Texture> textures;
 	unsigned int VAO;
 
-	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
+	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Config *cfg);
 	void Draw(Shader *shader, Boids *Boids);
 
 private:
+	Config *cfg;
 	unsigned int VBO, EBO;
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;

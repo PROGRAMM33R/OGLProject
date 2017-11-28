@@ -9,15 +9,18 @@ private:
 	float initialFoV;
 	float speed, mouseSpeed;
 	Camera *camera;
+	Config *cfg;
 
 public:
-	Controls() 
-	: 
-		camera(new Camera()),
-		initialFoV(Config::FOV),
-		speed(Config::PLAYER_SPEED),
-		mouseSpeed(Config::MOUSE_SPEED)
-	{}
+	Controls(Config *cfg)
+	:
+		camera(new Camera(cfg)),
+		cfg(cfg)
+	{
+			this->initialFoV = this->cfg->FOV;
+			this->speed = this->cfg->PLAYER_SPEED;
+			this->mouseSpeed = this->cfg->MOUSE_SPEED;
+	}
 	~Controls();
 	void computeMatricesFromInputs(GLFWwindow* window);
 	glm::mat4 getMVP() const;

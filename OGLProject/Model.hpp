@@ -14,7 +14,8 @@ public:
 	string directory;
 	bool gammaCorrection;
 
-	Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
+	Model(string const &path, Config *cfg, bool gamma = false)
+		: gammaCorrection(gamma), cfg(cfg)
 	{
 		loadModel(path);
 	}
@@ -23,12 +24,14 @@ public:
 		textures_loaded(model.textures_loaded),
 		meshes(model.meshes),
 		directory(model.directory),
-		gammaCorrection(model.gammaCorrection)
+		gammaCorrection(model.gammaCorrection),
+		cfg(model.cfg)
 	{}
 	~Model() {}
 	void Draw(Shader *shader, Boids *boids = NULL);
 
 private:
+	Config *cfg;
 	void loadModel(string const &path);
 	void processNode(aiNode *node, const aiScene *scene);
 	Mesh processMesh(aiMesh *mesh, const aiScene *scene);

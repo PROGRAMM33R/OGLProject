@@ -1,8 +1,8 @@
 
 #include "Flock.hpp"
 
-Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids)
-	:numberOfBoids(numberOfBoids), numberOfPredators(numberOfPredators){
+Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg)
+	:numberOfBoids(numberOfBoids), numberOfPredators(numberOfPredators), cfg(cfg){
 
 	this->boidsModel = new Model*[numberOfBoids];
 	this->flock = new vector<Boids*>();
@@ -15,6 +15,7 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 				(float)(rand() % initialSpacingBetweenBoids), 
 				(float)(rand() % initialSpacingBetweenBoids),
 				(float)(rand() % initialSpacingBetweenBoids),
+				this->cfg,
 				true
 			)
 			);
@@ -23,7 +24,8 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 			addBoid(new Boids(
 				(float)(rand() % initialSpacingBetweenBoids),
 				(float)(rand() % initialSpacingBetweenBoids),
-				(float)(rand() % initialSpacingBetweenBoids)
+				(float)(rand() % initialSpacingBetweenBoids),
+				this->cfg
 			)
 			);
 		}
@@ -32,13 +34,16 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 
 }
 
-Flock::Flock() 
+Flock::Flock(Config *cfg)
 	: Flock(
-		Config::BOID_NUMBER_OF_BOIDS, 
-		Config::BOID_NUMBER_OF_PREDATORS, 
-		Config::BOID_GENERATE_SPACE
+		cfg->BOID_NUMBER_OF_BOIDS,
+		cfg->BOID_NUMBER_OF_PREDATORS,
+		cfg->BOID_GENERATE_SPACE,
+		cfg
 	) 
-{}
+{
+	this->cfg = cfg;
+}
 
 void Flock::addBoid(Boids *b)
 {
@@ -49,10 +54,10 @@ void Flock::loadModels(void) {
 
 	Model *tmpBoidsModel = NULL, *tmpBoidsModelPredator = NULL;
 	if (this->numberOfBoids >= 1) {
-		tmpBoidsModel = new Model(Config::OBJ_BOID);
+		tmpBoidsModel = new Model(this->cfg->OBJ_BOID, this->cfg);
 	}
 	if (this->numberOfPredators >= 1) {
-		tmpBoidsModelPredator = new Model(Config::OBJ_PREDATOR);
+		tmpBoidsModelPredator = new Model(this->cfg->OBJ_PREDATOR, this->cfg);
 	}
 
 	for (register int i = 0; i < this->numberOfBoids; i++) {

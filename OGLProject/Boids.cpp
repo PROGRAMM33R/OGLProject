@@ -1,19 +1,19 @@
 
 #include "Boids.hpp"
 
-Boids::Boids(float x, float y, float z)
+Boids::Boids(float x, float y, float z, Config *cfg)
 {
 	acceleration = new MyVector();
 	velocity = new MyVector((float)(rand() % 3 - 2), (float)(rand() % 3 - 2), (float)(rand() % 3 - 2));
 	location = new MyVector(x, y, z);
-	size.x = (float)(Config::BOID_OBJ_SIZE);
+	size.x = (float)(cfg->BOID_OBJ_SIZE);
 	size.y = size.x;
 	size.z = size.x;
-	this->desiredseparation = Config::BOID_DESIRED_SEPARATION;
-	this->neighbordist = Config::BOID_NEIGHTBORDIST;
-	this->maxSpeed = Config::BOID_MAX_SPEED;
-	this->maxForce = Config::BOID_MAX_FORCE;
-	this->cubeSize = Config::BOID_CUBE_SIZE / 2;
+	this->desiredseparation = cfg->BOID_DESIRED_SEPARATION;
+	this->neighbordist = cfg->BOID_NEIGHTBORDIST;
+	this->maxSpeed = cfg->BOID_MAX_SPEED;
+	this->maxForce = cfg->BOID_MAX_FORCE;
+	this->cubeSize = cfg->BOID_CUBE_SIZE / 2;
 	this->steer = new MyVector();
 	this->sum = new MyVector();
 	this->desired = new MyVector();
@@ -22,8 +22,8 @@ Boids::Boids(float x, float y, float z)
 	this->desiredAvarage = new MyVector();
 }
 
-Boids::Boids() {
-	Boids(0.0, 0.0, 0.0);
+Boids::Boids(Config *cfg) {
+	Boids(0.0, 0.0, 0.0, cfg);
 }
 
 Boids::~Boids() {
@@ -38,23 +38,23 @@ Boids::~Boids() {
 	delete this->desiredAvarage;
 }
 
-Boids::Boids(float x, float y, float z, bool predCheck)
+Boids::Boids(float x, float y, float z, Config *cfg, bool predCheck)
 {
 	predator = predCheck;
 	if (predCheck == true) {
-		this->maxSpeed = Config::BOID_MAX_SPEED_PREDATOR;
-		this->maxForce = Config::BOID_MAX_FORCE_PREDATOR;
+		this->maxSpeed = cfg->BOID_MAX_SPEED_PREDATOR;
+		this->maxForce = cfg->BOID_MAX_FORCE_PREDATOR;
 		velocity = new MyVector((float)(rand() % 3 - 1), (float)(rand() % 3 - 1), (float)(rand() % 3 - 1));
 	}
 	else {
-		this->maxSpeed = Config::BOID_MAX_SPEED;
-		this->maxForce = Config::BOID_MAX_FORCE;
+		this->maxSpeed = cfg->BOID_MAX_SPEED;
+		this->maxForce = cfg->BOID_MAX_FORCE;
 		velocity = new MyVector((float)(rand() % 3 - 2), (float)(rand() % 3 - 2), (float)(rand() % 3 - 2));
 	}
 	acceleration = new MyVector();
 	location = new MyVector(x, y, z);
-	size.x = (float)(Config::BOID_OBJ_SIZE);
-	this->cubeSize = Config::BOID_CUBE_SIZE / 2;
+	size.x = (float)(cfg->BOID_OBJ_SIZE);
+	this->cubeSize = cfg->BOID_CUBE_SIZE / 2;
 	size.y = size.x;
 	size.z = size.x;
 	this->steer = new MyVector();
@@ -108,7 +108,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 			this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
 			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
-			this->tmpVector->mulScalar(200);
+			this->tmpVector->mulScalar(10);
 			this->steer->addVector(this->tmpVector);
 			delete this->tmpVector;
 			this->tmpVector = this->tmpVectorMem;
@@ -255,4 +255,15 @@ MyVector *Boids::WallRepel() {
 float Boids::angle(MyVector *v)
 {
 	return (float)(atan2(v->vec.x, -v->vec.y) * 180 / PI);
+}
+
+glm::vec3 Boids::rotationVector(MyVector *v) {
+	glm::vec3 rotation;
+	float r = sqrt(pow(v->vec.x, 2) + pow(v->vec.y, 2) + pow(v->vec.z, 2));
+	float theta = acos(v->vec.z / r);
+	float fi = atan(v->vec.y / v->vec.x);
+	rotation.x = r;
+	rotation.y = theta;
+	rotation.z = fi;
+	return rotation;
 }

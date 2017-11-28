@@ -5,8 +5,12 @@
 class Scene {
 
 private:
+	Config *cfg;
+
 public:
-	Scene() {}
+	Scene(Config *cfg)
+	:
+		cfg(cfg) {}
 	~Scene();
 	GLFWwindow *initScene(void) const;
 

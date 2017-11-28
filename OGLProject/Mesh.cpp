@@ -3,10 +3,11 @@
 #include "Mesh.hpp"
 #include "Boids.hpp"
 
-Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures) {
+Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Config *cfg) {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
+	this->cfg = cfg;
 	setupMesh();
 }
 
@@ -19,9 +20,7 @@ void Mesh::Draw(Shader *shader, Boids *Boidss) {
 		
 		// First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
 		model = glm::translate(model, position);  
-		
-		//model = glm::translate(model, glm::vec3(0.2f * Boidss->size.x, 3.0f, 0.2f * Boidss->size.y));
-		model = glm::rotate(model, Boidss->angle(Boidss->acceleration), glm::vec3(1.0f, 1.0f, 1.0f));
+		model = glm::rotate(model, Boidss->angle(Boidss->acceleration), Boidss->rotationVector(Boidss->velocity));
 		
 		model = glm::translate(model, glm::vec3(-0.2f * Boidss->size.x, -0.2 * Boidss->size.y, -0.2f * Boidss->size.z));
 		model = glm::scale(model, glm::vec3(Boidss->size));
@@ -30,7 +29,7 @@ void Mesh::Draw(Shader *shader, Boids *Boidss) {
 	}
 	else { // surface
 		glm::mat4 model;
-		glm::vec3 position = glm::vec3(0, -(Config::BOID_CUBE_SIZE / 2), 0);
+		glm::vec3 position = glm::vec3(0, -(this->cfg->BOID_CUBE_SIZE / 2), 0);
 		model = glm::translate(model, position);
 		shader->setMat4("Model", model);
 	}

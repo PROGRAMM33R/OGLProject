@@ -21,7 +21,7 @@ GLFWwindow *Scene::initScene(void) const {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(Config::WINDOW_WIDTH, Config::WINDOW_HEIGHT, Config::WINDOW_LABEL.c_str(), NULL, NULL);
+	window = glfwCreateWindow(this->cfg->WINDOW_WIDTH, this->cfg->WINDOW_HEIGHT, this->cfg->WINDOW_LABEL.c_str(), NULL, NULL);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		getchar();
@@ -39,7 +39,7 @@ GLFWwindow *Scene::initScene(void) const {
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glfwPollEvents();
-	glfwSetCursorPos(window, Config::WINDOW_WIDTH / 2, Config::WINDOW_HEIGHT / 2);
+	glfwSetCursorPos(window, this->cfg->WINDOW_WIDTH / 2, this->cfg->WINDOW_HEIGHT / 2);
 	glClearColor(0.15f, 0.15f, 0.15f, 0.0f);
 
 	glEnable(GL_DEPTH_TEST);

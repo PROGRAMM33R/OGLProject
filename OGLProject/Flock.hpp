@@ -11,13 +11,14 @@ private:
 	int numberOfBoids, numberOfPredators;
 	vector<Boids*> *flock;
 	Model **boidsModel;
+	Config *cfg;
 
 	void loadModels(void);
 
 public:
 	
-	Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids);
-	Flock();
+	Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg);
+	Flock(Config *cfg);
 	~Flock() {}
 	
 	void addBoid(Boids *b);

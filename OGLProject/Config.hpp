@@ -43,6 +43,7 @@ public:
 			vector<string> *values = new vector<string>();
 
 			int cameraX = 0, cameraY = 0, cameraZ = 0;
+			int cubeSize = 0;
 			std::ifstream in("config.cfg");
 			std::string contents((std::istreambuf_iterator<char>(in)),
 				std::istreambuf_iterator<char>());
@@ -97,7 +98,7 @@ public:
 					MOUSE_SPEED = std::stof(values->at(i));
 				}
 				if (keys->at(i).find("BOID_CUBE_SIZE") != std::string::npos) {
-					BOID_CUBE_SIZE = std::stoi(values->at(i));
+					int cubeSize = std::stoi(values->at(i));
 				}
 				if (keys->at(i).find("BOID_OBJ_SIZE") != std::string::npos) {
 					BOID_OBJ_SIZE = std::stoi(values->at(i));
@@ -141,6 +142,9 @@ public:
 				INIT_CAMERA_POSITION = glm::vec3(cameraX, cameraY, cameraZ);
 				if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {
 					BOID_CUBE_SIZE = BOID_CUBE_SIZE + (BOID_GENERATE_SPACE - BOID_CUBE_SIZE);
+				}
+				if ((BOID_NUMBER_OF_BOIDS * 80) > cubeSize) {
+					BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 80;
 				}
 			}
 			keys->clear();

@@ -8,6 +8,10 @@
 #include "Flock.hpp"
 #include "Std.hpp"
 
+void callFlocking(Flock *flock, Shader *shader) {
+	flock->flocking(shader);
+}
+
 int main(int argc, char **argv) {
 
 	Config		*cfg = new Config();
@@ -32,7 +36,7 @@ int main(int argc, char **argv) {
 
 		shader->use();
 
-		glm::mat4 ModelMatrix = glm::mat4(1.0);
+		glm::mat4 ModelMatrix = glm::mat4(2.0);
 		shader->setMat4("Model", ModelMatrix);
 
 		shader->setVec3("light.position", glm::vec3(14.0f, 10.0f, 6.0f));
@@ -57,6 +61,7 @@ int main(int argc, char **argv) {
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
 		surface->Draw(shader);
+
 		flock->flocking(shader);
 
 		glfwSwapBuffers(window);

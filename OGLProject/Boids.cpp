@@ -20,6 +20,8 @@ Boids::Boids(float x, float y, float z, Config *cfg)
 	this->oppositeVector = new MyVector();
 	this->tmpVector = new MyVector();
 	this->desiredAvarage = new MyVector();
+	this->origin = new MyVector(0, 0, 0);
+	this->cfg = cfg;
 }
 
 Boids::Boids(Config *cfg) {
@@ -36,6 +38,7 @@ Boids::~Boids() {
 	delete this->acceleration;
 	delete this->tmpVector;
 	delete this->desiredAvarage;
+	delete this->origin;
 }
 
 Boids::Boids(float x, float y, float z, Config *cfg, bool predCheck)
@@ -63,9 +66,11 @@ Boids::Boids(float x, float y, float z, Config *cfg, bool predCheck)
 	this->oppositeVector = new MyVector();
 	this->tmpVector = new MyVector();
 	this->desiredAvarage = new MyVector();
+	this->origin = new MyVector(0, 0, 0);
+	this->cfg = cfg;
 }
 
-void Boids::applyForce(MyVector *force)
+inline void Boids::applyForce(MyVector *force)
 {
 	acceleration->addVector(force);
 }
@@ -190,9 +195,7 @@ MyVector *Boids::seek(MyVector *v)
 	this->desired->subVector(v);
 	this->desired->normalize();
 	this->desired->mulScalar(maxSpeed);
-	// Steering = Desired minus Velocity
-	//MyVector *addressToDelete = acceleration->subTwoVector(this->desired, velocity);
-
+	acceleration->subTwoVector(desired, velocity);
 	acceleration->limit(maxForce); 
 	return acceleration;
 }
@@ -234,15 +237,8 @@ MyVector *Boids::WallRepel() {
 	this->oppositeVector->set();
 	this->oppositeVector->addVector(location);
 	this->oppositeVector->mulScalar(-0.5);
-
-	if (
-		location->vec.x <= -this->cubeSize ||
-		location->vec.x >= this->cubeSize ||
-		location->vec.y <= -this->cubeSize ||
-		location->vec.y >= this->cubeSize ||
-		location->vec.z <= -this->cubeSize ||
-		location->vec.z >= this->cubeSize
-		) {
+	
+	if (location->distance(this->origin) > (cfg->BOID_CUBE_SIZE / 2)) {
 		return this->oppositeVector;
 	}
 	else {
@@ -252,12 +248,12 @@ MyVector *Boids::WallRepel() {
 
 }
 
-float Boids::angle(MyVector *v)
+float Boids::angle(MyVector *v) const
 {
 	return (float)(atan2(v->vec.x, -v->vec.y) * 180 / PI);
 }
 
-glm::vec3 Boids::rotationVector(MyVector *v) {
+glm::vec3 Boids::rotationVector(MyVector *v) const {
 	glm::vec3 rotation;
 	float r = sqrt(pow(v->vec.x, 2) + pow(v->vec.y, 2) + pow(v->vec.z, 2));
 	float theta = acos(v->vec.z / r);

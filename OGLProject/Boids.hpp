@@ -12,7 +12,7 @@ private:
 	MyVector *oppositeVector;
 	MyVector *steer, *steerMem, *sum, *desired;
 	MyVector *tmpVector, *tmpVectorMem;
-	MyVector *desiredAvarage;
+	MyVector *desiredAvarage, *origin;
 
 	MyVector *separationResult;
 	MyVector *aligmentResult;
@@ -34,7 +34,7 @@ public:
 	Boids(float x, float y, float z, Config *cfg);
 	Boids(float x, float y, float z, Config *cfg, bool predCheck);
 	
-	void applyForce(MyVector *force);
+	inline void applyForce(MyVector *force);
 
 	// Three Laws
 	MyVector *Separation(vector<Boids*> *Boidss);
@@ -46,7 +46,7 @@ public:
 	void run(vector <Boids*> *v);
 	void update();
 	void flock(vector <Boids*> *v);
-	float angle(MyVector *v);
-	glm::vec3 rotationVector(MyVector *v);
+	float angle(MyVector *v) const;
+	glm::vec3 rotationVector(MyVector *v) const;
 
 };

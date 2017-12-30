@@ -8,10 +8,6 @@
 #include "Flock.hpp"
 #include "Std.hpp"
 
-void callFlocking(Flock *flock, Shader *shader) {
-	flock->flocking(shader);
-}
-
 int main(int argc, char **argv) {
 
 	Config		*cfg = new Config();
@@ -44,16 +40,16 @@ int main(int argc, char **argv) {
 
 		shader->setVec3("light.ambient", 1.0f, 1.0f, 1.0f);
 		shader->setVec3("light.diffuse", 0.0f, 0.0f, 0.0f);
-		shader->setVec3("light.specular", 0.2f, 0.2f, 0.2f);
+		shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 		
-		shader->setVec3("material.specular", 0.0f, 0.0f, 0.0f);
+		shader->setVec3("material.specular", 0.3f, 0.3f, 0.3f);
 		shader->setFloat("material.shininess", 64.0f);
 
 		// directional light
-		shader->setVec3("dirLight.position", glm::vec3(14.0f, 10.0f, 6.0f));
+		/*shader->setVec3("dirLight.position", glm::vec3(14.0f, 10.0f, 6.0f));
 		shader->setVec3("dirLight.ambient", 0.9f, 0.9f, 0.9f);
 		shader->setVec3("dirLight.diffuse", 0.3f, 0.3f, 0.3f);
-		shader->setVec3("dirLight.specular", 0.2f, 0.2f, 0.2f);
+		shader->setVec3("dirLight.specular", 0.2f, 0.2f, 0.2f);*/
 
 		controls->computeMatricesFromInputs( window );
 		glm::mat4 MVP = controls->getMVP();

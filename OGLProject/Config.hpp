@@ -118,10 +118,10 @@ public:
 				if (keys->at(i).find("BOID_NEIGHTBORDIST") != std::string::npos) {
 					BOID_NEIGHTBORDIST = std::stoi(values->at(i));
 				}
-				if (keys->at(i).find("BOID_MAX_SPEED") != std::string::npos) {
+				if (keys->at(i).find("BOID_SPEED") != std::string::npos) {
 					BOID_MAX_SPEED = std::stof(values->at(i));
 				}
-				if (keys->at(i).find("BOID_MAX_FORCE") != std::string::npos) {
+				if (keys->at(i).find("BOID_FORCE") != std::string::npos) {
 					BOID_MAX_FORCE = std::stof(values->at(i));
 				}
 				if (keys->at(i).find("BOID_MAX_SPEED_PREDATOR") != std::string::npos) {

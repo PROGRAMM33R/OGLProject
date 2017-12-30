@@ -25,10 +25,31 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 				(float)(rand() % initialSpacingBetweenBoids),
 				(float)(rand() % initialSpacingBetweenBoids),
 				(float)(rand() % initialSpacingBetweenBoids),
-				this->cfg
+				this->cfg,
+				false
 			)
 			);
 		}
+		/*if (i < numberOfPredators) {
+			addBoid(new Boids(
+				cfg->BOID_CUBE_SIZE / 2,
+				cfg->BOID_CUBE_SIZE / 2,
+				cfg->BOID_CUBE_SIZE / 2,
+				this->cfg,
+				true
+			)
+			);
+		}
+		else {
+			addBoid(new Boids(
+				cfg->BOID_CUBE_SIZE / 2,
+				cfg->BOID_CUBE_SIZE / 2,
+				cfg->BOID_CUBE_SIZE / 2,
+				this->cfg,
+				false
+			)
+			);
+		}*/
 		
 	}
 

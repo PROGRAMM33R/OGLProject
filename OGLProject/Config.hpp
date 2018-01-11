@@ -21,6 +21,7 @@ public:
 		float			PLAYER_SPEED;
 		float			MOUSE_SPEED;
 
+		std::string		SCENE_TYPE;
 		int				BOID_CUBE_SIZE;
 		int				BOID_OBJ_SIZE;
 		int				BOID_NUMBER_OF_BOIDS;
@@ -36,6 +37,7 @@ public:
 		std::string		OBJ_SURFACE;
 		std::string		OBJ_BOID;
 		std::string		OBJ_PREDATOR;
+		std::string		OBJ_SKY;
 
 		Config() {
 
@@ -97,6 +99,9 @@ public:
 				if (keys->at(i).find("MOUSE_SPEED") != std::string::npos) {
 					MOUSE_SPEED = std::stof(values->at(i));
 				}
+				if (keys->at(i).find("SCENE_TYPE") != std::string::npos) {
+					SCENE_TYPE = values->at(i);
+				}
 				if (keys->at(i).find("BOID_CUBE_SIZE") != std::string::npos) {
 					int cubeSize = std::stoi(values->at(i));
 				}
@@ -139,12 +144,15 @@ public:
 				if (keys->at(i).find("OBJ_PREDATOR") != std::string::npos) {
 					OBJ_PREDATOR = values->at(i);
 				}
+				if (keys->at(i).find("OBJ_SKY") != std::string::npos) {
+					OBJ_SKY = values->at(i);
+				}
 				INIT_CAMERA_POSITION = glm::vec3(cameraX, cameraY, cameraZ);
 				if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {
 					BOID_CUBE_SIZE = BOID_CUBE_SIZE + (BOID_GENERATE_SPACE - BOID_CUBE_SIZE);
 				}
-				if ((BOID_NUMBER_OF_BOIDS * 80) > cubeSize) {
-					BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 80;
+				if ((BOID_NUMBER_OF_BOIDS * 40) > cubeSize) {
+					BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 40;
 				}
 			}
 			keys->clear();

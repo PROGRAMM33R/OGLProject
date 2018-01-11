@@ -66,14 +66,14 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	for (register unsigned int i = 0; i < Boidss->size(); i++) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->desiredseparation)) {
-			this->tmpVector->set();
+			/*this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
 			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
 			this->tmpVector->normalize();
 			this->tmpVector->divScalar(d);
 			this->steer->addVector(this->tmpVector);
 			delete this->tmpVector;
-			this->tmpVector = this->tmpVectorMem;
+			this->tmpVector = this->tmpVectorMem;*/
 			count++;
 		}
 		
@@ -81,7 +81,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 			&& Boidss->at(i)->predator == true) {
 			this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
-			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
+			this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
 			this->tmpVector->normalize();
 			this->tmpVector->divScalar(d);
 			this->steer->addVector(this->tmpVector);
@@ -93,7 +93,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 		else if ((d > 0) && (d < this->desiredseparation) && Boidss->at(i)->predator == true) {
 			this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
-			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
+			this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
 			this->tmpVector->mulScalar(20);
 			this->steer->addVector(this->tmpVector);
 			delete this->tmpVector;
@@ -105,19 +105,15 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	if (count > 0)
 		this->steer->divScalar((float)count);
 	if (this->steer->magnitude() > 0) {
-		// Steering = Desired - Velocity
-		//this->sum->divScalar((float)count);
+
 		this->steer->normalize();
 		this->steer->mulScalar(maxSpeed);
 		this->steer->subVector(velocity);
-
-		//this->desiredAvarage = this->steer->subTwoVector(this->sum, velocity); //sum = desired(average)
-		//this->steer->set(this->desiredAvarage->vec.x, this->desiredAvarage->vec.y, this->desiredAvarage->vec.z);
-		//delete this->desiredAvarage;
-
 		this->steer->limit(maxForce);
+
 	}
 	return this->steer;
+
 }
 
 // Alignment
@@ -149,6 +145,7 @@ MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 	else {
 		return this->sum;
 	}
+
 }
 
 // Cohesion
@@ -167,8 +164,7 @@ MyVector *Boids::Cohesion(vector<Boids*> *Boidss)
 	}
 	if (count > 0) {
 		this->sum->divScalar((float)count);
-		//return seek(this->sum);
-		return acceleration;
+		return seek(this->sum);
 	}
 	else {
 		return this->sum;
@@ -181,34 +177,25 @@ MyVector *Boids::seek(MyVector *v)
 {
 	this->desired->set();
 
-	/*this->tmpVectorMem = desired->subTwoVector(v, this->location);
+	this->tmpVectorMem = desired->subTwoVector(v, this->location);
 	this->desired->set(this->tmpVectorMem->vec.x, this->tmpVectorMem->vec.y, this->tmpVectorMem->vec.z);
-	delete this->tmpVectorMem;*/
+	delete this->tmpVectorMem;
 
-	this->desired->subVector(v);
 	this->desired->normalize();
 	this->desired->mulScalar(maxSpeed);
 
-	/*this->seekResult->set();
+	this->seekResult->set();
 	this->tmpVectorMem = seekResult->subTwoVector(this->desired, this->velocity);
 	this->seekResult->set(this->tmpVectorMem->vec.x, this->tmpVectorMem->vec.y, this->tmpVectorMem->vec.z);
 	delete this->tmpVectorMem;
 
 	seekResult->limit(maxForce);
-	return this->seekResult;*/
-
-	this->seekResult->set();
-	this->tmpVectorMem = seekResult->subTwoVector(this->desired, this->velocity);
-	this->acceleration->set(this->tmpVectorMem->vec.x, this->tmpVectorMem->vec.y, this->tmpVectorMem->vec.z);
-	delete this->tmpVectorMem;
-
-	acceleration->limit(maxForce);
-	return this->acceleration;
+	return this->seekResult;
 }
 
 void Boids::update()
 {
-	//acceleration->mulScalar((float)(.4));
+	acceleration->mulScalar((float)(.4));
 	velocity->addVector(acceleration);
 	velocity->limit(maxSpeed);
 	location->addVector(velocity);
@@ -242,7 +229,7 @@ MyVector *Boids::WallRepel() {
 	
 	this->oppositeVector->set();
 	this->oppositeVector->addVector(location);
-	this->oppositeVector->mulScalar(-0.5);
+	this->oppositeVector->mulScalar(-.5);
 	
 	if (location->distance(this->origin) > (cfg->BOID_CUBE_SIZE / 2)) {
 		return this->oppositeVector;

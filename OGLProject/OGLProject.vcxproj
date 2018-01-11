@@ -73,7 +73,7 @@
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
-    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -175,6 +175,7 @@ xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Debug" &lt;NUL</Comma
     <ClInclude Include="Boids.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Controls.hpp" />
+    <ClInclude Include="DrawTypeObj.hpp" />
     <ClInclude Include="Flock.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />

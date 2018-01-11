@@ -11,28 +11,40 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 	setupMesh();
 }
 
-void Mesh::Draw(Shader *shader, Boids *Boidss) {
+void Mesh::Draw(Shader *shader, int objType, Boids *Boidss) {
 
-	if (Boidss != NULL) {
+	if (Boidss != NULL && objType == DRAW_TYPE_BOIDS) {
 
 		glm::mat4 model;
 		glm::vec3 position = glm::vec3(Boidss->location->vec.x, Boidss->location->vec.y, Boidss->location->vec.z);
 		
 		// First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
 		model = glm::translate(model, position);  
-		model = glm::rotate(model, Boidss->angleX(Boidss->acceleration), glm::vec3(1, 0, 0));
-		//model = glm::rotate(model, Boidss->angleY(Boidss->acceleration), glm::vec3(0, 1, 0));
-		model = glm::rotate(model, Boidss->angleZ(Boidss->acceleration), glm::vec3(0, 1, 0));
+
+		//model = glm::rotate(model, hovno, glm::vec3(0.1, 0, 0));
+		//model = glm::rotate(model, Boidss->angleY(Boidss->velocity), glm::vec3(0, 1, 0));
+		//model = glm::rotate(model, Boidss->angleZ(Boidss->velocity), glm::vec3(0, 0, 1));
 		
-		model = glm::translate(model, glm::vec3(-0.2f * Boidss->size.x, -0.2 * Boidss->size.y, -0.2f * Boidss->size.z));
+		model = glm::translate(model, glm::vec3(Boidss->size.x, Boidss->size.y, Boidss->size.z));
 		model = glm::scale(model, glm::vec3(Boidss->size));
 
 		shader->setMat4("Model", model);
 	}
-	else { // surface
-		glm::mat4 model;
+	else if (objType == DRAW_TYPE_SURFACE){ // surface
+		glm::mat4 model; 
+		int size = cfg->BOID_CUBE_SIZE / 200;
 		glm::vec3 position = glm::vec3(0, -(this->cfg->BOID_CUBE_SIZE / 2) - 100, 0);
 		model = glm::translate(model, position);
+		model = glm::translate(model, glm::vec3(size, size, size));
+		model = glm::scale(model, glm::vec3(size));
+		shader->setMat4("Model", model);
+	}
+	else if (objType == DRAW_TYPE_SKY) { // surface
+		glm::mat4 model; int size = 190000;
+		glm::vec3 position = glm::vec3(-190000, -182000, -180000);
+		model = glm::translate(model, position);
+		model = glm::translate(model, glm::vec3(size, size, size));
+		model = glm::scale(model, glm::vec3(size));
 		shader->setMat4("Model", model);
 	}
 

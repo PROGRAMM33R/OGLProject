@@ -30,26 +30,6 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 			)
 			);
 		}
-		/*if (i < numberOfPredators) {
-			addBoid(new Boids(
-				cfg->BOID_CUBE_SIZE / 2,
-				cfg->BOID_CUBE_SIZE / 2,
-				cfg->BOID_CUBE_SIZE / 2,
-				this->cfg,
-				true
-			)
-			);
-		}
-		else {
-			addBoid(new Boids(
-				cfg->BOID_CUBE_SIZE / 2,
-				cfg->BOID_CUBE_SIZE / 2,
-				cfg->BOID_CUBE_SIZE / 2,
-				this->cfg,
-				false
-			)
-			);
-		}*/
 		
 	}
 
@@ -100,6 +80,6 @@ void Flock::flocking(Shader *shader)
 {
 	for (register int i = 0; i < this->numberOfBoids; i++) {
 		this->flock->at(i)->run(flock);
-		boidsModel[i]->Draw(shader, this->flock->at(i));
+		boidsModel[i]->Draw(shader, DRAW_TYPE_BOIDS, this->flock->at(i));
 	}
 }

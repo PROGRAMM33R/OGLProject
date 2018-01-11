@@ -8,3 +8,5 @@ Crowd simulation by Boid's algorithm.
 http://natureofcode.com/book/chapter-6-autonomous-agents/
 
 http://www.kfish.org/boids/pseudocode.html
+
+https://github.com/ben-grid/Mechstorming/

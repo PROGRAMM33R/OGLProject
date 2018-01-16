@@ -1,29 +1,8 @@
 
 #include "Boids.hpp"
 
-Boids::Boids(float x, float y, float z, Config *cfg)
-{
-	acceleration = new MyVector();
-	velocity = new MyVector((float)(rand() % 3 - 2), (float)(rand() % 3 - 2), (float)(rand() % 3 - 2));
-	location = new MyVector(x, y, z);
-	size.x = (float)(cfg->BOID_OBJ_SIZE);
-	size.y = size.x;
-	size.z = size.x;
-	this->desiredseparation = cfg->BOID_DESIRED_SEPARATION;
-	this->neighbordist = cfg->BOID_NEIGHTBORDIST;
-	this->maxSpeed = cfg->BOID_MAX_SPEED;
-	this->maxForce = cfg->BOID_MAX_FORCE;
-	this->cubeSize = cfg->BOID_CUBE_SIZE / 2;
-	this->steer = new MyVector();
-	this->sum = new MyVector();
-	this->desired = new MyVector();
-	this->oppositeVector = new MyVector();
-	this->tmpVector = new MyVector();
-	this->desiredAvarage = new MyVector();
-}
-
 Boids::Boids(Config *cfg) {
-	Boids(0.0, 0.0, 0.0, cfg);
+	Boids(0.0, 0.0, 0.0, cfg, false);
 }
 
 Boids::~Boids() {
@@ -36,36 +15,43 @@ Boids::~Boids() {
 	delete this->acceleration;
 	delete this->tmpVector;
 	delete this->desiredAvarage;
+	delete this->origin;
 }
 
-Boids::Boids(float x, float y, float z, Config *cfg, bool predCheck)
+Boids::Boids(float x, float y, float z, Config *cfg, bool predCheck = false)
 {
 	predator = predCheck;
+	float angle = (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * PI * 2;
 	if (predCheck == true) {
 		this->maxSpeed = cfg->BOID_MAX_SPEED_PREDATOR;
 		this->maxForce = cfg->BOID_MAX_FORCE_PREDATOR;
-		velocity = new MyVector((float)(rand() % 3 - 1), (float)(rand() % 3 - 1), (float)(rand() % 3 - 1));
+		velocity = new MyVector((float)this->maxSpeed, (float)(rand() % 3 - this->maxSpeed), (float)(rand() % 3 - this->maxSpeed));
 	}
 	else {
 		this->maxSpeed = cfg->BOID_MAX_SPEED;
 		this->maxForce = cfg->BOID_MAX_FORCE;
-		velocity = new MyVector((float)(rand() % 3 - 2), (float)(rand() % 3 - 2), (float)(rand() % 3 - 2));
+		this->neighbordist = cfg->BOID_NEIGHTBORDIST;
+		velocity = new MyVector(cos(angle), sin(angle), tan(angle));
 	}
+	this->desiredseparation = cfg->BOID_DESIRED_SEPARATION;
 	acceleration = new MyVector();
 	location = new MyVector(x, y, z);
 	size.x = (float)(cfg->BOID_OBJ_SIZE);
-	this->cubeSize = cfg->BOID_CUBE_SIZE / 2;
 	size.y = size.x;
 	size.z = size.x;
+	this->cubeSize = cfg->BOID_CUBE_SIZE / 2;
 	this->steer = new MyVector();
 	this->sum = new MyVector();
 	this->desired = new MyVector();
 	this->oppositeVector = new MyVector();
 	this->tmpVector = new MyVector();
 	this->desiredAvarage = new MyVector();
+	this->seekResult = new MyVector();
+	this->origin = new MyVector(0, 0, 0);
+	this->cfg = cfg;
 }
 
-void Boids::applyForce(MyVector *force)
+inline void Boids::applyForce(MyVector *force)
 {
 	acceleration->addVector(force);
 }
@@ -80,14 +66,14 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	for (register unsigned int i = 0; i < Boidss->size(); i++) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->desiredseparation)) {
-			this->tmpVector->set();
+			/*this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
 			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
 			this->tmpVector->normalize();
 			this->tmpVector->divScalar(d);
 			this->steer->addVector(this->tmpVector);
 			delete this->tmpVector;
-			this->tmpVector = this->tmpVectorMem;
+			this->tmpVector = this->tmpVectorMem;*/
 			count++;
 		}
 		
@@ -95,7 +81,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 			&& Boidss->at(i)->predator == true) {
 			this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
-			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
+			this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
 			this->tmpVector->normalize();
 			this->tmpVector->divScalar(d);
 			this->steer->addVector(this->tmpVector);
@@ -107,8 +93,8 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 		else if ((d > 0) && (d < this->desiredseparation) && Boidss->at(i)->predator == true) {
 			this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
-			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
-			this->tmpVector->mulScalar(10);
+			this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
+			this->tmpVector->mulScalar(20);
 			this->steer->addVector(this->tmpVector);
 			delete this->tmpVector;
 			this->tmpVector = this->tmpVectorMem;
@@ -119,13 +105,15 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	if (count > 0)
 		this->steer->divScalar((float)count);
 	if (this->steer->magnitude() > 0) {
-		// Steering = Desired - Velocity
+
 		this->steer->normalize();
 		this->steer->mulScalar(maxSpeed);
 		this->steer->subVector(velocity);
 		this->steer->limit(maxForce);
+
 	}
 	return this->steer;
+
 }
 
 // Alignment
@@ -155,8 +143,9 @@ MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 		return this->steer;
 	}
 	else {
-		return sum;
+		return this->sum;
 	}
+
 }
 
 // Cohesion
@@ -187,14 +176,21 @@ MyVector *Boids::Cohesion(vector<Boids*> *Boidss)
 MyVector *Boids::seek(MyVector *v)
 {
 	this->desired->set();
-	this->desired->subVector(v);
+
+	this->tmpVectorMem = desired->subTwoVector(v, this->location);
+	this->desired->set(this->tmpVectorMem->vec.x, this->tmpVectorMem->vec.y, this->tmpVectorMem->vec.z);
+	delete this->tmpVectorMem;
+
 	this->desired->normalize();
 	this->desired->mulScalar(maxSpeed);
-	// Steering = Desired minus Velocity
-	//MyVector *addressToDelete = acceleration->subTwoVector(this->desired, velocity);
 
-	acceleration->limit(maxForce); 
-	return acceleration;
+	this->seekResult->set();
+	this->tmpVectorMem = seekResult->subTwoVector(this->desired, this->velocity);
+	this->seekResult->set(this->tmpVectorMem->vec.x, this->tmpVectorMem->vec.y, this->tmpVectorMem->vec.z);
+	delete this->tmpVectorMem;
+
+	seekResult->limit(maxForce);
+	return this->seekResult;
 }
 
 void Boids::update()
@@ -233,16 +229,9 @@ MyVector *Boids::WallRepel() {
 	
 	this->oppositeVector->set();
 	this->oppositeVector->addVector(location);
-	this->oppositeVector->mulScalar(-0.5);
-
-	if (
-		location->vec.x <= -this->cubeSize ||
-		location->vec.x >= this->cubeSize ||
-		location->vec.y <= -this->cubeSize ||
-		location->vec.y >= this->cubeSize ||
-		location->vec.z <= -this->cubeSize ||
-		location->vec.z >= this->cubeSize
-		) {
+	this->oppositeVector->mulScalar(-.5);
+	
+	if (location->distance(this->origin) > (cfg->BOID_CUBE_SIZE / 2)) {
 		return this->oppositeVector;
 	}
 	else {
@@ -252,12 +241,27 @@ MyVector *Boids::WallRepel() {
 
 }
 
-float Boids::angle(MyVector *v)
+float Boids::angle(MyVector *v) const
 {
 	return (float)(atan2(v->vec.x, -v->vec.y) * 180 / PI);
 }
 
-glm::vec3 Boids::rotationVector(MyVector *v) {
+float Boids::angleX(MyVector *v) const
+{
+	return (float)(atan2(v->vec.y, v->vec.x) * 180 / PI);
+}
+
+float Boids::angleY(MyVector *v) const
+{
+	return (float)(atan2(v->vec.x, v->vec.y) * 180 / PI);
+}
+
+float Boids::angleZ(MyVector *v) const
+{
+	return (float)(atan2(v->vec.x, v->vec.z) * 180 / PI);
+}
+
+glm::vec3 Boids::rotationVector(MyVector *v) const {
 	glm::vec3 rotation;
 	float r = sqrt(pow(v->vec.x, 2) + pow(v->vec.y, 2) + pow(v->vec.z, 2));
 	float theta = acos(v->vec.z / r);

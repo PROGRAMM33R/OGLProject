@@ -25,7 +25,8 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 				(float)(rand() % initialSpacingBetweenBoids),
 				(float)(rand() % initialSpacingBetweenBoids),
 				(float)(rand() % initialSpacingBetweenBoids),
-				this->cfg
+				this->cfg,
+				false
 			)
 			);
 		}
@@ -79,6 +80,6 @@ void Flock::flocking(Shader *shader)
 {
 	for (register int i = 0; i < this->numberOfBoids; i++) {
 		this->flock->at(i)->run(flock);
-		boidsModel[i]->Draw(shader, this->flock->at(i));
+		boidsModel[i]->Draw(shader, DRAW_TYPE_BOIDS, this->flock->at(i));
 	}
 }

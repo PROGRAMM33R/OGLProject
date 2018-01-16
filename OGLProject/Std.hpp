@@ -28,6 +28,7 @@
 #include "Vertex.hpp"
 #include "Texture.hpp"
 
+#include "DrawTypeObj.hpp"
 
 using namespace glm;
 using namespace std;

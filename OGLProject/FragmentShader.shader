@@ -7,13 +7,13 @@ struct Material {
     float shininess;
 }; 
 
-//struct Light {
-//    vec3 position;
-//
-//    vec3 ambient;
-//    vec3 diffuse;
-//    vec3 specular;
-//};
+struct Light {
+    vec3 position;
+
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
 
 in vec3 Normal;  
 in vec3 FragPos;  
@@ -25,7 +25,7 @@ uniform vec3 lightColor;
 uniform vec3 objectColor;
 
 uniform Material material;
-//uniform Light light;
+uniform Light light;
 
 struct DirLight {
 	vec3 direction;
@@ -55,33 +55,33 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 
 void main(){
 	
-	//// ambient
- //   vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;
- // 	
- //   // diffuse 
- //   vec3 norm = normalize(Normal);
- //   vec3 lightDir = normalize(light.position - FragPos);
- //   float diff = max(dot(norm, lightDir), 0.0);
- //   vec3 diffuse = light.diffuse * diff * texture(material.diffuse, TexCoords).rgb;  
- //   
- //   // specular
- //   vec3 viewDir = normalize(viewPos - FragPos);
- //   vec3 reflectDir = reflect(-lightDir, norm);  
- //   float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
- //   vec3 specular = light.specular * (spec * material.specular);
- //       
- //   vec3 result = ambient + diffuse + specular;
-	////vec3 result = ambient;
- //   FragColor = vec4(result, 1.0);
+	// ambient
+    vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;
+  	
+    // diffuse 
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(light.position - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = light.diffuse * diff * texture(material.diffuse, TexCoords).rgb;  
+    
+    // specular
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);  
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = light.specular * (spec * material.specular);
+        
+    vec3 result = ambient + diffuse + specular;
+	//vec3 result = ambient;
+    FragColor = vec4(result, 1.0);
 	
-	//FragColor = texture( material.diffuse, TexCoords );
+	FragColor = texture( material.diffuse, TexCoords );
 
 	// properties
-	vec3 norm = normalize(Normal);
-	vec3 viewDir = normalize(dirLight.position - FragPos);
+	/*vec3 norm = normalize(Normal);
+	vec3 viewDir = normalize(dirLight.position - FragPos);*/
 
 	// phase 1: Directional lighting
-	vec3 result = CalcDirLight(dirLight, norm, viewDir);
+	//vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	// phase 2: Point lights
 	/*for (int i = 0; i < NR_POINT_LIGHTS; i++)
 		result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);*/

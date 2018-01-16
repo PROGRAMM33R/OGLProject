@@ -28,7 +28,7 @@ public:
 		cfg(model.cfg)
 	{}
 	~Model() {}
-	void Draw(Shader *shader, Boids *boids = NULL);
+	void Draw(Shader *shader, int objType, Boids *boids = NULL);
 
 private:
 	Config *cfg;

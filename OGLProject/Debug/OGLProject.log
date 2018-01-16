@@ -1,59 +1,74 @@
-﻿  main.cpp
-  Controls.cpp
-  Config.hpp
-  Scene.cpp
-  MyVector.cpp
-  Model.cpp
-  Mesh.cpp
-  Flock.cpp
-  Camera.cpp
-  Boids.cpp
-  Generování kódu...
-LINK : warning LNK4098: Výchozí knihovna MSVCRT je v konfliktu s použitím jiných knihoven. Použijte /NODEFAULTLIB:library.
-  OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.exe
-  OGLProject.vcxproj -> C:\Users\lasak\Desktop\OGLProject\Debug\OGLProject.pdb (Partial PDB)
+﻿  Mesh.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.exe
+  OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.pdb (Partial PDB)
   File not found - Win32.dll
   0 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\packages\DevIL Windows SDK\lib\x86\Release\DevIL.dll
+  C:\Users\adam\Desktop\BachelorProject\packages\DevIL Windows SDK\lib\x86\Release\DevIL.dll
   1 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\packages\DevIL Windows SDK\lib\x86\Release\ILU.dll
+  C:\Users\adam\Desktop\BachelorProject\packages\DevIL Windows SDK\lib\x86\Release\ILU.dll
   1 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\packages\DevIL Windows SDK\lib\x86\Release\ILUT.dll
+  C:\Users\adam\Desktop\BachelorProject\packages\DevIL Windows SDK\lib\x86\Release\ILUT.dll
   1 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\packages\glew-2.1.0\bin\Release\Win32\glew32.dll
+  C:\Users\adam\Desktop\BachelorProject\packages\glew-2.1.0\bin\Release\Win32\glew32.dll
   1 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
+  C:\Users\adam\Desktop\BachelorProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
   1 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
+  C:\Users\adam\Desktop\BachelorProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
   1 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\cube.obj
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\test.mtl
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\test.obj
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\test.png
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cottage\test2.png
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\cube.mtl
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\cube.obj
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\surface - Copy.jpg
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\surface.jpg
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\untitled.blend
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube\untitled.blend1
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\cube.mtl
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\cube.obj
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\surface - Copy.jpg
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\surface.jpg
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\untitled.blend
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\cube_predator\untitled.blend1
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\grass.jpg
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\surface.mtl
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\surface.obj
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\untitled.blend
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\untitled.blend1
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\untitled.mtl
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\Models\surface\untitled.obj
-  24 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\config.cfg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\bird\bird.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test2.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\cube.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\cube.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\surface - Copy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\surface.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\untitled.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\untitled.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\cube.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\cube.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\surface - Copy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\surface.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\fulldome3.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skybox.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\bk.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\dn.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\ft.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\lt.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negx.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negz.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posx.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posz.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\rt.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\sky1.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\sky2.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\SkyBox.bmp
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox2.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox2.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\space1.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\up.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass-.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\surface.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\surface.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.mtl
+  48 File(s) copied
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
   1 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\FragmentShader.shader
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\FragmentShader.shader
   1 File(s) copied
-  C:\Users\lasak\Desktop\OGLProject\OGLProject\VertexShader.shader
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\VertexShader.shader
   1 File(s) copied

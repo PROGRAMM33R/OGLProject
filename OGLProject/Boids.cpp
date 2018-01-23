@@ -65,15 +65,15 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	
 	for (register unsigned int i = 0; i < Boidss->size(); i++) {
 		float d = location->distance(Boidss->at(i)->location);
-		if ((d > 0) && (d < this->desiredseparation)) {
-			/*this->tmpVector->set();
+		if ((d > 0) && (d < this->desiredseparation) && predator == false) {
+			this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
 			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
 			this->tmpVector->normalize();
 			this->tmpVector->divScalar(d);
 			this->steer->addVector(this->tmpVector);
 			delete this->tmpVector;
-			this->tmpVector = this->tmpVectorMem;*/
+			this->tmpVector = this->tmpVectorMem;
 			count++;
 		}
 		
@@ -90,11 +90,11 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 			count++;
 		}
 		
-		else if ((d > 0) && (d < this->desiredseparation) && Boidss->at(i)->predator == true) {
+		else if ((d > 0) && (d < (this->desiredseparation + 300)) && Boidss->at(i)->predator == true) {
 			this->tmpVector->set();
 			this->tmpVectorMem = this->tmpVector;
 			this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
-			this->tmpVector->mulScalar(20);
+			this->tmpVector->mulScalar(900);
 			this->steer->addVector(this->tmpVector);
 			delete this->tmpVector;
 			this->tmpVector = this->tmpVectorMem;
@@ -227,11 +227,9 @@ void Boids::flock(vector<Boids*> *v)
 
 MyVector *Boids::WallRepel() {
 	
-	this->oppositeVector->set();
-	this->oppositeVector->addVector(location);
-	this->oppositeVector->mulScalar(-.5);
-	
 	if (location->distance(this->origin) > (cfg->BOID_CUBE_SIZE / 2)) {
+		this->oppositeVector->addVector(location);
+		this->oppositeVector->mulScalar(-.5);
 		return this->oppositeVector;
 	}
 	else {

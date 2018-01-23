@@ -1,6 +1,4 @@
-﻿  Mesh.cpp
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  MyVector.cpp
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.pdb (Partial PDB)
   File not found - Win32.dll
@@ -17,7 +15,6 @@ c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(47): warning C4244: 'a
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
   1 File(s) copied
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\bird\bird.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test.png
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test2.png
@@ -33,6 +30,13 @@ c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(47): warning C4244: 'a
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\surface.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\eagle.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\eagle.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.FBX
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle_D.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle_D.TGA
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\fulldome3.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skybox.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.blend
@@ -58,14 +62,14 @@ c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(47): warning C4244: 'a
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox2.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\space1.png
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\up.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass-.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass - Copy.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\surface.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\surface.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend1
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.mtl
-  48 File(s) copied
+  54 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\FragmentShader.shader

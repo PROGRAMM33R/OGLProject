@@ -24,7 +24,6 @@ int main(int argc, char **argv) {
 
 	Flock *flock = new Flock(cfg);
 	Model *surface = new Model(cfg->OBJ_SURFACE, cfg);
-	Model *sky = new Model(cfg->OBJ_SKY, cfg);
 
 	do {
 
@@ -57,7 +56,6 @@ int main(int argc, char **argv) {
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
 		surface->Draw(shader, DRAW_TYPE_SURFACE);
-		sky->Draw(shader, DRAW_TYPE_SKY);
 
 		flock->flocking(shader);
 

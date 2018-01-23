@@ -30,16 +30,16 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss) {
 
 		shader->setMat4("Model", model);
 	}
-	else if (objType == DRAW_TYPE_SURFACE){ // surface
+	else if (objType == DRAW_TYPE_SURFACE){
 		glm::mat4 model; 
-		int size = cfg->BOID_CUBE_SIZE / 200;
+		int size = cfg->BOID_CUBE_SIZE / 1300;
 		glm::vec3 position = glm::vec3(0, -(this->cfg->BOID_CUBE_SIZE / 2) - 100, 0);
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
 		shader->setMat4("Model", model);
 	}
-	else if (objType == DRAW_TYPE_SKY) { // surface
+	else if (objType == DRAW_TYPE_SKY) { 
 		glm::mat4 model; int size = 190000;
 		glm::vec3 position = glm::vec3(-190000, -182000, -180000);
 		model = glm::translate(model, position);

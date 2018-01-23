@@ -43,10 +43,7 @@ void MyVector::subVector(MyVector *v)
 MyVector *MyVector::subTwoVector(MyVector *v, MyVector *v2)
 {
 	MyVector *tmp = new MyVector();
-	v->vec.x -= v2->vec.x;
-	v->vec.y -= v2->vec.y;
-	v->vec.z -= v2->vec.z;
-	tmp->set(v->vec.x, v->vec.y, v->vec.z);
+	tmp->set(v->vec.x - v2->vec.x, v->vec.y - v2->vec.y, v->vec.z - v2->vec.z);
 	return tmp;
 }
 

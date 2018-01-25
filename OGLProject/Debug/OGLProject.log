@@ -1,4 +1,12 @@
-﻿  MyVector.cpp
+﻿  Boids.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(93): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(154): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(186): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(281): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(282): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(283): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(284): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.pdb (Partial PDB)
   File not found - Win32.dll
@@ -30,13 +38,32 @@
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\surface.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend1
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\eagle.blend
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\eagle.blend1
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.FBX
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.mtl
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.obj
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle_D.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle_D.TGA
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Fogel_Mat Diffuse Color.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\eagle.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\eagle.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.FBX
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle_D.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle_D.TGA
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\cilveks2.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\CILVEKS2.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\cilveks2.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\CILVEKS2.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\CILVEKS2.psd
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\cilveks_sarkanais.rar
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human1.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human1.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human1.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human1.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human2.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human2.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human2.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.png
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\fulldome3.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skybox.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.blend
@@ -69,7 +96,11 @@
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend1
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.mtl
-  54 File(s) copied
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\OBJ.rar
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.obj
+  77 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\FragmentShader.shader

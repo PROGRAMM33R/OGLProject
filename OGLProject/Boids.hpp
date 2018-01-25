@@ -2,13 +2,16 @@
 
 #include "Std.hpp"
 #include "MyVector.hpp"
+#include "Walls.hpp"
 
 class Boids {
 
 private:
 	Config *cfg;
+	Walls *walls;
 	int cubeSize;
 	const double PI = 3.141592635;
+	float AxisY;
 	MyVector *oppositeVector;
 	MyVector *steer, *steerMem, *sum, *desired;
 	MyVector *tmpVector, *tmpVectorMem;
@@ -29,9 +32,9 @@ public:
 
 	glm::vec3 size;
 
-	Boids(Config *cfg);
+	Boids(Config *cfg, Walls *walls);
 	~Boids();
-	Boids(float x, float y, float z, Config *cfg, bool predCheck);
+	Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predCheck);
 	
 	inline void applyForce(MyVector *force);
 

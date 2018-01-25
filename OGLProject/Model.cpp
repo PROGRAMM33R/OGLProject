@@ -1,10 +1,10 @@
 
 #include "Model.hpp"
 
-void Model::Draw(Shader *shader, int objType, Boids *Boidss)
+void Model::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls)
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)
-		meshes[i].Draw(shader, objType, Boidss);
+		meshes[i].Draw(shader, objType, Boidss, walls);
 }
 
 void Model::loadModel(string const &path) {
@@ -126,7 +126,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
 vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)
 {
 	vector<Texture> textures;
-	//cout << "mat->GetTextureCount: " << mat->GetTextureCount(type) << endl;
+	
 	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
 	{
 		aiString str;

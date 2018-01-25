@@ -5,6 +5,7 @@
 #include "Model.hpp"
 
 class Shader;
+class Walls;
 class Flock {
 
 private:
@@ -12,13 +13,14 @@ private:
 	vector<Boids*> *flock;
 	Model **boidsModel;
 	Config *cfg;
+	Walls *walls;
 
 	void loadModels(void);
 
 public:
 	
-	Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg);
-	Flock(Config *cfg);
+	Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg, Walls *walls);
+	Flock(Config *cfg, Walls *walls);
 	~Flock() {}
 	
 	void addBoid(Boids *b);

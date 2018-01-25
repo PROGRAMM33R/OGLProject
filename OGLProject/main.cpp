@@ -5,6 +5,7 @@
 #include "Controls.hpp"
 #include "Model.hpp"
 #include "Flock.hpp"
+#include "Walls.hpp"
 #include "Std.hpp"
 
 int main(int argc, char **argv) {
@@ -22,7 +23,8 @@ int main(int argc, char **argv) {
 	Shader *shader = new Shader("VertexShader.shader", "FragmentShader.shader");
 	GLuint MatrixID = glGetUniformLocation(shader->ID, "MVP");
 
-	Flock *flock = new Flock(cfg);
+	Walls *walls = new Walls(cfg);
+	Flock *flock = new Flock(cfg, walls);
 	Model *surface = new Model(cfg->OBJ_SURFACE, cfg);
 
 	do {
@@ -55,9 +57,10 @@ int main(int argc, char **argv) {
 
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
-		surface->Draw(shader, DRAW_TYPE_SURFACE);
-
+		walls->drawWalls(shader);
 		flock->flocking(shader);
+
+		surface->Draw(shader, DRAW_TYPE_SURFACE);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -71,6 +74,7 @@ int main(int argc, char **argv) {
 	delete shader;
 	delete controls;
 	delete flock;
+	delete walls;
 
 	return 0;
 

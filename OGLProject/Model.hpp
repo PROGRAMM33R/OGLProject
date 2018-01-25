@@ -6,6 +6,7 @@
 
 class Shader;
 class Boids;
+class Wall;
 class Model {
 
 public:
@@ -28,7 +29,7 @@ public:
 		cfg(model.cfg)
 	{}
 	~Model() {}
-	void Draw(Shader *shader, int objType, Boids *boids = NULL);
+	void Draw(Shader *shader, int objType, Boids *boids = NULL, Wall *walls = NULL);
 
 private:
 	Config *cfg;

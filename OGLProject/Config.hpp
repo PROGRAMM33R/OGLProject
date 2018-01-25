@@ -22,6 +22,8 @@ public:
 		float			MOUSE_SPEED;
 
 		std::string		SCENE_TYPE;
+		int				SCENE_COUNT_OF_WALLS;
+
 		int				BOID_CUBE_SIZE;
 		int				BOID_OBJ_SIZE;
 		int				BOID_NUMBER_OF_BOIDS;
@@ -38,6 +40,7 @@ public:
 		std::string		OBJ_BOID;
 		std::string		OBJ_PREDATOR;
 		std::string		OBJ_SKY;
+		std::string		OBJ_WALL;
 
 		Config() {
 
@@ -102,6 +105,9 @@ public:
 				if (keys->at(i).find("SCENE_TYPE") != std::string::npos) {
 					SCENE_TYPE = values->at(i);
 				}
+				if (keys->at(i).find("SCENE_COUNT_OF_WALLS") != std::string::npos) {
+					SCENE_COUNT_OF_WALLS = std::stoi(values->at(i));
+				}
 				if (keys->at(i).find("BOID_CUBE_SIZE") != std::string::npos) {
 					int cubeSize = std::stoi(values->at(i));
 				}
@@ -147,12 +153,26 @@ public:
 				if (keys->at(i).find("OBJ_SKY") != std::string::npos) {
 					OBJ_SKY = values->at(i);
 				}
-				INIT_CAMERA_POSITION = glm::vec3(cameraX, cameraY, cameraZ);
-				if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {
-					BOID_CUBE_SIZE = BOID_CUBE_SIZE + (BOID_GENERATE_SPACE - BOID_CUBE_SIZE);
+				if (keys->at(i).find("OBJ_WALL") != std::string::npos) {
+					OBJ_WALL = values->at(i);
 				}
-				if ((BOID_NUMBER_OF_BOIDS * 40) > cubeSize) {
-					BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 40;
+
+				INIT_CAMERA_POSITION = glm::vec3(cameraX, cameraY, cameraZ);
+				if (SCENE_TYPE == "3D") {
+					if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {
+						BOID_CUBE_SIZE = BOID_CUBE_SIZE + (BOID_GENERATE_SPACE - BOID_CUBE_SIZE);
+					}
+					if ((BOID_NUMBER_OF_BOIDS * 40) > cubeSize) {
+						BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 40;
+					}
+				}
+				else {
+					if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {
+						BOID_CUBE_SIZE = BOID_CUBE_SIZE + (BOID_GENERATE_SPACE - BOID_CUBE_SIZE);
+					}
+					if ((BOID_NUMBER_OF_BOIDS * 400) > cubeSize) {
+						BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 400;
+					}
 				}
 			}
 			keys->clear();

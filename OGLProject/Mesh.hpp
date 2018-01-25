@@ -4,6 +4,7 @@
 #include "Shader.hpp"
 
 class Boids;
+class Wall;
 class Mesh {
 
 public:
@@ -13,7 +14,7 @@ public:
 	unsigned int VAO;
 
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Config *cfg);
-	void Draw(Shader *shader, int objType, Boids *Boids);
+	void Draw(Shader *shader, int objType, Boids *Boids, Wall *walls);
 
 private:
 	Config *cfg;

@@ -1,8 +1,8 @@
 
 #include "Flock.hpp"
 
-Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg)
-	:numberOfBoids(numberOfBoids), numberOfPredators(numberOfPredators), cfg(cfg){
+Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg, Walls *walls)
+	:numberOfBoids(numberOfBoids), numberOfPredators(numberOfPredators), cfg(cfg), walls(walls){
 
 	this->boidsModel = new Model*[numberOfBoids];
 	this->flock = new vector<Boids*>();
@@ -16,6 +16,7 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 				(float)(rand() % initialSpacingBetweenBoids),
 				(float)(rand() % initialSpacingBetweenBoids),
 				this->cfg,
+				walls,
 				true
 			)
 			);
@@ -26,6 +27,7 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 				(float)(rand() % initialSpacingBetweenBoids),
 				(float)(rand() % initialSpacingBetweenBoids),
 				this->cfg,
+				walls,
 				false
 			)
 			);
@@ -35,13 +37,14 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 
 }
 
-Flock::Flock(Config *cfg)
+Flock::Flock(Config *cfg, Walls *walls)
 	: Flock(
 		cfg->BOID_NUMBER_OF_BOIDS,
 		cfg->BOID_NUMBER_OF_PREDATORS,
 		cfg->BOID_GENERATE_SPACE,
-		cfg
-	) 
+		cfg,
+		walls
+	)
 {
 	this->cfg = cfg;
 }

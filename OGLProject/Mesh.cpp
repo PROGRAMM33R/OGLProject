@@ -2,6 +2,7 @@
 #include "Std.hpp"
 #include "Mesh.hpp"
 #include "Boids.hpp"
+#include "Wall.hpp"
 
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Config *cfg) {
 	this->vertices = vertices;
@@ -11,7 +12,7 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 	setupMesh();
 }
 
-void Mesh::Draw(Shader *shader, int objType, Boids *Boidss) {
+void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 
 	if (Boidss != NULL && objType == DRAW_TYPE_BOIDS) {
 
@@ -21,31 +22,64 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss) {
 		// First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
 		model = glm::translate(model, position);  
 
-		//model = glm::rotate(model, hovno, glm::vec3(0.1, 0, 0));
-		//model = glm::rotate(model, Boidss->angleY(Boidss->velocity), glm::vec3(0, 1, 0));
-		//model = glm::rotate(model, Boidss->angleZ(Boidss->velocity), glm::vec3(0, 0, 1));
+		if (this->cfg->SCENE_TYPE == "2D") {
+			model = glm::rotate(model, Boidss->angleY(Boidss->velocity), glm::vec3(0, 1, 0));
+		}
+		else {
+			//model = glm::rotate(model, hovno, glm::vec3(0.1, 0, 0));
+			//model = glm::rotate(model, Boidss->angleY(Boidss->velocity), glm::vec3(0, 1, 0));
+			//model = glm::rotate(model, Boidss->angleZ(Boidss->velocity), glm::vec3(0, 0, 1));
+		}
 		
 		model = glm::translate(model, glm::vec3(Boidss->size.x, Boidss->size.y, Boidss->size.z));
 		model = glm::scale(model, glm::vec3(Boidss->size));
 
 		shader->setMat4("Model", model);
 	}
-	else if (objType == DRAW_TYPE_SURFACE){
+	if (walls != NULL && objType == DRAW_TYPE_WALL) {
+
+		if (this->cfg->SCENE_TYPE != "3D") {
+
+			glm::mat4 model;
+			int size = 250;
+			glm::vec3 position;
+
+			position = glm::vec3(walls->location->vec.x, -(this->cfg->BOID_OBJ_SIZE) - 250, walls->location->vec.z);
+			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
+			model = glm::translate(model, position);
+			model = glm::translate(model, glm::vec3(size, size, size));
+			model = glm::scale(model, glm::vec3(size));
+			shader->setMat4("Model", model);
+
+		}
+
+	}
+	if (objType == DRAW_TYPE_SURFACE){
+
 		glm::mat4 model; 
 		int size = cfg->BOID_CUBE_SIZE / 1300;
-		glm::vec3 position = glm::vec3(0, -(this->cfg->BOID_CUBE_SIZE / 2) - 100, 0);
+		glm::vec3 position;
+		if (this->cfg->SCENE_TYPE == "3D") {
+			position = glm::vec3(0, -(this->cfg->BOID_CUBE_SIZE / 2) - 100, 0);
+		}
+		else {
+			position = glm::vec3(0, -(this->cfg->BOID_OBJ_SIZE) - 50, 0);
+		}
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
 		shader->setMat4("Model", model);
+
 	}
-	else if (objType == DRAW_TYPE_SKY) { 
+	if (objType == DRAW_TYPE_SKY) { 
+
 		glm::mat4 model; int size = 190000;
 		glm::vec3 position = glm::vec3(-190000, -182000, -180000);
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
 		shader->setMat4("Model", model);
+
 	}
 
 	for (register unsigned int i = 0; i < textures.size(); i++) {

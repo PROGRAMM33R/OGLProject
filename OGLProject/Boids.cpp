@@ -16,6 +16,9 @@ Boids::~Boids() {
 	delete this->tmpVector;
 	delete this->desiredAvarage;
 	delete this->origin;
+	delete this->separationResult;
+	delete this->aligmentResult;
+	delete this->cohesionResult;
 }
 
 Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predCheck = false)
@@ -74,6 +77,9 @@ Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predChec
 	this->desiredAvarage = new MyVector();
 	this->seekResult = new MyVector();
 	this->origin = new MyVector(0, 0, 0);
+	this->separationResult = new MyVector();
+	this->aligmentResult = new MyVector();
+	this->cohesionResult = new MyVector();
 	this->cfg = cfg;
 	this->walls = walls;
 }
@@ -218,6 +224,7 @@ MyVector *Boids::seek(MyVector *v)
 	delete this->tmpVectorMem;
 
 	seekResult->limit(maxForce);
+
 	return this->seekResult;
 }
 
@@ -238,20 +245,40 @@ void Boids::run(vector <Boids*> *v)
 
 void Boids::flock(vector<Boids*> *v)
 {
-	this->separationResult = Separation(v);
-	this->aligmentResult   = Alignment(v);
-	this->cohesionResult   = Cohesion(v);
-	this->wallRepelResult  = WallRepel();
+
+	this->tmpVectorMem = Separation(v);
+	this->separationResult->set(
+		this->tmpVectorMem->vec.x, 
+		this->tmpVectorMem->vec.y, 
+		this->tmpVectorMem->vec.z
+	);
+
+	this->tmpVectorMem = Alignment(v);
+	this->aligmentResult->set(
+		this->tmpVectorMem->vec.x, 
+		this->tmpVectorMem->vec.y, 
+		this->tmpVectorMem->vec.z
+	);
+
+	this->tmpVectorMem = Cohesion(v);
+	this->cohesionResult->set(
+		this->tmpVectorMem->vec.x, 
+		this->tmpVectorMem->vec.y, 
+		this->tmpVectorMem->vec.z
+	);
+
+	this->wallRepelResult = WallRepel();
 	
 	if (cfg->SCENE_TYPE == "3D") {
 		this->separationResult->mulScalar(1.5);
+		this->aligmentResult->mulScalar(1.0);
+		this->cohesionResult->mulScalar(1.0);
 	}
 	else {
 		this->separationResult->mulScalar(5.0);
+		this->aligmentResult->mulScalar(1.0);
+		this->cohesionResult->mulScalar(0.5);
 	}
-
-	this->aligmentResult->mulScalar(1.0);
-	this->cohesionResult->mulScalar(1.0);
 	
 	applyForce(this->separationResult);
 	applyForce(this->aligmentResult);
@@ -278,22 +305,23 @@ MyVector *Boids::WallRepel() {
 	}
 	else {
 
-		if (location->vec.x < -this->cubeSize)		location->vec.x = this->cubeSize;
+		/*if (location->vec.x < -this->cubeSize)		location->vec.x = this->cubeSize;
 		if (location->vec.x > this->cubeSize)		location->vec.x = -this->cubeSize;
 		if (location->vec.z < -this->cubeSize)		location->vec.z = this->cubeSize;
-		if (location->vec.z > this->cubeSize)		location->vec.z = -this->cubeSize;
+		if (location->vec.z > this->cubeSize)		location->vec.z = -this->cubeSize;*/
 
-		for (register int i = 0; i < this->walls->size(); i++) {
+		/*for (register int i = 0; i < this->walls->size(); i++) {
 
 			Wall *tmpWall = this->walls->get(i);
 
 			float xmin = tmpWall->location->vec.x;
 			float xmax = tmpWall->location->vec.x + tmpWall->size->vec.x;
 			float zmin = tmpWall->location->vec.z;
-			float zmax = tmpWall->location->vec.z + tmpWall->size->vec.y;
+			float zmax = tmpWall->location->vec.z + tmpWall->size->vec.z;
 
 			if ((location->vec.x <= xmax && location->vec.x >= xmin) && (location->vec.z <= zmax && location->vec.z >= zmin))
 			{
+				cout << "kolize , zed " << i << endl;
 				this->oppositeVector->addVector(location);
 				this->oppositeVector->mulScalar(-.5);
 				return this->oppositeVector;
@@ -302,11 +330,11 @@ MyVector *Boids::WallRepel() {
 				continue;
 			}
 
-		}
+		}*/
 
-		return this->oppositeVector;
+		//return this->oppositeVector;
 
-		/*this->oppositeVector->addVector(location);
+		this->oppositeVector->addVector(location);
 		this->oppositeVector->mulScalar(-0.5);
 
 		if (
@@ -322,7 +350,7 @@ MyVector *Boids::WallRepel() {
 		else {
 			this->oppositeVector->set();
 			return this->oppositeVector;
-		}*/
+		}
 	}
 
 }

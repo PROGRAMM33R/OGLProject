@@ -12,19 +12,19 @@ Walls::Walls(int countOfWalls, Config *cfg)
 	int angle = 0, randomResult = 0, sizeableConstant = 1;
 
 	int arrayX[4] = {
-		-500, -300, 1000, -2500
+		0, -300, 1000, -2500
 	};
 
 	int arrayZ[4] = {
-		-2000, 1000, 2000, -2300
+		500, 1000, 2000, -2300
 	};
 
 	float angles[4] = {
 		1.57, 0, 0, 1.57
 	};
 
-	MyVector *wallSize = new MyVector(1800, 100, 0);
-	MyVector *wallSize90 = new MyVector(100, 1800, 0);
+	MyVector *wallSize = new MyVector(0, 0, 0);
+	MyVector *wallSize90 = new MyVector(1100, 0, 200);
 
 	for (register int i = 0; i < countOfWalls; i++) {
 

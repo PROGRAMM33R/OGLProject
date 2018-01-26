@@ -1,12 +1,8 @@
 ﻿  Boids.cpp
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(93): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(154): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(186): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(281): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(282): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(283): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(284): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(99): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(160): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(192): warning C4018: '<': signed/unsigned mismatch
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.pdb (Partial PDB)
   File not found - Win32.dll

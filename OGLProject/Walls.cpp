@@ -8,65 +8,40 @@ Walls::Walls(int countOfWalls, Config *cfg)
 	this->walls = new vector<Wall*>();
 	this->loadModels();
 
-	float origin = 0.0;
-	int angle = 0, randomResult = 0, sizeableConstant = 1;
+	MyVector *wallSize = new MyVector(500, 0, 0);
+	MyVector *wallSize90 = new MyVector(0, 0, 500);
 
-	int arrayX[4] = {
-		0, -300, 1000, -2500
-	};
-
-	int arrayZ[4] = {
-		500, 1000, 2000, -2300
-	};
-
-	float angles[4] = {
-		1.57, 0, 0, 1.57
-	};
-
-	MyVector *wallSize = new MyVector(0, 0, 0);
-	MyVector *wallSize90 = new MyVector(1100, 0, 200);
+	bool flipFlop = false;
+	float divide = 2.5;
 
 	for (register int i = 0; i < countOfWalls; i++) {
 
-		/*randomResult = ((double)rand() / (RAND_MAX)) + 1;
-		if (randomResult == 1) {
-			angle = 0;
-		}
-		else {
-			angle = 0;
-		}
+		if (!flipFlop) {
+			flipFlop = true;
 
-		addWall(new Wall(
-			new MyVector(
-				(float)(rand() % cfg->BOID_CUBE_SIZE),
-				0,
-				(float)(rand() % cfg->BOID_CUBE_SIZE)
-			),
-			angle
-			)
-		);*/
-
-		if (i == 0 || i == 3) {
 			addWall(new Wall(
 				new MyVector(
-					arrayX[i],
+					(rand() % cfg->BOID_CUBE_SIZE) / divide,
 					0,
-					arrayZ[i]
-				),
-				wallSize90,
-				angles[i]
-			)
-			);
-		}
-		else {
-			addWall(new Wall(
-				new MyVector(
-					arrayX[i],
-					0,
-					arrayZ[i]
+					(rand() % cfg->BOID_CUBE_SIZE) / divide
 				),
 				wallSize,
-				angles[i]
+				0
+			)
+			);
+
+		}
+		else {
+			flipFlop = false;
+
+			addWall(new Wall(
+				new MyVector(
+					(rand() % cfg->BOID_CUBE_SIZE) / divide,
+					0,
+					(rand() % cfg->BOID_CUBE_SIZE) / divide
+				),
+				wallSize90,
+				1.57
 			)
 			);
 		}

@@ -45,9 +45,13 @@ public:
 
 	MyVector *WallRepel();
 	MyVector *seek(MyVector *v);
+
 	void run(vector <Boids*> *v);
 	void update();
 	void flock(vector <Boids*> *v);
+
+	MyVector *WallCollision(float direction, MyVector *_desired);
+
 	float angle(MyVector *v) const;
 	float angleX(MyVector *v) const;
 	float angleY(MyVector *v) const;

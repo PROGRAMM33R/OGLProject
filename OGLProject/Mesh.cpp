@@ -41,12 +41,12 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 		if (this->cfg->SCENE_TYPE != "3D") {
 
 			glm::mat4 model;
-			int size = 250;
+			int size = 200;
 			glm::vec3 position;
 
-			position = glm::vec3(walls->location->vec.x, -(this->cfg->BOID_OBJ_SIZE) - 250, walls->location->vec.z);
-			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
+			position = glm::vec3(walls->location->vec.x, -(this->cfg->BOID_OBJ_SIZE) - 190, walls->location->vec.z);
 			model = glm::translate(model, position);
+			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
 			model = glm::translate(model, glm::vec3(size, size, size));
 			model = glm::scale(model, glm::vec3(size));
 			shader->setMat4("Model", model);

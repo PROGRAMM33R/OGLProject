@@ -19,6 +19,7 @@ Boids::~Boids() {
 	delete this->separationResult;
 	delete this->aligmentResult;
 	delete this->cohesionResult;
+	delete this->wallRepelResult;
 }
 
 Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predCheck = false)
@@ -80,6 +81,7 @@ Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predChec
 	this->separationResult = new MyVector();
 	this->aligmentResult = new MyVector();
 	this->cohesionResult = new MyVector();
+	this->wallRepelResult = new MyVector();
 	this->cfg = cfg;
 	this->walls = walls;
 }
@@ -267,22 +269,31 @@ void Boids::flock(vector<Boids*> *v)
 		this->tmpVectorMem->vec.z
 	);
 
-	this->wallRepelResult = WallRepel();
+	this->tmpVectorMem = WallRepel();
+	this->wallRepelResult->set(
+		this->tmpVectorMem->vec.x,
+		this->tmpVectorMem->vec.y,
+		this->tmpVectorMem->vec.z
+	);
+
+	applyForce(this->separationResult);
 	
 	if (cfg->SCENE_TYPE == "3D") {
 		this->separationResult->mulScalar(1.5);
 		this->aligmentResult->mulScalar(1.0);
 		this->cohesionResult->mulScalar(1.0);
+		applyForce(this->cohesionResult);
 	}
 	else {
 		this->separationResult->mulScalar(5.0);
 		this->aligmentResult->mulScalar(1.0);
 		this->cohesionResult->mulScalar(0.5);
 	}
+
+	if (this->wallRepelResult->vec.x == 0 && this->wallRepelResult->vec.y == 0) {
+		applyForce(this->aligmentResult);
+	}
 	
-	applyForce(this->separationResult);
-	applyForce(this->aligmentResult);
-	applyForce(this->cohesionResult);
 	applyForce(this->wallRepelResult);
 }
 
@@ -310,29 +321,47 @@ MyVector *Boids::WallRepel() {
 		if (location->vec.z < -this->cubeSize)		location->vec.z = this->cubeSize;
 		if (location->vec.z > this->cubeSize)		location->vec.z = -this->cubeSize;*/
 
-		/*for (register int i = 0; i < this->walls->size(); i++) {
+		for (register int i = 0; i < this->walls->size(); i++) {
 
 			Wall *tmpWall = this->walls->get(i);
 
-			float xmin = tmpWall->location->vec.x;
+			float xmin = tmpWall->location->vec.x - tmpWall->size->vec.x;
 			float xmax = tmpWall->location->vec.x + tmpWall->size->vec.x;
-			float zmin = tmpWall->location->vec.z;
+			float zmin = tmpWall->location->vec.z - tmpWall->size->vec.z;
 			float zmax = tmpWall->location->vec.z + tmpWall->size->vec.z;
 
-			if ((location->vec.x <= xmax && location->vec.x >= xmin) && (location->vec.z <= zmax && location->vec.z >= zmin))
-			{
-				cout << "kolize , zed " << i << endl;
-				this->oppositeVector->addVector(location);
-				this->oppositeVector->mulScalar(-.5);
-				return this->oppositeVector;
+			this->desired->set();
+
+			if (tmpWall->angle != 0) {
+
+				for (register int j = zmin; j < zmax; j += cfg->BOID_DESIRED_SEPARATION - 10) {
+
+					this->desired->set(tmpWall->location->vec.x, 0, j);
+					float d = location->distance(this->desired);
+
+					if (d > 0 && d < cfg->BOID_DESIRED_SEPARATION + 230) {
+						return this->WallCollision(d, this->desired);
+					}
+
+				}
+
 			}
 			else {
-				continue;
+
+				for (register int j = xmin; j < xmax; j += cfg->BOID_DESIRED_SEPARATION - 10) {
+
+					this->desired->set(j, 0, tmpWall->location->vec.z);
+					float d = location->distance(this->desired);
+
+					if (d > 0 && d < cfg->BOID_DESIRED_SEPARATION + 230) {
+						return this->WallCollision(d, this->desired);
+					}
+
+				}
+
 			}
 
-		}*/
-
-		//return this->oppositeVector;
+		}
 
 		this->oppositeVector->addVector(location);
 		this->oppositeVector->mulScalar(-0.5);
@@ -347,12 +376,33 @@ MyVector *Boids::WallRepel() {
 			) {
 			return this->oppositeVector;
 		}
-		else {
-			this->oppositeVector->set();
-			return this->oppositeVector;
-		}
+		
+		this->oppositeVector->set();
+		return this->oppositeVector;
+		
 	}
 
+}
+
+MyVector *Boids::WallCollision(float direction, MyVector *_desired)
+{
+	this->tmpVector->set();
+	this->tmpVectorMem = this->tmpVector;
+	this->tmpVector = this->tmpVector->subTwoVector(location, _desired);
+	this->tmpVector->normalize();
+	this->tmpVector->divScalar(direction);
+	this->oppositeVector->set(this->tmpVector->vec.x, this->tmpVector->vec.y, this->tmpVector->vec.z);
+	delete this->tmpVector;
+	this->tmpVector = this->tmpVectorMem;
+
+	if (this->oppositeVector->magnitude() > 0) {
+		this->oppositeVector->normalize();
+		this->oppositeVector->mulScalar(maxSpeed);
+		this->oppositeVector->subVector(velocity);
+		this->oppositeVector->limit(maxForce);
+	}
+
+	return this->oppositeVector;
 }
 
 float Boids::angle(MyVector *v) const

@@ -21,6 +21,7 @@ private:
 	MyVector *aligmentResult;
 	MyVector *cohesionResult;
 	MyVector *wallRepelResult;
+	MyVector *arriveToResult;
 
 public:
 	int desiredseparation, neighbordist;
@@ -45,6 +46,8 @@ public:
 
 	MyVector *WallRepel();
 	MyVector *seek(MyVector *v);
+
+	MyVector *arriveTo(MyVector *v);
 
 	void run(vector <Boids*> *v);
 	void update();

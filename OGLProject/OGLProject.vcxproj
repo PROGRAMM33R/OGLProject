@@ -97,6 +97,7 @@ xcopy /Y "$(SolutionDir)packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll" "$(S
 xcopy /Y "$(SolutionDir)packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll" "$(SolutionDir)Debug" &lt;NUL
 xcopy /Y /S "$(ProjectDir)Models" "$(SolutionDir)Debug\Models" &lt;NUL
 xcopy /Y "$(ProjectDir)config.cfg" "$(SolutionDir)Debug" &lt;NUL
+xcopy /Y "$(ProjectDir)map.txt" "$(SolutionDir)Debug" &lt;NUL
 xcopy /Y "$(ProjectDir)FragmentShader.shader" "$(SolutionDir)Debug" &lt;NUL
 xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Debug" &lt;NUL</Command>
     </PostBuildEvent>
@@ -178,6 +179,7 @@ xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Debug" &lt;NUL</Comma
     <ClInclude Include="Controls.hpp" />
     <ClInclude Include="DrawTypeObj.hpp" />
     <ClInclude Include="Flock.hpp" />
+    <ClInclude Include="Map.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />
     <ClInclude Include="MyVector.hpp" />

@@ -12,9 +12,9 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 
 		if (i < numberOfPredators) {
 			addBoid(new Boids(
-				(float)(rand() % initialSpacingBetweenBoids), 
-				(float)(rand() % initialSpacingBetweenBoids),
-				(float)(rand() % initialSpacingBetweenBoids),
+				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.x, 
+				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.y,
+				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.z,
 				this->cfg,
 				walls,
 				true
@@ -23,9 +23,9 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 		}
 		else {
 			addBoid(new Boids(
-				(float)(rand() % initialSpacingBetweenBoids),
-				(float)(rand() % initialSpacingBetweenBoids),
-				(float)(rand() % initialSpacingBetweenBoids),
+				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.x,
+				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.y,
+				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.z,
 				this->cfg,
 				walls,
 				false

@@ -1,29 +1,6 @@
-﻿  Walls.cpp
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(46): warning C4305: 'argument': truncation from 'double' to 'float'
-  main.cpp
-  Controls.cpp
-  Config.hpp
-  Scene.cpp
-  MyVector.cpp
-  Model.cpp
-  Mesh.cpp
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Flock.cpp
-  Camera.cpp
-  Boids.cpp
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(101): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(162): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(194): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(337): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(339): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(351): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(353): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(stb_image_aug.obj)' or at 'C:\Users\adam\Desktop\BachelorProject\Debug\SOIL.pdb'; linking object as if no debug info
+﻿  Boids.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(302): warning C4305: 'argument': truncation from 'double' to 'float'
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.pdb (Partial PDB)
   File not found - Win32.dll
@@ -114,11 +91,14 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend1
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\OBJ.rar
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall - Copy.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.obj
-  77 File(s) copied
+  78 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
+  1 File(s) copied
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\map.txt
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\FragmentShader.shader
   1 File(s) copied

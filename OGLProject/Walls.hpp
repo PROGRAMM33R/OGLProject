@@ -3,6 +3,7 @@
 #include "Std.hpp"
 #include "Model.hpp"
 #include "Wall.hpp"
+#include "Map.hpp"
 #include "MyVector.hpp"
 
 class Shader;
@@ -12,13 +13,17 @@ private:
 	int countOfWalls;
 	vector<Wall*> *walls;
 	Model **wallsModel;
+	Model *exitModel;
+	Wall *exit;
 	Config *cfg;
 
 	void loadModels(void);
 
 public:
-	Walls(int countOfWalls, Config *cfg);
-	Walls(Config *cfg);
+	glm::vec3 generatePosition;
+	MyVector *exitPosition;
+
+	Walls(Map *map, Config *cfg);
 	~Walls() {}
 
 	void addWall(Wall *w);

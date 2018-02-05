@@ -6,11 +6,13 @@
 #include "Model.hpp"
 #include "Flock.hpp"
 #include "Walls.hpp"
+#include "Map.hpp"
 #include "Std.hpp"
 
 int main(int argc, char **argv) {
 
 	Config		*cfg = new Config();
+	Map         *map = new Map();
 	GLFWwindow  *window = NULL;
 	Scene       *scene = new Scene(cfg);
 	Controls    *controls = new Controls(cfg);
@@ -23,7 +25,7 @@ int main(int argc, char **argv) {
 	Shader *shader = new Shader("VertexShader.shader", "FragmentShader.shader");
 	GLuint MatrixID = glGetUniformLocation(shader->ID, "MVP");
 
-	Walls *walls = new Walls(cfg);
+	Walls *walls = new Walls(map, cfg);
 	Flock *flock = new Flock(cfg, walls);
 	Model *surface = new Model(cfg->OBJ_SURFACE, cfg);
 
@@ -70,6 +72,7 @@ int main(int argc, char **argv) {
 		glfwWindowShouldClose(window) == 0);
 
 	delete cfg;
+	delete map;
 	delete scene;
 	delete shader;
 	delete controls;

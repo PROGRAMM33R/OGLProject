@@ -36,19 +36,34 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 
 		shader->setMat4("Model", model);
 	}
-	if (walls != NULL && objType == DRAW_TYPE_WALL) {
+	if (walls != NULL && (objType == DRAW_TYPE_WALL || objType == DRAW_TYPE_EXIT)) {
 
-		if (this->cfg->SCENE_TYPE != "3D") {
+		if (this->cfg->SCENE_TYPE != "3D" && objType == DRAW_TYPE_WALL) {
 
 			glm::mat4 model;
-			int size = 200;
+			float size = 200;
 			glm::vec3 position;
 
 			position = glm::vec3(walls->location->vec.x, -(this->cfg->BOID_OBJ_SIZE) - 190, walls->location->vec.z);
 			model = glm::translate(model, position);
 			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
 			model = glm::translate(model, glm::vec3(size, size, size));
-			model = glm::scale(model, glm::vec3(size));
+			model = glm::scale(model, glm::vec3(82, size, size));
+			shader->setMat4("Model", model);
+
+		}
+
+		if (this->cfg->SCENE_TYPE != "3D" && objType == DRAW_TYPE_EXIT) {
+
+			glm::mat4 model;
+			float size = 20;
+			glm::vec3 position;
+
+			position = glm::vec3(walls->location->vec.x, 60, walls->location->vec.z);
+			model = glm::translate(model, position);
+			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
+			model = glm::translate(model, glm::vec3(size, size, size));
+			model = glm::scale(model, glm::vec3(size, size + 600, size));
 			shader->setMat4("Model", model);
 
 		}
@@ -71,7 +86,7 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 		shader->setMat4("Model", model);
 
 	}
-	if (objType == DRAW_TYPE_SKY) { 
+	if (objType == DRAW_TYPE_SKY) {
 
 		glm::mat4 model; int size = 190000;
 		glm::vec3 position = glm::vec3(-190000, -182000, -180000);

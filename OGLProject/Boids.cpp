@@ -20,13 +20,14 @@ Boids::~Boids() {
 	delete this->aligmentResult;
 	delete this->cohesionResult;
 	delete this->wallRepelResult;
+	delete this->arriveToResult;
 }
 
 Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predCheck = false)
 {
 	AxisY = 0;
 	predator = predCheck;
-	float angle = (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * PI * 2;
+	float angle = (float)(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * PI * 2;
 
 	if (predCheck == true) {
 
@@ -82,6 +83,7 @@ Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predChec
 	this->aligmentResult = new MyVector();
 	this->cohesionResult = new MyVector();
 	this->wallRepelResult = new MyVector();
+	this->arriveToResult = new MyVector();
 	this->cfg = cfg;
 	this->walls = walls;
 }
@@ -98,7 +100,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	this->steer->set();
 	int count = 0;
 	
-	for (register int i = 0; i < Boidss->size(); i++) {
+	for (register unsigned int i = 0; i < Boidss->size(); i++) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->desiredseparation) && predator == false) {
 			this->tmpVector->set();
@@ -159,7 +161,7 @@ MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 	this->sum->set();
 	this->steer->set();
 	int count = 0;
-	for (register int i = 0; i < Boidss->size(); i++) {
+	for (register unsigned int i = 0; i < Boidss->size(); i++) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->neighbordist)) {
 			this->sum->addVector(Boidss->at(i)->velocity);
@@ -191,7 +193,7 @@ MyVector *Boids::Cohesion(vector<Boids*> *Boidss)
 {
 	this->sum->set();
 	int count = 0;
-	for (register int i = 0; i < Boidss->size(); i++) {
+	for (register unsigned int i = 0; i < Boidss->size(); i++) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->neighbordist)) {
 			this->sum->addVector(Boidss->at(i)->location);
@@ -228,6 +230,10 @@ MyVector *Boids::seek(MyVector *v)
 	seekResult->limit(maxForce);
 
 	return this->seekResult;
+}
+
+MyVector *Boids::arriveTo(MyVector *v) {
+	return seek(v);
 }
 
 void Boids::update()
@@ -276,8 +282,13 @@ void Boids::flock(vector<Boids*> *v)
 		this->tmpVectorMem->vec.z
 	);
 
-	applyForce(this->separationResult);
-	
+	this->tmpVectorMem = arriveTo(walls->exitPosition);
+	this->arriveToResult->set(
+		this->tmpVectorMem->vec.x,
+		this->tmpVectorMem->vec.y,
+		this->tmpVectorMem->vec.z
+	);
+
 	if (cfg->SCENE_TYPE == "3D") {
 		this->separationResult->mulScalar(1.5);
 		this->aligmentResult->mulScalar(1.0);
@@ -285,15 +296,28 @@ void Boids::flock(vector<Boids*> *v)
 		applyForce(this->cohesionResult);
 	}
 	else {
-		this->separationResult->mulScalar(5.0);
+		this->separationResult->mulScalar(1.5);
 		this->aligmentResult->mulScalar(1.0);
 		this->cohesionResult->mulScalar(0.5);
+		this->arriveToResult->mulScalar(0.2);
 	}
 
 	if (this->wallRepelResult->vec.x == 0 && this->wallRepelResult->vec.y == 0) {
-		applyForce(this->aligmentResult);
+		applyForce(this->arriveToResult);
 	}
-	
+
+	if (cfg->SEPARATION_ENABLED == 1) {
+		applyForce(this->separationResult);
+	}
+	if (cfg->ALIGNMENT_ENABLED == 1) {
+		if (this->wallRepelResult->vec.x == 0 && this->wallRepelResult->vec.y == 0) {
+			applyForce(this->aligmentResult);
+		}
+	}
+	if (cfg->COHESION_ENABLED == 1) {
+		applyForce(this->cohesionResult);
+	}
+
 	applyForce(this->wallRepelResult);
 }
 
@@ -316,11 +340,6 @@ MyVector *Boids::WallRepel() {
 	}
 	else {
 
-		/*if (location->vec.x < -this->cubeSize)		location->vec.x = this->cubeSize;
-		if (location->vec.x > this->cubeSize)		location->vec.x = -this->cubeSize;
-		if (location->vec.z < -this->cubeSize)		location->vec.z = this->cubeSize;
-		if (location->vec.z > this->cubeSize)		location->vec.z = -this->cubeSize;*/
-
 		for (register int i = 0; i < this->walls->size(); i++) {
 
 			Wall *tmpWall = this->walls->get(i);
@@ -334,12 +353,12 @@ MyVector *Boids::WallRepel() {
 
 			if (tmpWall->angle != 0) {
 
-				for (register int j = zmin; j < zmax; j += cfg->BOID_DESIRED_SEPARATION - 10) {
+				for (register int j = (int)zmin; j < zmax; j += cfg->BOID_DESIRED_SEPARATION - 10) {
 
-					this->desired->set(tmpWall->location->vec.x, 0, j);
+					this->desired->set(tmpWall->location->vec.x, 0, (float)j);
 					float d = location->distance(this->desired);
 
-					if (d > 0 && d < cfg->BOID_DESIRED_SEPARATION + 230) {
+					if (d > 0 && d < cfg->BOID_DESIRED_SEPARATION + 200) {
 						return this->WallCollision(d, this->desired);
 					}
 
@@ -348,12 +367,12 @@ MyVector *Boids::WallRepel() {
 			}
 			else {
 
-				for (register int j = xmin; j < xmax; j += cfg->BOID_DESIRED_SEPARATION - 10) {
+				for (register int j = (int)xmin; j < xmax; j += cfg->BOID_DESIRED_SEPARATION - 10) {
 
-					this->desired->set(j, 0, tmpWall->location->vec.z);
+					this->desired->set((float)j, 0, tmpWall->location->vec.z);
 					float d = location->distance(this->desired);
 
-					if (d > 0 && d < cfg->BOID_DESIRED_SEPARATION + 230) {
+					if (d > 0 && d < cfg->BOID_DESIRED_SEPARATION + 200) {
 						return this->WallCollision(d, this->desired);
 					}
 

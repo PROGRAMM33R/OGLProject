@@ -22,7 +22,10 @@ public:
 		float			MOUSE_SPEED;
 
 		std::string		SCENE_TYPE;
-		int				SCENE_COUNT_OF_WALLS;
+
+		int				SEPARATION_ENABLED;
+		int				ALIGNMENT_ENABLED;
+		int				COHESION_ENABLED;
 
 		int				BOID_CUBE_SIZE;
 		int				BOID_OBJ_SIZE;
@@ -41,6 +44,7 @@ public:
 		std::string		OBJ_PREDATOR;
 		std::string		OBJ_SKY;
 		std::string		OBJ_WALL;
+		std::string		OBJ_EXIT;
 
 		Config() {
 
@@ -105,8 +109,14 @@ public:
 				if (keys->at(i).find("SCENE_TYPE") != std::string::npos) {
 					SCENE_TYPE = values->at(i);
 				}
-				if (keys->at(i).find("SCENE_COUNT_OF_WALLS") != std::string::npos) {
-					SCENE_COUNT_OF_WALLS = std::stoi(values->at(i));
+				if (keys->at(i).find("SEPARATION_ENABLED") != std::string::npos) {
+					SEPARATION_ENABLED = std::stoi(values->at(i));
+				}
+				if (keys->at(i).find("ALIGNMENT_ENABLED") != std::string::npos) {
+					ALIGNMENT_ENABLED = std::stoi(values->at(i));
+				}
+				if (keys->at(i).find("COHESION_ENABLED") != std::string::npos) {
+					COHESION_ENABLED = std::stoi(values->at(i));
 				}
 				if (keys->at(i).find("BOID_CUBE_SIZE") != std::string::npos) {
 					int cubeSize = std::stoi(values->at(i));
@@ -155,6 +165,9 @@ public:
 				}
 				if (keys->at(i).find("OBJ_WALL") != std::string::npos) {
 					OBJ_WALL = values->at(i);
+				}
+				if (keys->at(i).find("OBJ_EXIT") != std::string::npos) {
+					OBJ_EXIT = values->at(i);
 				}
 
 				INIT_CAMERA_POSITION = glm::vec3(cameraX, cameraY, cameraZ);

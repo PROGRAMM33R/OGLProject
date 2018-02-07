@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -9,6 +10,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <map>
+#include <iterator>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -23,6 +26,8 @@
 #include <assimp/postprocess.h> // Post processing flags
 #include <IL\il.h>
 #include <SOIL.h>
+
+#include <AntTweakBar.h>
 
 #include "Config.hpp"
 #include "Vertex.hpp"

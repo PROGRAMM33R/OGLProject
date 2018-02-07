@@ -44,11 +44,23 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 			float size = 200;
 			glm::vec3 position;
 
-			position = glm::vec3(walls->location->vec.x, -(this->cfg->BOID_OBJ_SIZE) - 190, walls->location->vec.z);
+			if (walls->angle != 0) {
+				position = glm::vec3(walls->location->vec.x - 180, -(this->cfg->BOID_OBJ_SIZE) - 240, walls->location->vec.z + 200);
+			}
+			else {
+				position = glm::vec3(walls->location->vec.x - 180, -(this->cfg->BOID_OBJ_SIZE) - 240, walls->location->vec.z - 180);
+			}
 			model = glm::translate(model, position);
 			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
 			model = glm::translate(model, glm::vec3(size, size, size));
-			model = glm::scale(model, glm::vec3(82, size, size));
+
+			if (walls->meshSize != 0) {
+				model = glm::scale(model, glm::vec3(walls->meshSize, size + 100, size));
+			}
+			else {
+				model = glm::scale(model, glm::vec3(50, size + 100, size));
+			}
+			
 			shader->setMat4("Model", model);
 
 		}

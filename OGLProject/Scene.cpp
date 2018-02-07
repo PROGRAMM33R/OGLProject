@@ -3,6 +3,7 @@
 #include "Scene.hpp"
 
 Scene::~Scene() {
+	TwTerminate();
 	glfwTerminate();
 }
 

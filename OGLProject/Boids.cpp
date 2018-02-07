@@ -21,6 +21,7 @@ Boids::~Boids() {
 	delete this->cohesionResult;
 	delete this->wallRepelResult;
 	delete this->arriveToResult;
+	delete this->finishedPoints;
 }
 
 Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predCheck = false)
@@ -84,6 +85,7 @@ Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predChec
 	this->cohesionResult = new MyVector();
 	this->wallRepelResult = new MyVector();
 	this->arriveToResult = new MyVector();
+	this->finishedPoints = new vector<int>();
 	this->cfg = cfg;
 	this->walls = walls;
 }
@@ -236,6 +238,27 @@ MyVector *Boids::arriveTo(MyVector *v) {
 	return seek(v);
 }
 
+MyVector *Boids::getArriveVector(void) {
+
+	int minIndex = 1000;
+	for (auto& x : walls->exitPositions) {
+
+		if (std::find(this->finishedPoints->begin(), this->finishedPoints->end(), x.first) == this->finishedPoints->end()) {
+			if (x.first < minIndex) {
+				minIndex = x.first;
+			}
+		}
+
+	}
+
+	if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS) {
+		this->finishedPoints->push_back(minIndex);
+	}
+
+	return walls->exitPositions.at(minIndex);
+
+}
+
 void Boids::update()
 {
 	acceleration->mulScalar((float)(.4));
@@ -282,7 +305,8 @@ void Boids::flock(vector<Boids*> *v)
 		this->tmpVectorMem->vec.z
 	);
 
-	this->tmpVectorMem = arriveTo(walls->exitPosition);
+	this->tmpVectorMem = arriveTo(getArriveVector());
+
 	this->arriveToResult->set(
 		this->tmpVectorMem->vec.x,
 		this->tmpVectorMem->vec.y,
@@ -299,11 +323,14 @@ void Boids::flock(vector<Boids*> *v)
 		this->separationResult->mulScalar(1.5);
 		this->aligmentResult->mulScalar(1.0);
 		this->cohesionResult->mulScalar(0.5);
-		this->arriveToResult->mulScalar(0.2);
-	}
+		this->arriveToResult->mulScalar(cfg->ESCAPE_SENSITIVITY);
 
-	if (this->wallRepelResult->vec.x == 0 && this->wallRepelResult->vec.y == 0) {
-		applyForce(this->arriveToResult);
+		if (cfg->PATH_FINDING_ENABLED == 1) {
+			if (this->wallRepelResult->vec.x == 0 && this->wallRepelResult->vec.y == 0) {
+				applyForce(this->arriveToResult);
+			}
+		}
+		
 	}
 
 	if (cfg->SEPARATION_ENABLED == 1) {
@@ -344,58 +371,31 @@ MyVector *Boids::WallRepel() {
 
 			Wall *tmpWall = this->walls->get(i);
 
-			float xmin = tmpWall->location->vec.x - tmpWall->size->vec.x;
-			float xmax = tmpWall->location->vec.x + tmpWall->size->vec.x;
-			float zmin = tmpWall->location->vec.z - tmpWall->size->vec.z;
-			float zmax = tmpWall->location->vec.z + tmpWall->size->vec.z;
-
 			this->desired->set();
 
 			if (tmpWall->angle != 0) {
 
-				for (register int j = (int)zmin; j < zmax; j += cfg->BOID_DESIRED_SEPARATION - 10) {
+				this->desired->set(tmpWall->location->vec.x, 0, (float)tmpWall->location->vec.z);
+				float d = location->distance(this->desired);
 
-					this->desired->set(tmpWall->location->vec.x, 0, (float)j);
-					float d = location->distance(this->desired);
-
-					if (d > 0 && d < cfg->BOID_DESIRED_SEPARATION + 200) {
-						return this->WallCollision(d, this->desired);
-					}
-
+				if (d > 0 && d < cfg->WALL_AVOID_RADIUS) {
+					return this->WallCollision(d, this->desired);
 				}
 
 			}
 			else {
 
-				for (register int j = (int)xmin; j < xmax; j += cfg->BOID_DESIRED_SEPARATION - 10) {
+				this->desired->set((float)tmpWall->location->vec.x, 0, tmpWall->location->vec.z);
+				float d = location->distance(this->desired);
 
-					this->desired->set((float)j, 0, tmpWall->location->vec.z);
-					float d = location->distance(this->desired);
-
-					if (d > 0 && d < cfg->BOID_DESIRED_SEPARATION + 200) {
-						return this->WallCollision(d, this->desired);
-					}
-
+				if (d > 0 && d < cfg->WALL_AVOID_RADIUS) {
+					return this->WallCollision(d, this->desired);
 				}
 
 			}
 
 		}
 
-		this->oppositeVector->addVector(location);
-		this->oppositeVector->mulScalar(-0.5);
-
-		if (
-			location->vec.x <= -this->cubeSize ||
-			location->vec.x >= this->cubeSize ||
-			location->vec.y <= -this->cubeSize ||
-			location->vec.y >= this->cubeSize ||
-			location->vec.z <= -this->cubeSize ||
-			location->vec.z >= this->cubeSize
-			) {
-			return this->oppositeVector;
-		}
-		
 		this->oppositeVector->set();
 		return this->oppositeVector;
 		

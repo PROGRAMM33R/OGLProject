@@ -14,14 +14,14 @@ private:
 	vector<Wall*> *walls;
 	Model **wallsModel;
 	Model *exitModel;
-	Wall *exit;
+	vector<Wall*> *pathToFind;
 	Config *cfg;
 
 	void loadModels(void);
 
 public:
 	glm::vec3 generatePosition;
-	MyVector *exitPosition;
+	map<int, MyVector*> exitPositions;
 
 	Walls(Map *map, Config *cfg);
 	~Walls() {}

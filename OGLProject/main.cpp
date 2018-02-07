@@ -7,6 +7,7 @@
 #include "Flock.hpp"
 #include "Walls.hpp"
 #include "Map.hpp"
+#include "Hud.hpp"
 #include "Std.hpp"
 
 int main(int argc, char **argv) {
@@ -16,6 +17,7 @@ int main(int argc, char **argv) {
 	GLFWwindow  *window = NULL;
 	Scene       *scene = new Scene(cfg);
 	Controls    *controls = new Controls(cfg);
+	Hud			*hud = new Hud(cfg);
 
 	window = scene->initScene();
 	if (window == NULL) {
@@ -28,6 +30,7 @@ int main(int argc, char **argv) {
 	Walls *walls = new Walls(map, cfg);
 	Flock *flock = new Flock(cfg, walls);
 	Model *surface = new Model(cfg->OBJ_SURFACE, cfg);
+	hud->init();
 
 	do {
 
@@ -64,6 +67,8 @@ int main(int argc, char **argv) {
 
 		surface->Draw(shader, DRAW_TYPE_SURFACE);
 
+		//hud->draw();
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
@@ -76,6 +81,7 @@ int main(int argc, char **argv) {
 	delete scene;
 	delete shader;
 	delete controls;
+	delete hud;
 	delete flock;
 	delete walls;
 

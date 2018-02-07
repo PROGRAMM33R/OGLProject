@@ -23,6 +23,8 @@ private:
 	MyVector *wallRepelResult;
 	MyVector *arriveToResult;
 
+	vector<int> *finishedPoints;
+
 public:
 	int desiredseparation, neighbordist;
 	float maxSpeed, maxForce;
@@ -48,6 +50,7 @@ public:
 	MyVector *seek(MyVector *v);
 
 	MyVector *arriveTo(MyVector *v);
+	MyVector *getArriveVector(void);
 
 	void run(vector <Boids*> *v);
 	void update();

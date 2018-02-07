@@ -11,9 +11,10 @@ public:
 	MyVector *location;
 	MyVector *size;
 	float angle;
+	int meshSize;
 
-	Wall(MyVector *location, MyVector *size, float angle)
-		:location(location), size(size), angle(angle)
+	Wall(MyVector *location, MyVector *size, float angle, int meshSize = 0)
+		:location(location), size(size), angle(angle), meshSize(meshSize)
 	{}
 
 };

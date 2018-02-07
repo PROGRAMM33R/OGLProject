@@ -26,6 +26,11 @@ public:
 		int				SEPARATION_ENABLED;
 		int				ALIGNMENT_ENABLED;
 		int				COHESION_ENABLED;
+		int				PATH_FINDING_ENABLED;
+
+		float			ESCAPE_SENSITIVITY;
+		int				PATH_TO_FIND_RADIUS;
+		int				WALL_AVOID_RADIUS;
 
 		int				BOID_CUBE_SIZE;
 		int				BOID_OBJ_SIZE;
@@ -117,6 +122,18 @@ public:
 				}
 				if (keys->at(i).find("COHESION_ENABLED") != std::string::npos) {
 					COHESION_ENABLED = std::stoi(values->at(i));
+				}
+				if (keys->at(i).find("PATH_FINDING_ENABLED") != std::string::npos) {
+					PATH_FINDING_ENABLED = std::stoi(values->at(i));
+				}
+				if (keys->at(i).find("ESCAPE_SENSITIVITY") != std::string::npos) {
+					ESCAPE_SENSITIVITY = std::stof(values->at(i));
+				}
+				if (keys->at(i).find("PATH_TO_FIND_RADIUS") != std::string::npos) {
+					PATH_TO_FIND_RADIUS = std::stoi(values->at(i));
+				}
+				if (keys->at(i).find("WALL_AVOID_RADIUS") != std::string::npos) {
+					WALL_AVOID_RADIUS = std::stoi(values->at(i));
 				}
 				if (keys->at(i).find("BOID_CUBE_SIZE") != std::string::npos) {
 					int cubeSize = std::stoi(values->at(i));

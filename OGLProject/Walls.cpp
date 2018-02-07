@@ -14,20 +14,22 @@ Walls::Walls(Map *map, Config *cfg)
 	this->walls = new vector<Wall*>();
 	this->loadModels();
 
-	MyVector *wallSize = new MyVector(200, 0, 0);
-	MyVector *wallSize90 = new MyVector(0, 0, 200);
+	MyVector *wallSize = new MyVector(25, 0, 0);
+	MyVector *wallSize90 = new MyVector(0, 0, 25);
 
-	float wallDiferencial = 450;
+	float wallDiferencial = 250;
 
 	countOfWalls = 0;
 	generatePosition = glm::vec3(0, 0, 0);
-	exitPosition = new MyVector();
+	this->pathToFind = new vector<Wall*>();
+
+	std::map<int, MyVector*>::iterator it = exitPositions.begin();
 
 	for (register unsigned int i = 0; i < map->map->size(); i++) {
 
 		for (register unsigned int j = 0; j < map->map->at(i)->size(); j++) {
 
-			if (map->map->at(i)->at(j) == '-' || map->map->at(i)->at(j) == '+') {
+			if (map->map->at(i)->at(j) == '-' || map->map->at(i)->at(j) == '*') {
 
 				addWall(new Wall(
 					new MyVector(
@@ -43,13 +45,13 @@ Walls::Walls(Map *map, Config *cfg)
 					
 			}
 			
-			if (map->map->at(i)->at(j) == '|' || map->map->at(i)->at(j) == '+') {
+			if (map->map->at(i)->at(j) == '|' || map->map->at(i)->at(j) == '*') {
 
 				addWall(new Wall(
 					new MyVector(
 						0 + (j * wallDiferencial),
 						0,
-						0 + (i * (wallDiferencial + 30))
+						0 + (i * wallDiferencial)
 					),
 					wallSize90,
 					(float)1.57
@@ -63,23 +65,168 @@ Walls::Walls(Map *map, Config *cfg)
 				generatePosition = glm::vec3(j * wallDiferencial, 0, i * wallDiferencial);
 			}
 
-			if (map->map->at(i)->at(j) == 'F' || map->map->at(i)->at(j) == 'f') {
-				exitPosition->set(j * wallDiferencial, 0, i * wallDiferencial);
+			if (isdigit(map->map->at(i)->at(j))) {
+				int index = map->map->at(i)->at(j) - '0';
+				exitPositions.insert(
+					it, 
+					std::pair<int, MyVector*>(
+						index, 
+						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
+					)
+				); 
+
+				this->pathToFind->push_back(new Wall(
+					exitPositions.at(index),
+					wallSize90,
+					0
+				));
+			}
+			else if (map->map->at(i)->at(j) == 'F') {
+				exitPositions.insert(
+					it,
+					std::pair<int, MyVector*>(
+						1000,
+						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
+					)
+				);
 			}
 
 		}
 
 	}
 
-	this->exit = new Wall(
-		new MyVector(
-			exitPosition->vec.x,
-			exitPosition->vec.y,
-			exitPosition->vec.z
-		),
+	for (register unsigned int i = 0; i < map->map->size(); i++) {
+
+		for (register unsigned int j = 0; j < map->map->at(i)->size(); j++) {
+
+			if (map->map->at(i)->at(j) == '+') {
+
+				if (i > 0 && j > 0) {
+					if (map->map->at(i)->at(j - 1) == '-' && map->map->at(i - 1)->at(j) == '|') {
+
+						addWall(new Wall(
+							new MyVector(
+								0 + (j * wallDiferencial) - 52,
+								0,
+								0 + (i * wallDiferencial)
+							),
+							wallSize,
+							(float)0, 25
+						)
+						);
+						countOfWalls++;
+
+						addWall(new Wall(
+							new MyVector(
+								0 + (j * wallDiferencial),
+								0,
+								0 + (i * wallDiferencial) - 40
+							),
+							wallSize90,
+							(float)1.57, 25
+						)
+						);
+						countOfWalls++;
+					}
+				}
+
+				if ((i > 0) && (j < map->map->at(i)->size() - 1)) {
+					if (map->map->at(i)->at(j + 1) == '-' && map->map->at(i - 1)->at(j) == '|') {
+						addWall(new Wall(
+							new MyVector(
+								0 + (j * wallDiferencial) + 52,
+								0,
+								0 + (i * wallDiferencial)
+							),
+							wallSize,
+							(float)0, 25
+						)
+						);
+						countOfWalls++;
+
+						addWall(new Wall(
+							new MyVector(
+								0 + (j * wallDiferencial),
+								0,
+								0 + (i * wallDiferencial) - 40
+							),
+							wallSize90,
+							(float)1.57, 25
+						)
+						);
+						countOfWalls++;
+					}
+				}
+
+				//if ((i > 0 && j > 0) && (i < map->map->size() - 1) && (j < map->map->at(i)->size() - 1)) {
+
+				if ((j > 0) && (i < map->map->size() - 1)) {
+					if (map->map->at(i)->at(j - 1) == '-' && map->map->at(i + 1)->at(j) == '|') {
+						addWall(new Wall(
+							new MyVector(
+								0 + (j * wallDiferencial) - 52,
+								0,
+								0 + (i * wallDiferencial)
+							),
+							wallSize,
+							(float)0, 25
+						)
+						);
+						countOfWalls++;
+
+						addWall(new Wall(
+							new MyVector(
+								0 + (j * wallDiferencial),
+								0,
+								0 + (i * wallDiferencial) + 78
+							),
+							wallSize90,
+							(float)1.57, 15
+						)
+						);
+						countOfWalls++;
+					}
+				}
+
+				if ((i < map->map->size() - 1) && (j < map->map->at(i)->size() - 1)) {
+					if (map->map->at(i)->at(j + 1) == '-' && map->map->at(i + 1)->at(j) == '|') {
+						addWall(new Wall(
+							new MyVector(
+								0 + (j * wallDiferencial) + 52,
+								0,
+								0 + (i * wallDiferencial)
+							),
+							wallSize,
+							(float)0, 25
+						)
+						);
+						countOfWalls++;
+
+						addWall(new Wall(
+							new MyVector(
+								0 + (j * wallDiferencial),
+								0,
+								0 + (i * wallDiferencial) + 78
+							),
+							wallSize90,
+							(float)1.57, 15
+						)
+						);
+						countOfWalls++;
+					}
+				}
+
+			}
+
+		}
+
+	}
+
+	this->pathToFind->push_back(new Wall(
+		exitPositions.at(1000),
 		wallSize90,
 		0
-	);
+	));
 
 }
 
@@ -107,7 +254,9 @@ void Walls::drawWalls(Shader *shader)
 	for (register int i = 0; i < this->countOfWalls; i++) {
 		this->wallsModel[i]->Draw(shader, DRAW_TYPE_WALL, NULL, this->walls->at(i));
 	}
-	this->exitModel->Draw(shader, DRAW_TYPE_EXIT, NULL, this->exit);
+	for (register int i = 0; i < this->pathToFind->size(); i++) {
+		this->exitModel->Draw(shader, DRAW_TYPE_EXIT, NULL, this->pathToFind->at(i));
+	}
 }
 
 Wall *Walls::get(int i) {

@@ -1,6 +1,5 @@
-﻿  Boids.cpp
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(302): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  Walls.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(257): warning C4018: '<': signed/unsigned mismatch
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.exe
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.pdb (Partial PDB)
   File not found - Win32.dll
@@ -16,6 +15,8 @@ c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(302): warning C4305: 
   C:\Users\adam\Desktop\BachelorProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\packages\glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.dll
+  1 File(s) copied
+  C:\Users\adam\Desktop\BachelorProject\packages\AntTweakBar\lib\AntTweakBar.dll
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test.png

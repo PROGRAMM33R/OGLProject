@@ -32,6 +32,13 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 		camera->setPosition(deltaTime * speed, "left");
 	}
 
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+		if (this->cfg->PATH_FINDING_ENABLED == 1)
+			this->cfg->PATH_FINDING_ENABLED = 0;
+		else
+			this->cfg->PATH_FINDING_ENABLED = 1;
+	}
+
 	camera->calculateMVP(initialFoV);
 
 	lastTime = currentTime;

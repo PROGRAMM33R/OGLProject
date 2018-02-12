@@ -17,7 +17,6 @@ int main(int argc, char **argv) {
 	GLFWwindow  *window = NULL;
 	Scene       *scene = new Scene(cfg);
 	Controls    *controls = new Controls(cfg);
-	Hud			*hud = new Hud(cfg);
 
 	window = scene->initScene();
 	if (window == NULL) {
@@ -30,13 +29,25 @@ int main(int argc, char **argv) {
 	Walls *walls = new Walls(map, cfg);
 	Flock *flock = new Flock(cfg, walls);
 	Model *surface = new Model(cfg->OBJ_SURFACE, cfg);
-	hud->init();
+
+	float lastTime = glfwGetTime(), currentTime = 0.0, fps = 0.0;
+	int nbFrames = 0;
+
+	Hud::init(cfg, &fps);
 
 	do {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader->use();
+
+		currentTime = glfwGetTime();
+		nbFrames++;
+		if (currentTime - lastTime >= 1.0) {
+			fps = 1000.0 / (float)nbFrames;
+			nbFrames = 0;
+			lastTime += 1.0;
+		}
 
 		glm::mat4 ModelMatrix = glm::mat4(2.0);
 		shader->setMat4("Model", ModelMatrix);
@@ -67,7 +78,7 @@ int main(int argc, char **argv) {
 
 		surface->Draw(shader, DRAW_TYPE_SURFACE);
 
-		//hud->draw();
+		Hud::draw();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -81,7 +92,6 @@ int main(int argc, char **argv) {
 	delete scene;
 	delete shader;
 	delete controls;
-	delete hud;
 	delete flock;
 	delete walls;
 

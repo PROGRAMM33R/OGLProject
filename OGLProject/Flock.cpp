@@ -4,33 +4,48 @@
 Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg, Walls *walls)
 	:numberOfBoids(numberOfBoids), numberOfPredators(numberOfPredators), cfg(cfg), walls(walls){
 
-	this->boidsModel = new Model*[numberOfBoids];
+	this->boidsModel = new Model*[numberOfBoids * walls->generatePositions->size()];
 	this->flock = new vector<Boids*>();
 	this->loadModels();
 
-	for (register int i = 0; i < numberOfBoids; i++) {
+	for (register unsigned int i = 0; i < numberOfBoids; ++i) {
 
-		if (i < numberOfPredators) {
-			addBoid(new Boids(
-				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.x, 
-				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.y,
-				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.z,
-				this->cfg,
-				walls,
-				true
-			)
-			);
+		if (cfg->SCENE_TYPE == "3D") {
+			if (i < numberOfPredators) {
+				addBoid(new Boids(
+					(float)(rand() % initialSpacingBetweenBoids),
+					(float)(rand() % initialSpacingBetweenBoids),
+					(float)(rand() % initialSpacingBetweenBoids),
+					this->cfg,
+					walls,
+					true
+				)
+				);
+			}
+			else {
+				addBoid(new Boids(
+					(float)(rand() % initialSpacingBetweenBoids),
+					(float)(rand() % initialSpacingBetweenBoids),
+					(float)(rand() % initialSpacingBetweenBoids),
+					this->cfg,
+					walls,
+					false
+				)
+				);
+			}
 		}
 		else {
-			addBoid(new Boids(
-				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.x,
-				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.y,
-				(float)(rand() % initialSpacingBetweenBoids) + walls->generatePosition.z,
-				this->cfg,
-				walls,
-				false
-			)
-			);
+			for (register unsigned int j = 0; j < walls->generatePositions->size(); j++) {
+				addBoid(new Boids(
+					(float)(rand() % initialSpacingBetweenBoids) + walls->generatePositions->at(j).x,
+					(float)(rand() % initialSpacingBetweenBoids) + walls->generatePositions->at(j).y,
+					(float)(rand() % initialSpacingBetweenBoids) + walls->generatePositions->at(j).z,
+					this->cfg,
+					walls,
+					false
+				)
+				);
+			}
 		}
 		
 	}
@@ -64,7 +79,7 @@ void Flock::loadModels(void) {
 		tmpBoidsModelPredator = new Model(this->cfg->OBJ_PREDATOR, this->cfg);
 	}
 
-	for (register int i = 0; i < this->numberOfBoids; i++) {
+	for (register unsigned int i = 0; i < this->numberOfBoids; ++i) {
 
 		if (i < this->numberOfPredators) {
 			if (tmpBoidsModelPredator != NULL)
@@ -81,7 +96,7 @@ void Flock::loadModels(void) {
 
 void Flock::flocking(Shader *shader)
 {
-	for (register int i = 0; i < this->numberOfBoids; i++) {
+	for (register unsigned int i = 0; i < this->numberOfBoids; ++i) {
 		this->flock->at(i)->run(flock);
 		boidsModel[i]->Draw(shader, DRAW_TYPE_BOIDS, this->flock->at(i));
 	}

@@ -20,7 +20,7 @@ private:
 	void loadModels(void);
 
 public:
-	glm::vec3 generatePosition;
+	vector<glm::vec3> *generatePositions;
 	map<int, MyVector*> exitPositions;
 
 	Walls(Map *map, Config *cfg);
@@ -28,7 +28,7 @@ public:
 
 	void addWall(Wall *w);
 	void drawWalls(Shader *shader);
-	Wall *get(int i);
-	int size(void);
+	Wall *get(int i) const;
+	int size(void) const;
 
 };

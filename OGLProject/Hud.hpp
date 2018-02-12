@@ -2,35 +2,40 @@
 
 #include "Std.hpp"
 
-class Hud {
+namespace Hud {
 
-private:
-	Config *cfg;
+	Config *_cfg;
 	TwBar *myBar;
 
-public:
-	Hud(Config *cfg) 
-		: cfg(cfg)
-	{}
+	void init(Config *cfg, float *frames) {
 
-	void init(void) {
+		_cfg = cfg;
 
 		if (TwInit(TW_OPENGL_CORE, NULL) == 0) {
 			fprintf(stderr, "AntTweakBar error: %s", TwGetLastError());
 		}
 		else {
-			this->myBar = TwNewBar("Parameters");
+			myBar = TwNewBar("Parameters");
 
-			TwWindowSize(this->cfg->WINDOW_WIDTH, this->cfg->WINDOW_HEIGHT);
+			TwWindowSize(_cfg->WINDOW_WIDTH, _cfg->WINDOW_HEIGHT);
 
-			int boids = cfg->BOID_NUMBER_OF_BOIDS;
-			TwAddVarRO(this->myBar, "Boids", TW_TYPE_INT32, &boids, " min = -1000 max = 1000 keyIncr = z keyDecr = Z ");
+			TwAddVarRO(myBar, "ms/frame", TW_TYPE_FLOAT, frames, NULL);
+			TwAddSeparator(myBar, "", NULL);
+
+			TwAddVarRO(myBar, "Boids", TW_TYPE_INT32, &(_cfg->BOID_NUMBER_OF_BOIDS), NULL);
+			TwAddVarRO(myBar, "Separation enabled", TW_TYPE_INT32, &(_cfg->SEPARATION_ENABLED), NULL);
+			TwAddVarRO(myBar, "Alignment enabled", TW_TYPE_INT32, &(_cfg->ALIGNMENT_ENABLED), NULL);
+			TwAddVarRO(myBar, "Cohesion enabled", TW_TYPE_INT32, &(_cfg->COHESION_ENABLED), NULL);
+			TwAddVarRO(myBar, "Path finding enabled", TW_TYPE_INT32, &(_cfg->PATH_FINDING_ENABLED), NULL);
+			TwAddVarRO(myBar, "Escape sensitivity", TW_TYPE_FLOAT, &(_cfg->ESCAPE_SENSITIVITY), NULL);
+
+			TwAddSeparator(myBar, "", NULL);
 
 		}
 
 	}
 
-	void draw(void) const {
+	void draw(void) {
 		TwDraw();
 	}
 

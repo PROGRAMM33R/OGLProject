@@ -54,6 +54,7 @@
     <None Include="VertexShader.shader" />
     <None Include="FragmentShader.shader" />
     <None Include="app.config" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controls.hpp">

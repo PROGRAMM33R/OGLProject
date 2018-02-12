@@ -109,7 +109,7 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 
 	}
 
-	for (register unsigned int i = 0; i < textures.size(); i++) {
+	for (register unsigned int i = 0, len = textures.size(); i < len; ++i) {
 		glActiveTexture(GL_TEXTURE0 + i); 
 										 
 		stringstream ss;

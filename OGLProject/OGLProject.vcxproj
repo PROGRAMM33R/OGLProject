@@ -170,6 +170,7 @@ xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Debug" &lt;NUL</Comma
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="FragmentShader.shader" />
     <None Include="VertexShader.shader" />

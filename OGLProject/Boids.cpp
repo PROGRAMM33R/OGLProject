@@ -102,7 +102,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	this->steer->set();
 	int count = 0;
 	
-	for (register unsigned int i = 0; i < Boidss->size(); i++) {
+	for (register unsigned int i = 0, len = Boidss->size(); i < len; ++i) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->desiredseparation) && predator == false) {
 			this->tmpVector->set();
@@ -163,7 +163,7 @@ MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 	this->sum->set();
 	this->steer->set();
 	int count = 0;
-	for (register unsigned int i = 0; i < Boidss->size(); i++) {
+	for (register unsigned int i = 0, len = Boidss->size(); i < len; ++i) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->neighbordist)) {
 			this->sum->addVector(Boidss->at(i)->velocity);
@@ -195,7 +195,7 @@ MyVector *Boids::Cohesion(vector<Boids*> *Boidss)
 {
 	this->sum->set();
 	int count = 0;
-	for (register unsigned int i = 0; i < Boidss->size(); i++) {
+	for (register unsigned int i = 0, len = Boidss->size(); i < len; ++i) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->neighbordist)) {
 			this->sum->addVector(Boidss->at(i)->location);
@@ -276,27 +276,32 @@ void Boids::run(vector <Boids*> *v)
 
 void Boids::flock(vector<Boids*> *v)
 {
+	if (cfg->SEPARATION_ENABLED == 1) {
+		this->tmpVectorMem = Separation(v);
+		this->separationResult->set(
+			this->tmpVectorMem->vec.x,
+			this->tmpVectorMem->vec.y,
+			this->tmpVectorMem->vec.z
+		);
+	}
 
-	this->tmpVectorMem = Separation(v);
-	this->separationResult->set(
-		this->tmpVectorMem->vec.x, 
-		this->tmpVectorMem->vec.y, 
-		this->tmpVectorMem->vec.z
-	);
+	if (cfg->ALIGNMENT_ENABLED == 1) {
+		this->tmpVectorMem = Alignment(v);
+		this->aligmentResult->set(
+			this->tmpVectorMem->vec.x,
+			this->tmpVectorMem->vec.y,
+			this->tmpVectorMem->vec.z
+		);
+	}
 
-	this->tmpVectorMem = Alignment(v);
-	this->aligmentResult->set(
-		this->tmpVectorMem->vec.x, 
-		this->tmpVectorMem->vec.y, 
-		this->tmpVectorMem->vec.z
-	);
-
-	this->tmpVectorMem = Cohesion(v);
-	this->cohesionResult->set(
-		this->tmpVectorMem->vec.x, 
-		this->tmpVectorMem->vec.y, 
-		this->tmpVectorMem->vec.z
-	);
+	if (cfg->COHESION_ENABLED == 1) {
+		this->tmpVectorMem = Cohesion(v);
+		this->cohesionResult->set(
+			this->tmpVectorMem->vec.x,
+			this->tmpVectorMem->vec.y,
+			this->tmpVectorMem->vec.z
+		);
+	}
 
 	this->tmpVectorMem = WallRepel();
 	this->wallRepelResult->set(
@@ -320,7 +325,7 @@ void Boids::flock(vector<Boids*> *v)
 		applyForce(this->cohesionResult);
 	}
 	else {
-		this->separationResult->mulScalar(1.5);
+		this->separationResult->mulScalar(0.75);
 		this->aligmentResult->mulScalar(1.0);
 		this->cohesionResult->mulScalar(0.5);
 		this->arriveToResult->mulScalar(cfg->ESCAPE_SENSITIVITY);
@@ -367,7 +372,7 @@ MyVector *Boids::WallRepel() {
 	}
 	else {
 
-		for (register int i = 0; i < this->walls->size(); i++) {
+		for (register int i = 0, len = this->walls->size(); i < len; ++i) {
 
 			Wall *tmpWall = this->walls->get(i);
 

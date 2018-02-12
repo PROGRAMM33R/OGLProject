@@ -3,7 +3,7 @@
 
 void Model::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls)
 {
-	for (unsigned int i = 0; i < meshes.size(); i++)
+	for (unsigned int i = 0, len = meshes.size(); i < len; ++i)
 		meshes[i].Draw(shader, objType, Boidss, walls);
 }
 
@@ -30,12 +30,12 @@ void Model::loadModel(string const &path) {
 
 void Model::processNode(aiNode *node, const aiScene *scene) {
 
-	for (unsigned int i = 0; i < node->mNumMeshes; i++) {
+	for (unsigned int i = 0; i < node->mNumMeshes; ++i) {
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		meshes.push_back(processMesh(mesh, scene));
 	}
 
-	for (unsigned int i = 0; i < node->mNumChildren; i++) {
+	for (unsigned int i = 0; i < node->mNumChildren; ++i) {
 		processNode(node->mChildren[i], scene);
 	}
 
@@ -46,7 +46,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
 	vector<unsigned int> indices;
 	vector<Texture> textures;
 
-	for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
+	for (unsigned int i = 0; i < mesh->mNumVertices; ++i) {
 		Vertex vertex;
 		glm::vec3 vector;
 
@@ -95,9 +95,9 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
 		vertices.push_back(vertex);
 	}
 
-	for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
+	for (unsigned int i = 0; i < mesh->mNumFaces; ++i) {
 		aiFace face = mesh->mFaces[i];
-		for (unsigned int j = 0; j < face.mNumIndices; j++)
+		for (unsigned int j = 0; j < face.mNumIndices; ++j)
 			indices.push_back(face.mIndices[j]);
 	}
 
@@ -127,7 +127,7 @@ vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type,
 {
 	vector<Texture> textures;
 	
-	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+	for (unsigned int i = 0; i < mat->GetTextureCount(type); ++i)
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);

@@ -7,7 +7,7 @@ namespace Hud {
 	Config *_cfg;
 	TwBar *myBar;
 
-	void init(Config *cfg, float *frames) {
+	void init(Config *cfg, float *frames, double *escapeDuration) {
 
 		_cfg = cfg;
 
@@ -16,6 +16,8 @@ namespace Hud {
 		}
 		else {
 			myBar = TwNewBar("Parameters");
+
+			//*escapeDuration = pow(*escapeDuration, 1);
 
 			TwWindowSize(_cfg->WINDOW_WIDTH, _cfg->WINDOW_HEIGHT);
 
@@ -30,6 +32,8 @@ namespace Hud {
 			TwAddVarRO(myBar, "Escape sensitivity", TW_TYPE_FLOAT, &(_cfg->ESCAPE_SENSITIVITY), NULL);
 
 			TwAddSeparator(myBar, "", NULL);
+
+			TwAddVarRO(myBar, "Escape sec", TW_TYPE_DOUBLE, escapeDuration, NULL);
 
 		}
 

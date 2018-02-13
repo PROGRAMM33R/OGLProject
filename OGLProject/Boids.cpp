@@ -102,7 +102,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	this->steer->set();
 	int count = 0;
 	
-	for (register unsigned int i = 0, len = Boidss->size(); i < len; ++i) {
+	for (int i = 0, len = Boidss->size(); i < len; ++i) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->desiredseparation) && predator == false) {
 			this->tmpVector->set();
@@ -163,7 +163,7 @@ MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 	this->sum->set();
 	this->steer->set();
 	int count = 0;
-	for (register unsigned int i = 0, len = Boidss->size(); i < len; ++i) {
+	for (int i = 0, len = Boidss->size(); i < len; ++i) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->neighbordist)) {
 			this->sum->addVector(Boidss->at(i)->velocity);
@@ -195,7 +195,7 @@ MyVector *Boids::Cohesion(vector<Boids*> *Boidss)
 {
 	this->sum->set();
 	int count = 0;
-	for (register unsigned int i = 0, len = Boidss->size(); i < len; ++i) {
+	for (int i = 0, len = Boidss->size(); i < len; ++i) {
 		float d = location->distance(Boidss->at(i)->location);
 		if ((d > 0) && (d < this->neighbordist)) {
 			this->sum->addVector(Boidss->at(i)->location);
@@ -372,7 +372,7 @@ MyVector *Boids::WallRepel() {
 	}
 	else {
 
-		for (register int i = 0, len = this->walls->size(); i < len; ++i) {
+		for (int i = 0, len = this->walls->size(); i < len; ++i) {
 
 			Wall *tmpWall = this->walls->get(i);
 

@@ -13,6 +13,36 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 	double currentTime = glfwGetTime();
 	float deltaTime = float(currentTime - lastTime);
 
+	spacePressed = false;
+	spaceReleased = false;
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+		spacePressed = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE) {
+		spaceReleased = true;
+	}
+
+	if (spacePressed && spaceReleased) {
+		if (this->cfg->PATH_FINDING_ENABLED == 1) {
+			this->cfg->PATH_FINDING_ENABLED = 0;
+			escapeDuration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+			startStopwatch = false;
+		}
+		else {
+			this->cfg->PATH_FINDING_ENABLED = 1;
+			start = std::clock();
+			escapeDuration = 0.0;
+			startStopwatch = true;
+		}
+		spacePressed = false;
+		spaceReleased = false;
+	}
+
+	if (startStopwatch) {
+		escapeDuration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+	}
+
 	camera->calculateCamera(window, mouseSpeed);
 	
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS 
@@ -30,13 +60,6 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS
 		|| glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 		camera->setPosition(deltaTime * speed, "left");
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-		if (this->cfg->PATH_FINDING_ENABLED == 1)
-			this->cfg->PATH_FINDING_ENABLED = 0;
-		else
-			this->cfg->PATH_FINDING_ENABLED = 1;
 	}
 
 	camera->calculateMVP(initialFoV);

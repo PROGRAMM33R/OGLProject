@@ -12,6 +12,8 @@
 #include <iostream>
 #include <map>
 #include <iterator>
+#include <cstdio>
+#include <ctime>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>

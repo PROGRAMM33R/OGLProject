@@ -10,8 +10,11 @@ private:
 	float speed, mouseSpeed;
 	Camera *camera;
 	Config *cfg;
-
+	std::clock_t start;
+	bool spacePressed, spaceReleased, startStopwatch;
+	
 public:
+	double escapeDuration;
 	Controls(Config *cfg)
 	:
 		camera(new Camera(cfg)),
@@ -20,6 +23,9 @@ public:
 			this->initialFoV = this->cfg->FOV;
 			this->speed = this->cfg->PLAYER_SPEED;
 			this->mouseSpeed = this->cfg->MOUSE_SPEED;
+			spacePressed = false;
+			spaceReleased = false;
+			startStopwatch = false;
 	}
 	~Controls();
 	void computeMatricesFromInputs(GLFWwindow* window);

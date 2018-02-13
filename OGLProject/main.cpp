@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
 	float lastTime = glfwGetTime(), currentTime = 0.0, fps = 0.0;
 	int nbFrames = 0;
 
-	Hud::init(cfg, &fps);
+	Hud::init(cfg, &fps, &(controls->escapeDuration));
 
 	do {
 

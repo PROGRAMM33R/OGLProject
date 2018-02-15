@@ -1,11 +1,16 @@
 #pragma once
 
-#include "Std.hpp"
+#include <cmath>
 
 class MyVector {
 
+private:
+	struct vec3 {
+		float x, y, z;
+	};
+
 public:
-	glm::vec3 vec;
+	vec3 vec;
 
 	MyVector();
 

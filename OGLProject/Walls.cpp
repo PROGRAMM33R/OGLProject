@@ -6,7 +6,7 @@ Walls::Walls(Map *map, Config *cfg)
 
 	countOfWalls = 0;
 
-	for (register unsigned int i = 0; i < map->map->size(); i++) {
+	for (int i = 0; i < map->map->size(); i++) {
 		countOfWalls += map->map->at(i)->size();
 	}
 
@@ -25,9 +25,9 @@ Walls::Walls(Map *map, Config *cfg)
 
 	std::map<int, MyVector*>::iterator it = exitPositions.begin();
 
-	for (register unsigned int i = 0, len = map->map->size(); i < len; ++i) {
+	for (int i = 0, len = map->map->size(); i < len; ++i) {
 
-		for (register unsigned int j = 0, len2 = map->map->at(i)->size(); j < len2; ++j) {
+		for (int j = 0, len2 = map->map->at(i)->size(); j < len2; ++j) {
 
 			if (map->map->at(i)->at(j) == '-' || map->map->at(i)->at(j) == '*') {
 
@@ -97,13 +97,13 @@ Walls::Walls(Map *map, Config *cfg)
 
 	}
 
-	for (register unsigned int i = 0, len = map->map->size(); i < len; ++i) {
+	for (int i = 0, len = map->map->size(); i < len; ++i) {
 
-		for (register unsigned int j = 0, len2 = map->map->at(i)->size(); j < len2; ++j) {
+		for (int j = 0, len2 = map->map->at(i)->size(); j < len2; ++j) {
 
 			if (map->map->at(i)->at(j) == '+') {
 
-				if (i > 0 && j > 0) {
+				if (i > 0 && j > 0 && map->map->at(i)->at(j - 1) != NULL && map->map->at(i - 1)->at(j) != NULL) {
 					if (map->map->at(i)->at(j - 1) == '-' && map->map->at(i - 1)->at(j) == '|') {
 
 						addWall(new Wall(
@@ -132,7 +132,7 @@ Walls::Walls(Map *map, Config *cfg)
 					}
 				}
 
-				if ((i > 0) && (j < map->map->at(i)->size() - 1)) {
+				if ((i > 0) && (j < map->map->at(i)->size() - 1) && map->map->at(i)->at(j + 1) != NULL && map->map->at(i - 1)->at(j) != NULL) {
 					if (map->map->at(i)->at(j + 1) == '-' && map->map->at(i - 1)->at(j) == '|') {
 						addWall(new Wall(
 							new MyVector(
@@ -163,7 +163,7 @@ Walls::Walls(Map *map, Config *cfg)
 				// full condition to check all rules
 				//if ((i > 0 && j > 0) && (i < map->map->size() - 1) && (j < map->map->at(i)->size() - 1)) {
 
-				if ((j > 0) && (i < map->map->size() - 1)) {
+				if ((j > 0) && (i < map->map->size() - 1) && map->map->at(i)->at(j - 1) != NULL && map->map->at(i + 1)->at(j) != NULL) {
 					if (map->map->at(i)->at(j - 1) == '-' && map->map->at(i + 1)->at(j) == '|') {
 						addWall(new Wall(
 							new MyVector(
@@ -191,7 +191,7 @@ Walls::Walls(Map *map, Config *cfg)
 					}
 				}
 
-				if ((i < map->map->size() - 1) && (j < map->map->at(i)->size() - 1)) {
+				if ((i < map->map->size() - 1) && (j < map->map->at(i)->size() - 1) && map->map->at(i)->at(j + 1) != NULL && map->map->at(i + 1)->at(j) != NULL) {
 					if (map->map->at(i)->at(j + 1) == '-' && map->map->at(i + 1)->at(j) == '|') {
 						addWall(new Wall(
 							new MyVector(
@@ -242,7 +242,7 @@ void Walls::loadModels(void) {
 
 	Model *tmpWallModel = new Model(this->cfg->OBJ_WALL, this->cfg);
 
-	for (register int i = 0; i < this->countOfWalls; ++i) {
+	for (int i = 0; i < this->countOfWalls; ++i) {
 
 		this->wallsModel[i] = new Model(*tmpWallModel);
 
@@ -254,10 +254,10 @@ void Walls::loadModels(void) {
 
 void Walls::drawWalls(Shader *shader)
 {
-	for (register int i = 0; i < this->countOfWalls; ++i) {
+	for (int i = 0; i < this->countOfWalls; ++i) {
 		this->wallsModel[i]->Draw(shader, DRAW_TYPE_WALL, NULL, this->walls->at(i));
 	}
-	for (register int i = 0, len = this->pathToFind->size(); i < len; ++i) {
+	for (int i = 0, len = this->pathToFind->size(); i < len; ++i) {
 		this->exitModel->Draw(shader, DRAW_TYPE_EXIT, NULL, this->pathToFind->at(i));
 	}
 }

@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Std.hpp"
+#include <iostream>
 #include "Boids.hpp"
 #include "Model.hpp"
+
+using namespace std;
 
 class Shader;
 class Walls;
@@ -16,14 +18,13 @@ private:
 	Walls *walls;
 
 	void loadModels(void);
+	inline void addBoid(Boids *b);
 
 public:
 	
-	Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg, Walls *walls);
 	Flock(Config *cfg, Walls *walls);
 	~Flock() {}
 	
-	void addBoid(Boids *b);
 	void flocking(Shader *shader);
 
 };

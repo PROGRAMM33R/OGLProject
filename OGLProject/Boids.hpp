@@ -1,8 +1,11 @@
 #pragma once
 
-#include "Std.hpp"
+#include <iostream>
+#include <cmath>
 #include "MyVector.hpp"
 #include "Walls.hpp"
+
+using namespace std;
 
 class Boids {
 
@@ -25,6 +28,23 @@ private:
 
 	vector<int> *finishedPoints;
 
+	// Three Laws
+	MyVector *Separation(vector<Boids*> *Boidss);
+	MyVector *Alignment(vector<Boids*> *Boidss);
+	MyVector *Cohesion(vector<Boids*> *Boidss);
+
+	MyVector *WallRepel();
+	MyVector *seek(MyVector *v);
+
+	MyVector *arriveTo(MyVector *v);
+	MyVector *getArriveVector(void);
+
+	inline void applyForce(MyVector *force);
+
+	MyVector *WallCollision(float direction, MyVector *_desired);
+
+	void update();
+
 public:
 	int desiredseparation, neighbordist;
 	float maxSpeed, maxForce;
@@ -37,31 +57,14 @@ public:
 
 	Boids(Config *cfg, Walls *walls);
 	~Boids();
-	Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predCheck);
-	
-	inline void applyForce(MyVector *force);
-
-	// Three Laws
-	MyVector *Separation(vector<Boids*> *Boidss);
-	MyVector *Alignment(vector<Boids*> *Boidss);
-	MyVector *Cohesion(vector<Boids*> *Boidss);
-
-	MyVector *WallRepel();
-	MyVector *seek(MyVector *v);
-
-	MyVector *arriveTo(MyVector *v);
-	MyVector *getArriveVector(void);
+	Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck);
 
 	void run(vector <Boids*> *v);
-	void update();
 	void flock(vector <Boids*> *v);
-
-	MyVector *WallCollision(float direction, MyVector *_desired);
 
 	float angle(MyVector *v) const;
 	float angleX(MyVector *v) const;
 	float angleY(MyVector *v) const;
 	float angleZ(MyVector *v) const;
-	glm::vec3 rotationVector(MyVector *v) const;
 
 };

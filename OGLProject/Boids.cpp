@@ -2,7 +2,7 @@
 #include "Boids.hpp"
 
 Boids::Boids(Config *cfg, Walls *walls) {
-	Boids(0.0, 0.0, 0.0, cfg, walls, false);
+	Boids(new MyVector(0, 0, 0), cfg, walls, false);
 }
 
 Boids::~Boids() {
@@ -24,7 +24,7 @@ Boids::~Boids() {
 	delete this->finishedPoints;
 }
 
-Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predCheck = false)
+Boids::Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck = false)
 {
 	AxisY = 0;
 	predator = predCheck;
@@ -62,10 +62,10 @@ Boids::Boids(float x, float y, float z, Config *cfg, Walls *walls, bool predChec
 	acceleration = new MyVector();
 
 	if (cfg->SCENE_TYPE == "3D") {
-		location = new MyVector(x, y, z);
+		location = new MyVector(newLocation->vec.x, newLocation->vec.y, newLocation->vec.z);
 	}
 	else {
-		location = new MyVector(x, AxisY, z);
+		location = new MyVector(newLocation->vec.x, AxisY, newLocation->vec.z);
 	}
 
 	size.x = (float)(cfg->BOID_OBJ_SIZE);
@@ -447,15 +447,4 @@ float Boids::angleY(MyVector *v) const
 float Boids::angleZ(MyVector *v) const
 {
 	return (float)(atan2(v->vec.x, v->vec.z));
-}
-
-glm::vec3 Boids::rotationVector(MyVector *v) const {
-	glm::vec3 rotation;
-	float r = sqrt(pow(v->vec.x, 2) + pow(v->vec.y, 2) + pow(v->vec.z, 2));
-	float theta = acos(v->vec.z / r);
-	float fi = atan(v->vec.y / v->vec.x);
-	rotation.x = r;
-	rotation.y = theta;
-	rotation.z = fi;
-	return rotation;
 }

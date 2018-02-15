@@ -1,20 +1,24 @@
 #pragma once
 
-#include "Std.hpp"
+#include "Object.hpp"
 #include "MyVector.hpp"
 
-class Wall {
+class Wall : public Object {
 
 private:
 
 public:
-	MyVector *location;
-	MyVector *size;
-	float angle;
 	int meshSize;
 
-	Wall(MyVector *location, MyVector *size, float angle, int meshSize = 0)
-		:location(location), size(size), angle(angle), meshSize(meshSize)
-	{}
+	Wall(MyVector *location, MyVector *size, float angle, int meshSize = 0){
+		this->location = location;
+		this->size = size;
+		this->angle = angle;
+		this->meshSize = meshSize;
+	}
+	Wall() {
+		Object();
+		this->meshSize = 0;
+	}
 
 };

@@ -1,10 +1,14 @@
 #pragma once
 
-#include "Std.hpp"
+#include <iostream>
+#include <map>
+#include <iterator>
 #include "Model.hpp"
 #include "Wall.hpp"
 #include "Map.hpp"
 #include "MyVector.hpp"
+
+using namespace std;
 
 class Shader;
 class Walls {
@@ -18,6 +22,7 @@ private:
 	Config *cfg;
 
 	void loadModels(void);
+	inline void addWall(Wall *w);
 
 public:
 	vector<glm::vec3> *generatePositions;
@@ -26,7 +31,6 @@ public:
 	Walls(Map *map, Config *cfg);
 	~Walls() {}
 
-	void addWall(Wall *w);
 	void drawWalls(Shader *shader);
 	Wall *get(int i) const;
 	int size(void) const;

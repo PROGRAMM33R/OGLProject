@@ -1,21 +1,26 @@
 
 #include "Flock.hpp"
 
-Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetweenBoids, Config *cfg, Walls *walls)
-	:numberOfBoids(numberOfBoids), numberOfPredators(numberOfPredators), cfg(cfg), walls(walls){
+Flock::Flock(Config *cfg, Walls *walls)
+	:cfg(cfg), walls(walls){
 
-	this->boidsModel = new Model*[numberOfBoids * walls->generatePositions->size()];
+	numberOfBoids = this->cfg->BOID_NUMBER_OF_BOIDS;
+	numberOfPredators = this->cfg->BOID_NUMBER_OF_PREDATORS;
+
+	this->boidsModel = new Model*[this->cfg->BOID_NUMBER_OF_BOIDS * walls->generatePositions->size()];
 	this->flock = new vector<Boids*>();
 	this->loadModels();
 
-	for (register unsigned int i = 0; i < numberOfBoids; ++i) {
+	for (int i = 0; i < cfg->BOID_NUMBER_OF_BOIDS; ++i) {
 
-		if (cfg->SCENE_TYPE == "3D") {
-			if (i < numberOfPredators) {
+		if (this->cfg->SCENE_TYPE == "3D") {
+			if (i < cfg->BOID_NUMBER_OF_PREDATORS) {
 				addBoid(new Boids(
-					(float)(rand() % initialSpacingBetweenBoids),
-					(float)(rand() % initialSpacingBetweenBoids),
-					(float)(rand() % initialSpacingBetweenBoids),
+					new MyVector(
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE),
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE),
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE)
+					),
 					this->cfg,
 					walls,
 					true
@@ -24,9 +29,11 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 			}
 			else {
 				addBoid(new Boids(
-					(float)(rand() % initialSpacingBetweenBoids),
-					(float)(rand() % initialSpacingBetweenBoids),
-					(float)(rand() % initialSpacingBetweenBoids),
+					new MyVector(
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE),
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE),
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE)
+					),
 					this->cfg,
 					walls,
 					false
@@ -35,11 +42,13 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 			}
 		}
 		else {
-			for (register unsigned int j = 0; j < walls->generatePositions->size(); j++) {
+			for (int j = 0, val = walls->generatePositions->size(); j < val; ++j) {
 				addBoid(new Boids(
-					(float)(rand() % initialSpacingBetweenBoids) + walls->generatePositions->at(j).x,
-					(float)(rand() % initialSpacingBetweenBoids) + walls->generatePositions->at(j).y,
-					(float)(rand() % initialSpacingBetweenBoids) + walls->generatePositions->at(j).z,
+					new MyVector(
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).x,
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).y,
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).z
+					),
 					this->cfg,
 					walls,
 					false
@@ -50,18 +59,6 @@ Flock::Flock(int numberOfBoids, int numberOfPredators, int initialSpacingBetween
 		
 	}
 
-}
-
-Flock::Flock(Config *cfg, Walls *walls)
-	: Flock(
-		cfg->BOID_NUMBER_OF_BOIDS,
-		cfg->BOID_NUMBER_OF_PREDATORS,
-		cfg->BOID_GENERATE_SPACE,
-		cfg,
-		walls
-	)
-{
-	this->cfg = cfg;
 }
 
 void Flock::addBoid(Boids *b)
@@ -79,7 +76,7 @@ void Flock::loadModels(void) {
 		tmpBoidsModelPredator = new Model(this->cfg->OBJ_PREDATOR, this->cfg);
 	}
 
-	for (register unsigned int i = 0; i < this->numberOfBoids; ++i) {
+	for (int i = 0; i < this->numberOfBoids; ++i) {
 
 		if (i < this->numberOfPredators) {
 			if (tmpBoidsModelPredator != NULL)
@@ -96,7 +93,7 @@ void Flock::loadModels(void) {
 
 void Flock::flocking(Shader *shader)
 {
-	for (register unsigned int i = 0; i < this->numberOfBoids; ++i) {
+	for (int i = 0; i < this->numberOfBoids; ++i) {
 		this->flock->at(i)->run(flock);
 		boidsModel[i]->Draw(shader, DRAW_TYPE_BOIDS, this->flock->at(i));
 	}

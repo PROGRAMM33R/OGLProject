@@ -2,7 +2,7 @@
 #include "Boids.hpp"
 
 Boids::Boids(Config *cfg, Walls *walls) {
-	Boids(new MyVector(0, 0, 0), cfg, walls, false);
+	Boids(new MyVector(0, 0, 0), cfg, walls, false, 0);
 }
 
 Boids::~Boids() {
@@ -24,10 +24,11 @@ Boids::~Boids() {
 	delete this->finishedPoints;
 }
 
-Boids::Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck = false)
+Boids::Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck = false, int floor = 0)
 {
 	AxisY = 0;
 	predator = predCheck;
+	this->floor = floor;
 	float angle = (float)(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * PI * 2;
 
 	if (predCheck == true) {
@@ -240,22 +241,60 @@ MyVector *Boids::arriveTo(MyVector *v) {
 
 MyVector *Boids::getArriveVector(void) {
 
-	int minIndex = 1000;
-	for (auto& x : walls->exitPositions) {
+	if (!this->getArriveVectorFirstTime) {
+		
+		for (int i = 0, j = 1; i < 6; ++i, j += 2) {
+			if (walls->exitPositions[j] != NULL) {
+				float d = location->distance(walls->exitPositions[j]);
 
-		if (std::find(this->finishedPoints->begin(), this->finishedPoints->end(), x.first) == this->finishedPoints->end()) {
-			if (x.first < minIndex) {
-				minIndex = x.first;
+				if (i == 0) {
+					this->minDistance = d;
+					this->minIndex = j;
+				}
+				else {
+					if (d < this->minDistance) {
+						this->minDistance = d;
+						this->minIndex = j;
+					}
+				}
 			}
 		}
 
+		if (this->minDistance != 0 && this->minIndex != 0) {
+			this->getArriveVectorFirstTime = true;
+		}
 	}
 
-	if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS) {
-		this->finishedPoints->push_back(minIndex);
-	}
+	if (!this->getArriveVectorFirstTime) {
 
-	return walls->exitPositions.at(minIndex);
+		this->minIndex = 1000;
+		for (auto& x : walls->exitPositions) {
+
+			if (std::find(this->finishedPoints->begin(), this->finishedPoints->end(), x.first) == this->finishedPoints->end()) {
+				if (x.first < minIndex) {
+					minIndex = x.first;
+				}
+			}
+
+		}
+
+		if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS) {
+			this->finishedPoints->push_back(minIndex);
+		}
+
+		return walls->exitPositions.at(minIndex);
+
+	}
+	else {
+
+		if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS && !this->incrementedOnce) {
+			++minIndex;
+			this->incrementedOnce = true;
+		}
+
+		return walls->exitPositions.at(minIndex);
+
+	}
 
 }
 
@@ -375,26 +414,31 @@ MyVector *Boids::WallRepel() {
 		for (int i = 0, len = this->walls->size(); i < len; ++i) {
 
 			Wall *tmpWall = this->walls->get(i);
+			MyVector *tmpSize = tmpWall->size;
 
-			this->desired->set();
+			if (tmpWall->floor == this->floor && tmpSize->magnitude() != 0) {
 
-			if (tmpWall->angle != 0) {
+				this->desired->set();
 
-				this->desired->set(tmpWall->location->vec.x, 0, (float)tmpWall->location->vec.z);
-				float d = location->distance(this->desired);
+				if (tmpWall->angle != 0) {
 
-				if (d > 0 && d < cfg->WALL_AVOID_RADIUS) {
-					return this->WallCollision(d, this->desired);
+					this->desired->set(tmpWall->location->vec.x, 0, (float)tmpWall->location->vec.z);
+					float d = location->distance(this->desired);
+
+					if (d > 0 && d < cfg->WALL_AVOID_RADIUS) {
+						return this->WallCollision(d, this->desired);
+					}
+
 				}
+				else {
 
-			}
-			else {
+					this->desired->set((float)tmpWall->location->vec.x, 0, tmpWall->location->vec.z);
+					float d = location->distance(this->desired);
 
-				this->desired->set((float)tmpWall->location->vec.x, 0, tmpWall->location->vec.z);
-				float d = location->distance(this->desired);
+					if (d > 0 && d < cfg->WALL_AVOID_RADIUS) {
+						return this->WallCollision(d, this->desired);
+					}
 
-				if (d > 0 && d < cfg->WALL_AVOID_RADIUS) {
-					return this->WallCollision(d, this->desired);
 				}
 
 			}

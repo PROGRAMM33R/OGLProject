@@ -34,21 +34,22 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 		model = glm::translate(model, glm::vec3(Boidss->size.x, Boidss->size.y, Boidss->size.z));
 		model = glm::scale(model, glm::vec3(Boidss->size));
 
+		shader->setFloat("transparent", 1.0);
 		shader->setMat4("Model", model);
 	}
-	if (walls != NULL && (objType == DRAW_TYPE_WALL || objType == DRAW_TYPE_EXIT)) {
+	if (walls != NULL && this->cfg->SCENE_TYPE != "3D" && (objType == DRAW_TYPE_WALL || objType == DRAW_TYPE_EXIT || DRAW_TYPE_FLOOR)) {
 
-		if (this->cfg->SCENE_TYPE != "3D" && objType == DRAW_TYPE_WALL) {
+		if (objType == DRAW_TYPE_WALL) { 
 
 			glm::mat4 model;
 			float size = 200;
 			glm::vec3 position;
 
 			if (walls->angle != 0) {
-				position = glm::vec3(walls->location->vec.x - 180, -(this->cfg->BOID_OBJ_SIZE) - 240, walls->location->vec.z + 200);
+				position = glm::vec3(walls->location->vec.x - 180, (-(this->cfg->BOID_OBJ_SIZE) - 240) + walls->location->vec.y, walls->location->vec.z + 200);
 			}
 			else {
-				position = glm::vec3(walls->location->vec.x - 180, -(this->cfg->BOID_OBJ_SIZE) - 240, walls->location->vec.z - 180);
+				position = glm::vec3(walls->location->vec.x - 180, (-(this->cfg->BOID_OBJ_SIZE) - 240) + walls->location->vec.y, walls->location->vec.z - 180);
 			}
 			model = glm::translate(model, position);
 			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
@@ -61,26 +62,45 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 				model = glm::scale(model, glm::vec3(50, size + 100, size));
 			}
 			
+			shader->setFloat("transparent", 0.9);
 			shader->setMat4("Model", model);
 
 		}
 
-		if (this->cfg->SCENE_TYPE != "3D" && objType == DRAW_TYPE_EXIT) {
+		if (objType == DRAW_TYPE_FLOOR) {
+
+			glm::mat4 model;
+			int size = 1;
+			int sizeX = walls->meshSizeX / 1000;
+			int sizeZ = walls->meshSizeZ / 1000;
+			glm::vec3 position;
+			
+			position = glm::vec3(walls->location->vec.x, ((walls->floor + 1) * 570) - 40, walls->location->vec.z);
+
+			model = glm::translate(model, position);
+			model = glm::translate(model, glm::vec3(size, size, size));
+			model = glm::scale(model, glm::vec3(sizeX, size, sizeZ));
+			shader->setMat4("Model", model);
+
+		}
+
+		if (objType == DRAW_TYPE_EXIT) {
 
 			glm::mat4 model;
 			float size = 20;
 			glm::vec3 position;
 
-			position = glm::vec3(walls->location->vec.x, 60, walls->location->vec.z);
+			position = glm::vec3(walls->location->vec.x, 250, walls->location->vec.z);
 			model = glm::translate(model, position);
 			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
 			model = glm::translate(model, glm::vec3(size, size, size));
-			model = glm::scale(model, glm::vec3(size, size + 600, size));
+			model = glm::scale(model, glm::vec3(size, size + 300, size));
 			shader->setMat4("Model", model);
 
 		}
 
 	}
+
 	if (objType == DRAW_TYPE_SURFACE){
 
 		glm::mat4 model; 
@@ -98,6 +118,7 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 		shader->setMat4("Model", model);
 
 	}
+
 	if (objType == DRAW_TYPE_SKY) {
 
 		glm::mat4 model; int size = 190000;

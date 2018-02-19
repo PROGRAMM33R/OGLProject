@@ -37,14 +37,13 @@ int main(int argc, char **argv) {
 
 	do {
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		shader->use();
 
 		currentTime = glfwGetTime();
 		nbFrames++;
 		if (currentTime - lastTime >= 1.0) {
 			fps = 1000.0 / (float)nbFrames;
+			fps = (1 / fps) * 1000;
 			nbFrames = 0;
 			lastTime += 1.0;
 		}
@@ -52,14 +51,14 @@ int main(int argc, char **argv) {
 		glm::mat4 ModelMatrix = glm::mat4(2.0);
 		shader->setMat4("Model", ModelMatrix);
 
-		shader->setVec3("light.position", glm::vec3(14.0f, 10.0f, 6.0f));
+		shader->setVec3("light.position", glm::vec3(0.0f, 100.0f, 150.0f));
 		shader->setVec3("viewPos", controls->getCameraPosition());
 
 		shader->setVec3("light.ambient", 1.0f, 1.0f, 1.0f);
-		shader->setVec3("light.diffuse", 0.0f, 0.0f, 0.0f);
-		shader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+		shader->setVec3("light.specular", 0.8f, 0.8f, 0.8f);
 		
-		shader->setVec3("material.specular", 0.0f, 0.0f, 0.0f);
+		shader->setVec3("material.specular", 0.6f, 0.6f, 0.6f);
 		shader->setFloat("material.shininess", 64.0f);
 
 		// directional light
@@ -73,13 +72,14 @@ int main(int argc, char **argv) {
 
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		//surface->Draw(shader, DRAW_TYPE_SURFACE);
 		walls->drawWalls(shader);
 		flock->flocking(shader);
 
-		surface->Draw(shader, DRAW_TYPE_SURFACE);
-
 		Hud::draw();
-
+		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 

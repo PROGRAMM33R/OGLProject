@@ -21,7 +21,7 @@ namespace Hud {
 
 			TwWindowSize(_cfg->WINDOW_WIDTH, _cfg->WINDOW_HEIGHT);
 
-			TwAddVarRO(myBar, "ms/frame", TW_TYPE_FLOAT, frames, NULL);
+			TwAddVarRO(myBar, "FPS", TW_TYPE_FLOAT, frames, NULL);
 			TwAddSeparator(myBar, "", NULL);
 
 			TwAddVarRO(myBar, "Boids", TW_TYPE_INT32, &(_cfg->BOID_NUMBER_OF_BOIDS), NULL);

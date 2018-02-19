@@ -14,12 +14,15 @@ class Shader;
 class Walls {
 
 private:
-	int countOfWalls;
+	int countOfWalls, countOfFloors;
 	vector<Wall*> *walls;
+	vector<Wall*> *floors;
 	Model **wallsModel;
+	Model **floorsModel;
 	Model *exitModel;
 	vector<Wall*> *pathToFind;
 	Config *cfg;
+	int floor;
 
 	void loadModels(void);
 	inline void addWall(Wall *w);
@@ -27,6 +30,9 @@ private:
 public:
 	vector<glm::vec3> *generatePositions;
 	map<int, MyVector*> exitPositions;
+	const float wallDiferencial = 250;
+	const int floorDiferencial = 570;
+	int sizeX, sizeY;
 
 	Walls(Map *map, Config *cfg);
 	~Walls() {}

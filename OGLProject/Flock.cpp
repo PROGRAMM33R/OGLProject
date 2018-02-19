@@ -23,7 +23,7 @@ Flock::Flock(Config *cfg, Walls *walls)
 					),
 					this->cfg,
 					walls,
-					true
+					true, 0
 				)
 				);
 			}
@@ -36,7 +36,7 @@ Flock::Flock(Config *cfg, Walls *walls)
 					),
 					this->cfg,
 					walls,
-					false
+					false, 0
 				)
 				);
 			}
@@ -51,7 +51,7 @@ Flock::Flock(Config *cfg, Walls *walls)
 					),
 					this->cfg,
 					walls,
-					false
+					false, 0
 				)
 				);
 			}

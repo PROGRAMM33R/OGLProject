@@ -15,6 +15,11 @@ private:
 	int cubeSize;
 	const double PI = 3.141592635;
 	float AxisY;
+	float minDistance = 0, minIndex = 0;
+	bool getArriveVectorFirstTime = false;
+	bool incrementedOnce = false;
+	int floor;
+
 	MyVector *oppositeVector;
 	MyVector *steer, *steerMem, *sum, *desired;
 	MyVector *tmpVector, *tmpVectorMem;
@@ -57,7 +62,7 @@ public:
 
 	Boids(Config *cfg, Walls *walls);
 	~Boids();
-	Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck);
+	Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck, int floor);
 
 	void run(vector <Boids*> *v);
 	void flock(vector <Boids*> *v);

@@ -18,11 +18,11 @@ public:
 		this->floor = floor;
 		this->meshSize = meshSize;
 
-		if (size->vec.y == -88) {
+		//if (size->vec.y == -88) {
 			meshSizeX = size->vec.x;
 			meshSizeZ = size->vec.z;
-			size->set(0, 0, 0);
-		}
+			//size->set(0, 0, 0);
+		//}
 	}
 	
 	Wall() {

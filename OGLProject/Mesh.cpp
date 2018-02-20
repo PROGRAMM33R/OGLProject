@@ -70,16 +70,19 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 		if (objType == DRAW_TYPE_FLOOR) {
 
 			glm::mat4 model;
-			int size = 1;
-			int sizeX = walls->meshSizeX / 1000;
-			int sizeZ = walls->meshSizeZ / 1000;
+			float sizeX = (float)walls->meshSizeZ / 4070.0;
+			float sizeZ = (float)walls->meshSizeX / 4070.0;
 			glm::vec3 position;
 			
-			position = glm::vec3(walls->location->vec.x, ((walls->floor + 1) * 570) - 40, walls->location->vec.z);
+			position = glm::vec3(
+				walls->location->vec.x + (walls->meshSizeZ / 2) + 20,
+				((walls->floor + 1) * 570) - 30, 
+				walls->location->vec.z + (walls->meshSizeX / 2) + 20
+			);
 
 			model = glm::translate(model, position);
-			model = glm::translate(model, glm::vec3(size, size, size));
-			model = glm::scale(model, glm::vec3(sizeX, size, sizeZ));
+			//model = glm::translate(model, glm::vec3(size, size, size + 1000));
+			model = glm::scale(model, glm::vec3(sizeX, 1, sizeZ));
 			shader->setMat4("Model", model);
 
 		}
@@ -90,11 +93,12 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 			float size = 20;
 			glm::vec3 position;
 
-			position = glm::vec3(walls->location->vec.x, 250, walls->location->vec.z);
+			position = glm::vec3(walls->location->vec.x, 220, walls->location->vec.z);
 			model = glm::translate(model, position);
 			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
 			model = glm::translate(model, glm::vec3(size, size, size));
-			model = glm::scale(model, glm::vec3(size, size + 300, size));
+			model = glm::scale(model, glm::vec3(size, size + 250, size));
+			shader->setFloat("transparent", 0.7);
 			shader->setMat4("Model", model);
 
 		}

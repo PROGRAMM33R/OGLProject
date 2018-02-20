@@ -23,6 +23,7 @@ private:
 	vector<Wall*> *pathToFind;
 	Config *cfg;
 	int floor;
+	float sizeX, sizeY;
 
 	void loadModels(void);
 	inline void addWall(Wall *w);
@@ -32,7 +33,6 @@ public:
 	map<int, MyVector*> exitPositions;
 	const float wallDiferencial = 250;
 	const int floorDiferencial = 570;
-	int sizeX, sizeY;
 
 	Walls(Map *map, Config *cfg);
 	~Walls() {}

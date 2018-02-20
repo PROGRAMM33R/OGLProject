@@ -23,46 +23,82 @@ Walls::Walls(Map *map, Config *cfg)
 	this->pathToFind = new vector<Wall*>();
 	this->floors = new vector<Wall*>();
 
-	sizeX = 0, sizeY = 0;
-	int tmpJ = 0;
+	sizeX = 0.0, sizeY = 0.0;
+	bool nextFloor = false;
+	bool haveFirstWall = false, haveFirstWallJ = false;
+	int firstX = 0, firstY = 0, lastX = 0, lastY = 0, firstWall = 0, firstWallJ = 0;
 
 	std::map<int, MyVector*>::iterator it = exitPositions.begin();
 
-	for (int i = 0, floorIndex = -1, len = map->map->size(); i < len; ++i) {
+	for (int i = 0, floorIndex = -2, len = map->map->size(); i < len; ++i) {
 
 		if (floor != 0) {
 			++floorIndex;
 		}
-		if (len > this->sizeX) {
-			this->sizeX = len;
-		}
-
+		
 		for (int j = 0, len2 = map->map->at(i)->size(); j < len2; ++j) {
 
-			if (len2 > this->sizeY) {
-				this->sizeY = len;
-			}
-			if (j == len2 - 1)
-				tmpJ = j;
-
 			if (map->map->at(i)->at(j) == '=') {
-				floorIndex = -1;
-				this->floors->push_back(new Wall(
-					new MyVector(
-						0,
-						floor * floorDiferencial,
-						0
-					),
-					new MyVector(
-						tmpJ * wallDiferencial,
-						-88,
-						i * wallDiferencial
-					),
-					(float)0, 0, 0
-				)
-				);
+				floorIndex = -2;
 				++floor;
 				++this->countOfFloors;
+				nextFloor = true;
+			}
+
+			if (nextFloor) {
+
+				bool firstCross = false;
+				int tmpI = i;
+				for (int ii = lastX == 0 ? ++tmpI : lastX, lenii = map->map->size(); ii < lenii; ++ii) {
+					for (int jj = 0, len2jj = map->map->at(ii)->size(); jj < len2jj; ++jj) {
+						if (map->map->at(ii)->at(jj) != '/') {
+
+							if ((map->map->at(ii)->at(jj) == '+' || map->map->at(ii)->at(jj) == '|' || map->map->at(ii)->at(jj) == '-') && !firstCross) {
+								firstCross = true;
+								firstX = ii;
+								firstY = jj;
+								if (!haveFirstWallJ) {
+									firstWallJ = jj;
+									haveFirstWallJ = true;
+								}
+							}
+
+							if (map->map->at(ii)->at(jj) == '+' || map->map->at(ii)->at(jj) == '|' || map->map->at(ii)->at(jj) == '-') {
+								lastX = ii;
+								lastY = jj;
+								if (!haveFirstWallJ) {
+									firstWallJ = jj;
+									haveFirstWallJ = true;
+								}
+							}
+
+						}
+						else {
+							nextFloor = false;
+
+							this->sizeX = (float)(lastX - firstX);
+							this->sizeY = (float)(lastY - firstY);
+
+							this->floors->push_back(new Wall(
+								new MyVector(
+									firstWallJ * wallDiferencial,
+									floor * floorDiferencial,
+									firstWall * wallDiferencial
+								),
+								new MyVector(
+									this->sizeX * wallDiferencial,
+									-88,
+									this->sizeY * wallDiferencial
+								),
+								(float)0, 0, 0
+							)
+							);
+
+							lastX = ii + 1;
+						}
+					}
+				}
+
 			}
 
 			if (map->map->at(i)->at(j) == '-' || map->map->at(i)->at(j) == '*') {
@@ -78,6 +114,11 @@ Walls::Walls(Map *map, Config *cfg)
 				)
 				);
 				++countOfWalls;
+
+				if (!haveFirstWall) {
+					firstWall = i;
+					haveFirstWall = true;
+				}
 					
 			}
 			
@@ -94,6 +135,11 @@ Walls::Walls(Map *map, Config *cfg)
 				)
 				);
 				++countOfWalls;
+
+				if (!haveFirstWall) {
+					firstWall = i;
+					haveFirstWall = true;
+				}
 
 			}
 
@@ -244,7 +290,7 @@ Walls::Walls(Map *map, Config *cfg)
 
 	floor = 0;
 
-	for (int i = 0, floorIndex = -1, len = map->map->size(); i < len; ++i) {
+	for (int i = 0, floorIndex = -2, len = map->map->size(); i < len; ++i) {
 
 		if (floor != 0) {
 			++floorIndex;
@@ -254,7 +300,7 @@ Walls::Walls(Map *map, Config *cfg)
 
 			if (map->map->at(i)->at(j) == '=') {
 				++floor;
-				floorIndex = -1;
+				floorIndex = -2;
 			}
 
 			if (map->map->at(i)->at(j) == '+') {

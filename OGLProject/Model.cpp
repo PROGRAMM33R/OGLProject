@@ -1,10 +1,10 @@
 
 #include "Model.hpp"
 
-void Model::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls)
+void Model::Draw(InstanceStorage *instanceStorage)
 {
 	for (unsigned int i = 0, len = meshes.size(); i < len; ++i)
-		meshes[i].Draw(shader, objType, Boidss, walls);
+		meshes[i].Draw(instanceStorage);
 }
 
 void Model::loadModel(string const &path) {

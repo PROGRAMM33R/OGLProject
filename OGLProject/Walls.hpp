@@ -7,6 +7,8 @@
 #include "Wall.hpp"
 #include "Map.hpp"
 #include "MyVector.hpp"
+#include "Controls.hpp"
+#include "InstanceStorage.hpp"
 
 using namespace std;
 
@@ -28,13 +30,19 @@ private:
 	void loadModels(void);
 	inline void addWall(Wall *w);
 
+	Controls *controls;
+
+	InstanceStorage *ISWall;
+	InstanceStorage *ISFloor;
+	InstanceStorage *ISPath;
+
 public:
 	vector<glm::vec3> *generatePositions;
 	map<int, MyVector*> exitPositions;
 	const float wallDiferencial = 250;
 	const int floorDiferencial = 570;
 
-	Walls(Map *map, Config *cfg);
+	Walls(Map *map, Config *cfg, Controls *controls);
 	~Walls() {}
 
 	void drawWalls(Shader *shader);

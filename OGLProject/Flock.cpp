@@ -59,6 +59,8 @@ Flock::Flock(Config *cfg, Walls *walls)
 		
 	}
 
+	this->ISBoid = new InstanceStorage(NULL, DRAW_TYPE_BOIDS, NULL, NULL);
+
 }
 
 void Flock::addBoid(Boids *b)
@@ -93,8 +95,13 @@ void Flock::loadModels(void) {
 
 void Flock::flocking(Shader *shader)
 {
+	this->ISBoid->shader = shader;
+
 	for (int i = 0; i < this->numberOfBoids; ++i) {
+
 		this->flock->at(i)->run(flock);
-		boidsModel[i]->Draw(shader, DRAW_TYPE_BOIDS, this->flock->at(i));
+		this->ISBoid->Boidss = this->flock->at(i);
+		boidsModel[i]->Draw(this->ISBoid);
+
 	}
 }

@@ -44,7 +44,32 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 	}
 
 	camera->calculateCamera(window, mouseSpeed);
-	
+
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		this->activatedFloor = 99;
+	}
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+		this->activatedFloor = 90;
+	}
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+		this->activatedFloor = 0;
+	}
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+		this->activatedFloor = 1;
+	}
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+		this->activatedFloor = 2;
+	}
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
+		this->activatedFloor = 3;
+	}
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
+		this->activatedFloor = 4;
+	}
+	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS) {
+		this->activatedFloor = 5;
+	}
+
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS 
 		|| glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 		camera->setPosition(deltaTime * speed, "up");

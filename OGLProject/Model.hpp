@@ -3,6 +3,7 @@
 #include "Std.hpp"
 #include "stb_image.hpp"
 #include "Mesh.hpp"
+#include "InstanceStorage.hpp"
 
 class Shader;
 class Boids;
@@ -29,7 +30,7 @@ public:
 		cfg(model.cfg)
 	{}
 	~Model() {}
-	void Draw(Shader *shader, int objType, Boids *boids = NULL, Wall *walls = NULL);
+	void Draw(InstanceStorage *instanceStorage);
 
 private:
 	Config *cfg;

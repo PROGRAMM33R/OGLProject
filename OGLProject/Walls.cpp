@@ -1,8 +1,8 @@
 
 #include "Walls.hpp"
 
-Walls::Walls(Map *map, Config *cfg)
-	: cfg(cfg) {
+Walls::Walls(Map *map, Config *cfg, Controls *controls)
+	: cfg(cfg), controls(controls) {
 
 	this->countOfWalls = 0;
 	this->countOfFloors = 0;
@@ -17,7 +17,7 @@ Walls::Walls(Map *map, Config *cfg)
 	MyVector *wallSize = new MyVector(25, 0, 0);
 	MyVector *wallSize90 = new MyVector(0, 0, 25);
 
-	floor = 0;
+	this->floor = 0;
 	countOfWalls = 0;
 	this->generatePositions = new vector<glm::vec3>();
 	this->pathToFind = new vector<Wall*>();
@@ -30,26 +30,30 @@ Walls::Walls(Map *map, Config *cfg)
 
 	std::map<int, MyVector*>::iterator it = exitPositions.begin();
 
-	for (int i = 0, floorIndex = -2, len = map->map->size(); i < len; ++i) {
+	for (int i = 0, floorIndex = -1, len = map->map->size(); i < len; ++i) {
 
-		if (floor != 0) {
+		if (this->floor != 0) {
 			++floorIndex;
 		}
 		
 		for (int j = 0, len2 = map->map->at(i)->size(); j < len2; ++j) {
 
 			if (map->map->at(i)->at(j) == '=') {
-				floorIndex = -2;
-				++floor;
+				floorIndex = -1;
+				++this->floor;
 				++this->countOfFloors;
 				nextFloor = true;
+				haveFirstWall = false; haveFirstWallJ = false;
+				firstWall = 0; firstWallJ = 0;
+				firstX = 0; firstY = 0; lastY = 0;
 			}
 
 			if (nextFloor) {
 
 				bool firstCross = false;
+				nextFloor = false;
 				int tmpI = i;
-				for (int ii = lastX == 0 ? ++tmpI : lastX, lenii = map->map->size(); ii < lenii; ++ii) {
+				for (int ii = ++tmpI, lenii = map->map->size(); ii < lenii; ++ii) {
 					for (int jj = 0, len2jj = map->map->at(ii)->size(); jj < len2jj; ++jj) {
 						if (map->map->at(ii)->at(jj) != '/') {
 
@@ -74,7 +78,6 @@ Walls::Walls(Map *map, Config *cfg)
 
 						}
 						else {
-							nextFloor = false;
 
 							this->sizeX = (float)(lastX - firstX);
 							this->sizeY = (float)(lastY - firstY);
@@ -87,14 +90,16 @@ Walls::Walls(Map *map, Config *cfg)
 								),
 								new MyVector(
 									this->sizeX * wallDiferencial,
-									-88,
+									0,
 									this->sizeY * wallDiferencial
 								),
-								(float)0, 0, 0
+								(float)0, 0, this->floor
 							)
 							);
 
 							lastX = ii + 1;
+							lenii = -1;
+							break;
 						}
 					}
 				}
@@ -110,7 +115,7 @@ Walls::Walls(Map *map, Config *cfg)
 						floor == 0 ? 0 + (i * wallDiferencial) : 0 + (floorIndex * wallDiferencial)
 					),
 					wallSize,
-					(float)0, 0, floor
+					(float)0, 0, this->floor
 				)
 				);
 				++countOfWalls;
@@ -131,7 +136,7 @@ Walls::Walls(Map *map, Config *cfg)
 						floor == 0 ? 0 + (i * wallDiferencial) : 0 + (floorIndex * wallDiferencial)
 					),
 					wallSize90,
-					(float)1.57, 0, floor
+					(float)1.57, 0, this->floor
 				)
 				);
 				++countOfWalls;
@@ -290,7 +295,7 @@ Walls::Walls(Map *map, Config *cfg)
 
 	floor = 0;
 
-	for (int i = 0, floorIndex = -2, len = map->map->size(); i < len; ++i) {
+	for (int i = 0, floorIndex = -1, len = map->map->size(); i < len; ++i) {
 
 		if (floor != 0) {
 			++floorIndex;
@@ -300,7 +305,7 @@ Walls::Walls(Map *map, Config *cfg)
 
 			if (map->map->at(i)->at(j) == '=') {
 				++floor;
-				floorIndex = -2;
+				floorIndex = -1;
 			}
 
 			if (map->map->at(i)->at(j) == '+') {
@@ -428,6 +433,9 @@ Walls::Walls(Map *map, Config *cfg)
 	}
 
 	this->loadModels();
+	this->ISWall = new InstanceStorage(NULL, DRAW_TYPE_WALL, NULL, NULL);
+	this->ISFloor = new InstanceStorage(NULL, DRAW_TYPE_FLOOR, NULL, NULL);
+	this->ISPath = new InstanceStorage(NULL, DRAW_TYPE_EXIT, NULL, NULL);
 
 }
 
@@ -455,16 +463,27 @@ void Walls::loadModels(void) {
 
 void Walls::drawWalls(Shader *shader)
 {
+	this->ISWall->shader = shader;
+	this->ISFloor->shader = shader;
+	this->ISFloor->activeFloor = controls->activatedFloor;
+	this->ISFloor->transparency = 0.1;
+	this->ISWall->activeFloor = controls->activatedFloor;
+	this->ISWall->transparency = 0.1;
+	this->ISPath->shader = shader;
+
 	for (int i = 0; i < this->countOfWalls; ++i) {
-		this->wallsModel[i]->Draw(shader, DRAW_TYPE_WALL, NULL, this->walls->at(i));		
+		this->ISWall->walls = this->walls->at(i);
+		this->wallsModel[i]->Draw(this->ISWall);		
 	}
 
 	for (int i = 0; i < this->countOfFloors; ++i) {
-		this->floorsModel[i]->Draw(shader, DRAW_TYPE_FLOOR, NULL, this->floors->at(i));
+		this->ISFloor->walls = this->floors->at(i);
+		this->floorsModel[i]->Draw(this->ISFloor);
 	}
 
 	for (int i = 0, len = this->pathToFind->size(); i < len; ++i) {
-		this->exitModel->Draw(shader, DRAW_TYPE_EXIT, NULL, this->pathToFind->at(i));
+		this->ISPath->walls = this->pathToFind->at(i);
+		this->exitModel->Draw(this->ISPath);
 	}
 }
 

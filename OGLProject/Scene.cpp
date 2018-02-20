@@ -43,11 +43,11 @@ GLFWwindow *Scene::initScene(void) const {
 	glfwSetCursorPos(window, this->cfg->WINDOW_WIDTH / 2, this->cfg->WINDOW_HEIGHT / 2);
 	glClearColor(0.15f, 0.15f, 0.15f, 0.0f);
 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	return window;
 }

@@ -2,6 +2,7 @@
 
 #include "Std.hpp"
 #include "Shader.hpp"
+#include "InstanceStorage.hpp"
 
 class Boids;
 class Wall;
@@ -14,7 +15,7 @@ public:
 	unsigned int VAO;
 
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Config *cfg);
-	void Draw(Shader *shader, int objType, Boids *Boids, Wall *walls);
+	void Draw(InstanceStorage *instanceStorage);
 
 private:
 	Config *cfg;

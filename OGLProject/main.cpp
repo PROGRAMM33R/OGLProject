@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
 	Shader *shader = new Shader("VertexShader.shader", "FragmentShader.shader");
 	GLuint MatrixID = glGetUniformLocation(shader->ID, "MVP");
 
-	Walls *walls = new Walls(map, cfg);
+	Walls *walls = new Walls(map, cfg, controls);
 	Flock *flock = new Flock(cfg, walls);
 	Model *surface = new Model(cfg->OBJ_SURFACE, cfg);
 
@@ -75,8 +75,9 @@ int main(int argc, char **argv) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//surface->Draw(shader, DRAW_TYPE_SURFACE);
-		walls->drawWalls(shader);
+
 		flock->flocking(shader);
+		walls->drawWalls(shader);
 
 		Hud::draw();
 		

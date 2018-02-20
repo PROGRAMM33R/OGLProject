@@ -15,6 +15,8 @@ private:
 	
 public:
 	double escapeDuration;
+	int activatedFloor;
+
 	Controls(Config *cfg)
 	:
 		camera(new Camera(cfg)),
@@ -23,6 +25,7 @@ public:
 			this->initialFoV = this->cfg->FOV;
 			this->speed = this->cfg->PLAYER_SPEED;
 			this->mouseSpeed = this->cfg->MOUSE_SPEED;
+			this->activatedFloor = 99;
 			spacePressed = false;
 			spaceReleased = false;
 			startStopwatch = false;

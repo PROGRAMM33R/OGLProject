@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Boids.hpp"
 #include "Model.hpp"
+#include "InstanceStorage.hpp"
 
 using namespace std;
 
@@ -19,6 +20,8 @@ private:
 
 	void loadModels(void);
 	inline void addBoid(Boids *b);
+
+	InstanceStorage *ISBoid;
 
 public:
 	

@@ -12,18 +12,22 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 	setupMesh();
 }
 
-void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
+void Mesh::Draw(InstanceStorage *instanceStorage) {
 
-	if (Boidss != NULL && objType == DRAW_TYPE_BOIDS) {
+	if (instanceStorage->Boidss != NULL && instanceStorage->objType == DRAW_TYPE_BOIDS) {
 
 		glm::mat4 model;
-		glm::vec3 position = glm::vec3(Boidss->location->vec.x, Boidss->location->vec.y, Boidss->location->vec.z);
+		glm::vec3 position = glm::vec3(
+			instanceStorage->Boidss->location->vec.x, 
+			instanceStorage->Boidss->location->vec.y, 
+			instanceStorage->Boidss->location->vec.z
+		);
 		
 		// First translate (transformations are: scale happens first, then rotation and then finall translation happens; reversed order)
 		model = glm::translate(model, position);  
 
 		if (this->cfg->SCENE_TYPE == "2D") {
-			model = glm::rotate(model, Boidss->angleY(Boidss->velocity), glm::vec3(0, 1, 0));
+			model = glm::rotate(model, instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity), glm::vec3(0, 1, 0));
 		}
 		else {
 			//model = glm::rotate(model, hovno, glm::vec3(0.1, 0, 0));
@@ -31,81 +35,122 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 			//model = glm::rotate(model, Boidss->angleZ(Boidss->velocity), glm::vec3(0, 0, 1));
 		}
 		
-		model = glm::translate(model, glm::vec3(Boidss->size.x, Boidss->size.y, Boidss->size.z));
-		model = glm::scale(model, glm::vec3(Boidss->size));
+		model = glm::translate(
+			model, 
+			glm::vec3(
+				instanceStorage->Boidss->size.x, 
+				instanceStorage->Boidss->size.y, 
+				instanceStorage->Boidss->size.z
+			)
+		);
+		model = glm::scale(model, glm::vec3(instanceStorage->Boidss->size));
 
-		shader->setFloat("transparent", 1.0);
-		shader->setMat4("Model", model);
+		instanceStorage->shader->setFloat("transparent", 0.9);
+		instanceStorage->shader->setMat4("Model", model);
 	}
-	if (walls != NULL && this->cfg->SCENE_TYPE != "3D" && (objType == DRAW_TYPE_WALL || objType == DRAW_TYPE_EXIT || DRAW_TYPE_FLOOR)) {
+	if (instanceStorage->walls != NULL && 
+		this->cfg->SCENE_TYPE != "3D" && 
+		(
+			instanceStorage->objType == DRAW_TYPE_WALL || 
+			instanceStorage->objType == DRAW_TYPE_EXIT || 
+			DRAW_TYPE_FLOOR
+		)) {
 
-		if (objType == DRAW_TYPE_WALL) { 
+		if (instanceStorage->objType == DRAW_TYPE_WALL) {
 
 			glm::mat4 model;
 			float size = 200;
 			glm::vec3 position;
 
-			if (walls->angle != 0) {
-				position = glm::vec3(walls->location->vec.x - 180, (-(this->cfg->BOID_OBJ_SIZE) - 240) + walls->location->vec.y, walls->location->vec.z + 200);
+			if (instanceStorage->walls->angle != 0) {
+				position = glm::vec3(
+					instanceStorage->walls->location->vec.x - 180, 
+					(-(this->cfg->BOID_OBJ_SIZE) - 240) + instanceStorage->walls->location->vec.y, 
+					instanceStorage->walls->location->vec.z + 200
+				);
 			}
 			else {
-				position = glm::vec3(walls->location->vec.x - 180, (-(this->cfg->BOID_OBJ_SIZE) - 240) + walls->location->vec.y, walls->location->vec.z - 180);
+				position = glm::vec3(
+					instanceStorage->walls->location->vec.x - 180, 
+					(-(this->cfg->BOID_OBJ_SIZE) - 240) + instanceStorage->walls->location->vec.y, 
+					instanceStorage->walls->location->vec.z - 180
+				);
 			}
 			model = glm::translate(model, position);
-			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
+			model = glm::rotate(model, instanceStorage->walls->angle, glm::vec3(0, 1, 0));
 			model = glm::translate(model, glm::vec3(size, size, size));
 
-			if (walls->meshSize != 0) {
-				model = glm::scale(model, glm::vec3(walls->meshSize, size + 100, size));
+			if (instanceStorage->walls->meshSize != 0) {
+				model = glm::scale(model, glm::vec3(instanceStorage->walls->meshSize, size + 100, size));
 			}
 			else {
-				model = glm::scale(model, glm::vec3(50, size + 100, size));
+				model = glm::scale(model, glm::vec3(46, size + 100, size));
 			}
 			
-			shader->setFloat("transparent", 0.9);
-			shader->setMat4("Model", model);
+			if ((instanceStorage->walls->floor == instanceStorage->activeFloor) && instanceStorage->activeFloor != 98) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else if (instanceStorage->activeFloor == 99) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else {
+				instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
+			}
+
+			instanceStorage->shader->setMat4("Model", model);
 
 		}
 
-		if (objType == DRAW_TYPE_FLOOR) {
+		if (instanceStorage->objType == DRAW_TYPE_FLOOR) {
 
 			glm::mat4 model;
-			float sizeX = (float)walls->meshSizeZ / 4070.0;
-			float sizeZ = (float)walls->meshSizeX / 4070.0;
+			float sizeX = (float)instanceStorage->walls->meshSizeZ / 4070.0;
+			float sizeZ = (float)instanceStorage->walls->meshSizeX / 4070.0;
 			glm::vec3 position;
 			
 			position = glm::vec3(
-				walls->location->vec.x + (walls->meshSizeZ / 2) + 20,
-				((walls->floor + 1) * 570) - 30, 
-				walls->location->vec.z + (walls->meshSizeX / 2) + 20
+				instanceStorage->walls->location->vec.x + (instanceStorage->walls->meshSizeZ / 2) + 20,
+				instanceStorage->walls->location->vec.y - 20,
+				instanceStorage->walls->location->vec.z + (instanceStorage->walls->meshSizeX / 2) + 20
 			);
 
 			model = glm::translate(model, position);
 			//model = glm::translate(model, glm::vec3(size, size, size + 1000));
 			model = glm::scale(model, glm::vec3(sizeX, 1, sizeZ));
-			shader->setMat4("Model", model);
+
+			if ((instanceStorage->walls->floor == instanceStorage->activeFloor) && instanceStorage->activeFloor != 98) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else if (instanceStorage->activeFloor == 99) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else {
+				instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
+			}
+
+			instanceStorage->shader->setMat4("Model", model);
 
 		}
 
-		if (objType == DRAW_TYPE_EXIT) {
+		if (instanceStorage->objType == DRAW_TYPE_EXIT) {
 
 			glm::mat4 model;
 			float size = 20;
 			glm::vec3 position;
 
-			position = glm::vec3(walls->location->vec.x, 220, walls->location->vec.z);
+			position = glm::vec3(instanceStorage->walls->location->vec.x, 220, instanceStorage->walls->location->vec.z);
 			model = glm::translate(model, position);
-			model = glm::rotate(model, walls->angle, glm::vec3(0, 1, 0));
+			model = glm::rotate(model, instanceStorage->walls->angle, glm::vec3(0, 1, 0));
 			model = glm::translate(model, glm::vec3(size, size, size));
 			model = glm::scale(model, glm::vec3(size, size + 250, size));
-			shader->setFloat("transparent", 0.7);
-			shader->setMat4("Model", model);
+			instanceStorage->shader->setFloat("transparent", 0.7);
+			instanceStorage->shader->setMat4("Model", model);
 
 		}
 
 	}
 
-	if (objType == DRAW_TYPE_SURFACE){
+	if (instanceStorage->objType == DRAW_TYPE_SURFACE){
 
 		glm::mat4 model; 
 		int size = cfg->BOID_CUBE_SIZE / 1300;
@@ -119,18 +164,18 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
-		shader->setMat4("Model", model);
+		instanceStorage->shader->setMat4("Model", model);
 
 	}
 
-	if (objType == DRAW_TYPE_SKY) {
+	if (instanceStorage->objType == DRAW_TYPE_SKY) {
 
 		glm::mat4 model; int size = 190000;
 		glm::vec3 position = glm::vec3(-190000, -182000, -180000);
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
-		shader->setMat4("Model", model);
+		instanceStorage->shader->setMat4("Model", model);
 
 	}
 
@@ -149,7 +194,7 @@ void Mesh::Draw(Shader *shader, int objType, Boids *Boidss, Wall *walls) {
 		else if (name == "material.height")
 			ss << heightNr++;
 		number = ss.str();
-		glUniform1i(glGetUniformLocation(shader->ID, (name + number).c_str()), i);
+		glUniform1i(glGetUniformLocation(instanceStorage->shader->ID, (name + number).c_str()), i);
 		glBindTexture(GL_TEXTURE_2D, textures[i].id);
 	}
 

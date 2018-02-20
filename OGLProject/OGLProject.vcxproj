@@ -199,6 +199,7 @@ xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Release" &lt;NUL</Com
     <ClInclude Include="Controls.hpp" />
     <ClInclude Include="DrawTypeObj.hpp" />
     <ClInclude Include="Flock.hpp" />
+    <ClInclude Include="InstanceStorage.hpp" />
     <ClInclude Include="Hud.hpp" />
     <ClInclude Include="Map.hpp" />
     <ClInclude Include="Mesh.hpp" />

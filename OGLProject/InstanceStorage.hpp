@@ -8,7 +8,6 @@ using namespace std;
 class Shader;
 class Boids;
 class Wall;
-class MyVector;
 class InstanceStorage {
 
 private:
@@ -18,8 +17,6 @@ public:
 	int objType;
 	Boids *Boidss;
 	Wall *walls;
-	MyVector *boidPosition;
-	int floorDiferencial;
 
 	int activeFloor = 0;
 	float transparency = 0.0;

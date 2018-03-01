@@ -45,7 +45,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 		);
 		model = glm::scale(model, glm::vec3(instanceStorage->Boidss->size));
 
-		this->setTransparency(instanceStorage);
+		instanceStorage->shader->setFloat("transparent", 0.9);
 		instanceStorage->shader->setMat4("Model", model);
 	}
 	if (instanceStorage->walls != NULL && 
@@ -53,7 +53,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 		(
 			instanceStorage->objType == DRAW_TYPE_WALL || 
 			instanceStorage->objType == DRAW_TYPE_EXIT || 
-			instanceStorage->objType == DRAW_TYPE_FLOOR
+			DRAW_TYPE_FLOOR
 		)) {
 
 		if (instanceStorage->objType == DRAW_TYPE_WALL) {
@@ -86,8 +86,16 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 			else {
 				model = glm::scale(model, glm::vec3(46, size + 100, size));
 			}
-
-			this->setTransparency(instanceStorage);
+			
+			if ((instanceStorage->walls->floor == instanceStorage->activeFloor) && instanceStorage->activeFloor != 98) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else if (instanceStorage->activeFloor == 99) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else {
+				instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
+			}
 
 			instanceStorage->shader->setMat4("Model", model);
 
@@ -110,7 +118,15 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 			//model = glm::translate(model, glm::vec3(size, size, size + 1000));
 			model = glm::scale(model, glm::vec3(sizeX, 1, sizeZ));
 
-			this->setTransparency(instanceStorage);
+			if ((instanceStorage->walls->floor == instanceStorage->activeFloor) && instanceStorage->activeFloor != 98) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else if (instanceStorage->activeFloor == 99) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else {
+				instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
+			}
 
 			instanceStorage->shader->setMat4("Model", model);
 
@@ -189,7 +205,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 	glActiveTexture(GL_TEXTURE0);
 }
 
-void Mesh::setupMesh(void) {
+void Mesh::setupMesh() {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
@@ -213,31 +229,4 @@ void Mesh::setupMesh(void) {
 	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Bitangent));
 
 	glBindVertexArray(0);
-}
-
-void Mesh::setTransparency(InstanceStorage *instanceStorage) {
-
-	if (instanceStorage->walls != NULL) {
-		if ((instanceStorage->walls->floor == instanceStorage->activeFloor) && instanceStorage->activeFloor != 98) {
-			instanceStorage->shader->setFloat("transparent", 1.0);
-		}
-		else if (instanceStorage->activeFloor == 99) {
-			instanceStorage->shader->setFloat("transparent", 1.0);
-		}
-		else {
-			instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
-		}
-	}
-	else if (instanceStorage->boidPosition != NULL) {
-		if (instanceStorage->activeFloor == (instanceStorage->boidPosition->vec.y / instanceStorage->floorDiferencial) && instanceStorage->activeFloor != 98) {
-			instanceStorage->shader->setFloat("transparent", 1.0);
-		}
-		else if (instanceStorage->activeFloor == 90 || instanceStorage->activeFloor == 99) {
-			instanceStorage->shader->setFloat("transparent", 1.0);
-		}
-		else {
-			instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
-		}
-	}
-
 }

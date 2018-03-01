@@ -30,15 +30,13 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -78,8 +76,7 @@
     <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
-    <LinkIncremental>true</LinkIncremental>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -88,7 +85,6 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)..\packages\Simple OpenGL Image Library\src;$(ProjectDir)..\packages\DevIL Windows SDK\include;$(ProjectDir)..\packages\glm;$(ProjectDir)..\packages\glfw-3.2.1.bin.WIN32\include;$(ProjectDir)..\packages\glew-2.1.0\include;$(ProjectDir)..\packages\AntTweakBar\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;DevIL.lib;ILU.lib;ILUT.lib;SOIL.lib;AntTweakBar.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -134,7 +130,6 @@ xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Debug" &lt;NUL</Comma
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)..\packages\Simple OpenGL Image Library\src;$(ProjectDir)..\packages\DevIL Windows SDK\include;$(ProjectDir)..\packages\glm;$(ProjectDir)..\packages\glfw-3.2.1.bin.WIN32\include;$(ProjectDir)..\packages\glew-2.1.0\include;$(ProjectDir)..\packages\AntTweakBar\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -185,7 +180,6 @@ xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Release" &lt;NUL</Com
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MyVector.cpp" />
-    <ClCompile Include="MyVector2D.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Config.hpp" />
     <ClCompile Include="Controls.cpp" />
@@ -211,7 +205,6 @@ xcopy /Y "$(ProjectDir)VertexShader.shader" "$(SolutionDir)Release" &lt;NUL</Com
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />
     <ClInclude Include="MyVector.hpp" />
-    <ClInclude Include="MyVector2D.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Scene.hpp" />
     <ClInclude Include="Shader.hpp" />

@@ -46,12 +46,12 @@ Flock::Flock(Config *cfg, Walls *walls)
 				addBoid(new Boids(
 					new MyVector(
 						(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).x,
-						walls->generatePositions->at(j).y,
+						(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).y,
 						(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).z
 					),
 					this->cfg,
 					walls,
-					false, (walls->generatePositions->at(j).y / walls->floorDiferencial)
+					false, 0
 				)
 				);
 			}
@@ -96,15 +96,11 @@ void Flock::loadModels(void) {
 void Flock::flocking(Shader *shader)
 {
 	this->ISBoid->shader = shader;
-	this->ISBoid->transparency = 0.1;
-	this->ISBoid->floorDiferencial = walls->floorDiferencial;
 
 	for (int i = 0; i < this->numberOfBoids; ++i) {
 
 		this->flock->at(i)->run(flock);
 		this->ISBoid->Boidss = this->flock->at(i);
-		this->ISBoid->boidPosition = this->flock->at(i)->location;
-		this->ISBoid->activeFloor = this->walls->controls->activatedFloor;
 		boidsModel[i]->Draw(this->ISBoid);
 
 	}

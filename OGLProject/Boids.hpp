@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cmath>
 #include "MyVector.hpp"
-#include "MyVector2D.hpp"
 #include "Walls.hpp"
 
 using namespace std;

@@ -26,7 +26,7 @@ Boids::~Boids() {
 
 Boids::Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck = false, int floor = 0)
 {
-	AxisY = 1000;
+	AxisY = 0;
 	predator = predCheck;
 	this->floor = floor;
 	float angle = (float)(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * PI * 2;
@@ -40,7 +40,7 @@ Boids::Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck = 
 			velocity = new MyVector((float)this->maxSpeed, (float)(rand() % 3 - this->maxSpeed), (float)(rand() % 3 - this->maxSpeed));
 		}
 		else {
-			velocity = new MyVector2D((float)this->maxSpeed, AxisY, (float)(rand() % 3 - this->maxSpeed));
+			velocity = new MyVector((float)this->maxSpeed, AxisY, (float)(rand() % 3 - this->maxSpeed));
 		}
 
 	}
@@ -54,59 +54,38 @@ Boids::Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck = 
 			velocity = new MyVector(cos(angle), sin(angle), tan(angle));
 		}
 		else {
-			velocity = new MyVector2D(cos(angle), AxisY, tan(angle));
+			velocity = new MyVector(cos(angle), AxisY, tan(angle));
 		}
 
 	}
 
 	this->desiredseparation = cfg->BOID_DESIRED_SEPARATION;
+	acceleration = new MyVector();
 
 	if (cfg->SCENE_TYPE == "3D") {
 		location = new MyVector(newLocation->vec.x, newLocation->vec.y, newLocation->vec.z);
-		acceleration = new MyVector();
 	}
 	else {
-		location = new MyVector2D(newLocation->vec.x, newLocation->vec.y, newLocation->vec.z);
-		acceleration = new MyVector2D();
+		location = new MyVector(newLocation->vec.x, AxisY, newLocation->vec.z);
 	}
 
 	size.x = (float)(cfg->BOID_OBJ_SIZE);
 	size.y = size.x;
 	size.z = size.x;
 	this->cubeSize = cfg->BOID_CUBE_SIZE / 2;
-
-	if (cfg->SCENE_TYPE == "3D") {
-		this->steer = new MyVector();
-		this->sum = new MyVector();
-		this->desired = new MyVector();
-		this->oppositeVector = new MyVector();
-		this->tmpVector = new MyVector();
-		this->desiredAvarage = new MyVector();
-		this->seekResult = new MyVector();
-		this->origin = new MyVector(0, 0, 0);
-		this->separationResult = new MyVector();
-		this->aligmentResult = new MyVector();
-		this->cohesionResult = new MyVector();
-		this->wallRepelResult = new MyVector();
-		this->arriveToResult = new MyVector();
-		
-	}
-	else {
-		this->steer = new MyVector2D();
-		this->sum = new MyVector2D();
-		this->desired = new MyVector2D();
-		this->oppositeVector = new MyVector2D();
-		this->tmpVector = new MyVector2D();
-		this->desiredAvarage = new MyVector2D();
-		this->seekResult = new MyVector2D();
-		this->origin = new MyVector2D(0, 0, 0);
-		this->separationResult = new MyVector2D();
-		this->aligmentResult = new MyVector2D();
-		this->cohesionResult = new MyVector2D();
-		this->wallRepelResult = new MyVector2D();
-		this->arriveToResult = new MyVector2D();
-	}
-	
+	this->steer = new MyVector();
+	this->sum = new MyVector();
+	this->desired = new MyVector();
+	this->oppositeVector = new MyVector();
+	this->tmpVector = new MyVector();
+	this->desiredAvarage = new MyVector();
+	this->seekResult = new MyVector();
+	this->origin = new MyVector(0, 0, 0);
+	this->separationResult = new MyVector();
+	this->aligmentResult = new MyVector();
+	this->cohesionResult = new MyVector();
+	this->wallRepelResult = new MyVector();
+	this->arriveToResult = new MyVector();
 	this->finishedPoints = new vector<int>();
 	this->cfg = cfg;
 	this->walls = walls;
@@ -125,49 +104,48 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	int count = 0;
 	
 	for (int i = 0, len = Boidss->size(); i < len; ++i) {
-		if (Boidss->at(i)->floor == this->floor) {
-			float d = location->distance(Boidss->at(i)->location);
-			if ((d > 0) && (d < this->desiredseparation) && predator == false) {
-				this->tmpVector->set();
-				this->tmpVectorMem = this->tmpVector;
-				this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
-				this->tmpVector->normalize();
-				this->tmpVector->divScalar(d);
-				this->steer->addVector(this->tmpVector);
-				delete this->tmpVector;
-				this->tmpVector = this->tmpVectorMem;
-				++count;
-			}
-
-			if ((d > 0) && (d < this->desiredseparation) && predator == true
-				&& Boidss->at(i)->predator == true) {
-				this->tmpVector->set();
-				this->tmpVectorMem = this->tmpVector;
-				this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
-				this->tmpVector->normalize();
-				this->tmpVector->divScalar(d);
-				this->steer->addVector(this->tmpVector);
-				delete this->tmpVector;
-				this->tmpVector = this->tmpVectorMem;
-				++count;
-			}
-
-			else if ((d > 0) && (d < (this->desiredseparation + 300)) && Boidss->at(i)->predator == true) {
-				this->tmpVector->set();
-				this->tmpVectorMem = this->tmpVector;
-				this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
-				this->tmpVector->mulScalar(900);
-				this->steer->addVector(this->tmpVector);
-				delete this->tmpVector;
-				this->tmpVector = this->tmpVectorMem;
-				++count;
-			}
+		float d = location->distance(Boidss->at(i)->location);
+		if ((d > 0) && (d < this->desiredseparation) && predator == false) {
+			this->tmpVector->set();
+			this->tmpVectorMem = this->tmpVector;
+			this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
+			this->tmpVector->normalize();
+			this->tmpVector->divScalar(d);
+			this->steer->addVector(this->tmpVector);
+			delete this->tmpVector;
+			this->tmpVector = this->tmpVectorMem;
+			count++;
+		}
+		
+		if ((d > 0) && (d < this->desiredseparation) && predator == true
+			&& Boidss->at(i)->predator == true) {
+			this->tmpVector->set();
+			this->tmpVectorMem = this->tmpVector;
+			this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
+			this->tmpVector->normalize();
+			this->tmpVector->divScalar(d);
+			this->steer->addVector(this->tmpVector);
+			delete this->tmpVector;
+			this->tmpVector = this->tmpVectorMem;
+			count++;
+		}
+		
+		else if ((d > 0) && (d < (this->desiredseparation + 300)) && Boidss->at(i)->predator == true) {
+			this->tmpVector->set();
+			this->tmpVectorMem = this->tmpVector;
+			this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
+			this->tmpVector->mulScalar(900);
+			this->steer->addVector(this->tmpVector);
+			delete this->tmpVector;
+			this->tmpVector = this->tmpVectorMem;
+			count++;
 		}
 	}
 	
+	if (count > 0)
+		this->steer->divScalar((float)count);
 	if (this->steer->magnitude() > 0) {
 
-		this->steer->divScalar((float)count);
 		this->steer->normalize();
 		this->steer->mulScalar(maxSpeed);
 		this->steer->subVector(velocity);
@@ -187,12 +165,10 @@ MyVector *Boids::Alignment(vector<Boids*> *Boidss)
 	this->steer->set();
 	int count = 0;
 	for (int i = 0, len = Boidss->size(); i < len; ++i) {
-		if (Boidss->at(i)->floor == this->floor) {
-			float d = location->distance(Boidss->at(i)->location);
-			if ((d > 0) && (d < this->neighbordist)) {
-				this->sum->addVector(Boidss->at(i)->velocity);
-				++count;
-			}
+		float d = location->distance(Boidss->at(i)->location);
+		if ((d > 0) && (d < this->neighbordist)) {
+			this->sum->addVector(Boidss->at(i)->velocity);
+			count++;
 		}
 	}
 	
@@ -221,12 +197,10 @@ MyVector *Boids::Cohesion(vector<Boids*> *Boidss)
 	this->sum->set();
 	int count = 0;
 	for (int i = 0, len = Boidss->size(); i < len; ++i) {
-		if (Boidss->at(i)->floor == this->floor) {
-			float d = location->distance(Boidss->at(i)->location);
-			if ((d > 0) && (d < this->neighbordist)) {
-				this->sum->addVector(Boidss->at(i)->location);
-				++count;
-			}
+		float d = location->distance(Boidss->at(i)->location);
+		if ((d > 0) && (d < this->neighbordist)) {
+			this->sum->addVector(Boidss->at(i)->location);
+			count++;
 		}
 	}
 	if (count > 0) {
@@ -440,8 +414,9 @@ MyVector *Boids::WallRepel() {
 		for (int i = 0, len = this->walls->size(); i < len; ++i) {
 
 			Wall *tmpWall = this->walls->get(i);
+			MyVector *tmpSize = tmpWall->size;
 
-			if (tmpWall->floor == this->floor) {
+			if (tmpWall->floor == this->floor && tmpSize->magnitude() != 0) {
 
 				this->desired->set();
 

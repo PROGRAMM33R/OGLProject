@@ -30,6 +30,8 @@ private:
 	void loadModels(void);
 	inline void addWall(Wall *w);
 
+	Controls *controls;
+
 	InstanceStorage *ISWall;
 	InstanceStorage *ISFloor;
 	InstanceStorage *ISPath;
@@ -39,7 +41,6 @@ public:
 	map<int, MyVector*> exitPositions;
 	const float wallDiferencial = 250;
 	const int floorDiferencial = 570;
-	Controls *controls;
 
 	Walls(Map *map, Config *cfg, Controls *controls);
 	~Walls() {}

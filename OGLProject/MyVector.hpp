@@ -8,9 +8,10 @@ private:
 	struct vec3 {
 		float x, y, z;
 	};
+	const double PI = 3.141592654;
 
 public:
-	vec3 vec;
+	vec3 vec;	
 
 	MyVector();
 
@@ -19,31 +20,28 @@ public:
 	void set(float x, float y, float z);
 	void set(void);
 
-	void addVector(MyVector *v);
-	void addScalar(float x);
+	virtual void addVector(MyVector *v);
+	virtual void addScalar(float x);
 
-	void subVector(MyVector *v);
-	MyVector *subTwoVector(MyVector *v, MyVector *v2);
-	void subScalar(float x);
+	virtual void subVector(MyVector *v);
+	virtual MyVector *subTwoVector(MyVector *v, MyVector *v2);
+	virtual void subScalar(float x);
 
-	void mulVector(MyVector *v);
-	void mulScalar(float x);
+	virtual void mulVector(MyVector *v);
+	virtual void mulScalar(float x);
 
-	void divVector(MyVector *v);
-	void divScalar(float x);
+	virtual void divVector(MyVector *v);
+	virtual void divScalar(float x);
 
-	void limit(float max);
+	virtual void limit(float max);
 
-	float distance(MyVector *v) const;
-	float dotProduct(MyVector *v) const;
-	float magnitude() const;
-	void setMagnitude(float x);
-	float angleBetween(MyVector *v);
-	void normalize(void);
+	virtual float distance(MyVector *v) const;
+	virtual float dotProduct(MyVector *v) const;
+	virtual float magnitude() const;
+	virtual void setMagnitude(float x);
+	virtual float angleBetween(MyVector *v);
+	virtual void normalize(void);
 
 	MyVector *copy(MyVector v) const;
-
-private:
-	const double PI = 3.141592654;
 
 };

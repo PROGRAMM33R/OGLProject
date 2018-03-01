@@ -30,6 +30,9 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 
 	std::map<int, MyVector*>::iterator it = exitPositions.begin();
 
+	char exitPoints[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+	int exitPointsIndex = 1;
+
 	for (int i = 0, floorIndex = -1, len = map->map->size(); i < len; ++i) {
 
 		if (this->floor != 0) {
@@ -53,8 +56,9 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 				bool firstCross = false;
 				nextFloor = false;
 				int tmpI = i;
-				for (int ii = ++tmpI, lenii = map->map->size(); ii < lenii; ++ii) {
+				for (int ii = ++tmpI, generationZ = 0, lenii = map->map->size(); ii < lenii; ++ii, ++generationZ) {
 					for (int jj = 0, len2jj = map->map->at(ii)->size(); jj < len2jj; ++jj) {
+
 						if (map->map->at(ii)->at(jj) != '/') {
 
 							if ((map->map->at(ii)->at(jj) == '+' || map->map->at(ii)->at(jj) == '|' || map->map->at(ii)->at(jj) == '-') && !firstCross) {
@@ -101,6 +105,17 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 							lenii = -1;
 							break;
 						}
+
+						if (map->map->at(ii)->at(jj) == 'G' || map->map->at(ii)->at(jj) == 'g') {
+							this->generatePositions->push_back(
+								glm::vec3(
+									jj * wallDiferencial, 
+									floor * floorDiferencial, 
+									(firstWall + generationZ) * wallDiferencial
+								)
+							);
+						}
+
 					}
 				}
 
@@ -148,10 +163,12 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 
 			}
 
-			if (map->map->at(i)->at(j) == 'G' || map->map->at(i)->at(j) == 'g') {
-				this->generatePositions->push_back( 
-					glm::vec3(j * wallDiferencial, 0, i * wallDiferencial) 
-				);
+			if (this->floor == 0) {
+				if (map->map->at(i)->at(j) == 'G' || map->map->at(i)->at(j) == 'g') {
+					this->generatePositions->push_back(
+						glm::vec3(j * wallDiferencial, floor * floorDiferencial, i * wallDiferencial)
+					);
+				}
 			}
 
 			if (isdigit(map->map->at(i)->at(j))) {
@@ -160,7 +177,7 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 					it, 
 					std::pair<int, MyVector*>(
 						index, 
-						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
+						new MyVector(j * wallDiferencial, floor * floorDiferencial, i * wallDiferencial)
 					)
 				); 
 
@@ -175,7 +192,7 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 					it,
 					std::pair<int, MyVector*>(
 						1000,
-						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
+						new MyVector(j * wallDiferencial, floor * floorDiferencial, i * wallDiferencial)
 					)
 				);
 				this->pathToFind->push_back(new Wall(
@@ -185,106 +202,29 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 				));
 			}
 
-			if (map->map->at(i)->at(j) == 'A' || map->map->at(i)->at(j) == 'a') {
-				int index = map->map->at(i)->at(j) == 'A' ? 2 : 1;
-				exitPositions.insert(
-					it,
-					std::pair<int, MyVector*>(
-						index,
-						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
-						)
-				);
+			for (
+				int charMapIndex = 0, exitPointsIndex = 1, len = (sizeof(exitPoints) / sizeof(*exitPoints)); 
+				charMapIndex < len; 
+				++charMapIndex, exitPointsIndex += 2
+				) {
 
-				this->pathToFind->push_back(new Wall(
-					exitPositions.at(index),
-					wallSize90,
-					0
-				));
-			}
+				if (map->map->at(i)->at(j) == exitPoints[charMapIndex] || map->map->at(i)->at(j) == tolower(exitPoints[charMapIndex])) {
+					int index = map->map->at(i)->at(j) == exitPoints[charMapIndex] ? (exitPointsIndex + 1) : exitPointsIndex;
+					exitPositions.insert(
+						it,
+						std::pair<int, MyVector*>(
+							index,
+							new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
+							)
+					);
 
-			if (map->map->at(i)->at(j) == 'B' || map->map->at(i)->at(j) == 'b') {
-				int index = map->map->at(i)->at(j) == 'B' ? 4 : 3;
-				exitPositions.insert(
-					it,
-					std::pair<int, MyVector*>(
-						index,
-						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
-						)
-				);
+					this->pathToFind->push_back(new Wall(
+						exitPositions.at(index),
+						wallSize90,
+						0
+					));
+				}
 
-				this->pathToFind->push_back(new Wall(
-					exitPositions.at(index),
-					wallSize90,
-					0
-				));
-			}
-
-			if (map->map->at(i)->at(j) == 'C' || map->map->at(i)->at(j) == 'c') {
-				int index = map->map->at(i)->at(j) == 'C' ? 6 : 5;
-				exitPositions.insert(
-					it,
-					std::pair<int, MyVector*>(
-						index,
-						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
-						)
-				);
-
-				this->pathToFind->push_back(new Wall(
-					exitPositions.at(index),
-					wallSize90,
-					0
-				));
-			}
-
-			if (map->map->at(i)->at(j) == 'D' || map->map->at(i)->at(j) == 'd') {
-				int index = map->map->at(i)->at(j) == 'D' ? 8 : 7;
-				exitPositions.insert(
-					it,
-					std::pair<int, MyVector*>(
-						index,
-						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
-						)
-				);
-
-				this->pathToFind->push_back(new Wall(
-					exitPositions.at(index),
-					wallSize90,
-					0
-				));
-			}
-
-			if (map->map->at(i)->at(j) == 'E' || map->map->at(i)->at(j) == 'e') {
-				int index = map->map->at(i)->at(j) == 'E' ? 10 : 9;
-				exitPositions.insert(
-					it,
-					std::pair<int, MyVector*>(
-						index,
-						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
-						)
-				);
-
-				this->pathToFind->push_back(new Wall(
-					exitPositions.at(index),
-					wallSize90,
-					0
-				));
-			}
-
-			if (map->map->at(i)->at(j) == 'F' || map->map->at(i)->at(j) == 'f') {
-				int index = map->map->at(i)->at(j) == 'F' ? 12 : 11;
-				exitPositions.insert(
-					it,
-					std::pair<int, MyVector*>(
-						index,
-						new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
-						)
-				);
-
-				this->pathToFind->push_back(new Wall(
-					exitPositions.at(index),
-					wallSize90,
-					0
-				));
 			}
 
 

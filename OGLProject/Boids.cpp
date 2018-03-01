@@ -269,7 +269,7 @@ MyVector *Boids::getArriveVector(void) {
 
 	if (!this->getArriveVectorFirstTime) {
 		
-		for (int i = 0, j = 1; i < 6; ++i, j += 2) {
+		for (int i = 0, j = 1; i < 24; ++i, j += 2) { // 25 for whole EN alphabet
 			if (walls->exitPositions[j] != NULL) {
 				float d = location->distance(walls->exitPositions[j]);
 
@@ -308,8 +308,6 @@ MyVector *Boids::getArriveVector(void) {
 			this->finishedPoints->push_back(minIndex);
 		}
 
-		return walls->exitPositions.at(minIndex);
-
 	}
 	else {
 
@@ -318,7 +316,12 @@ MyVector *Boids::getArriveVector(void) {
 			this->incrementedOnce = true;
 		}
 
-		return walls->exitPositions.at(minIndex);
+		if ((walls->exitPositions.at(minIndex)->vec.y / walls->floorDiferencial) == this->floor) {
+			return walls->exitPositions.at(minIndex);
+		}
+		else {
+			return NULL;
+		}
 
 	}
 
@@ -375,13 +378,17 @@ void Boids::flock(vector<Boids*> *v)
 		this->tmpVectorMem->vec.z
 	);
 
-	this->tmpVectorMem = arriveTo(getArriveVector());
+	this->tmpVectorMem = getArriveVector();
+	this->arriveToResult->set();
 
-	this->arriveToResult->set(
-		this->tmpVectorMem->vec.x,
-		this->tmpVectorMem->vec.y,
-		this->tmpVectorMem->vec.z
-	);
+	if (this->tmpVectorMem != NULL) {
+		this->tmpVectorMem = arriveTo(this->tmpVectorMem);
+		this->arriveToResult->set(
+			this->tmpVectorMem->vec.x,
+			this->tmpVectorMem->vec.y,
+			this->tmpVectorMem->vec.z
+		);
+	}
 
 	if (cfg->SCENE_TYPE == "3D") {
 		this->separationResult->mulScalar(1.5);

@@ -30,8 +30,8 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 
 	std::map<int, MyVector*>::iterator it = exitPositions.begin();
 
-	char exitPoints[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-	int exitPointsIndex = 1;
+	char exitPoints[] = { 'A', 'B', 'C', 'D', 'E', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+	int exitPointsIndexLast = 1;
 
 	for (int i = 0, floorIndex = -1, len = map->map->size(); i < len; ++i) {
 
@@ -60,6 +60,37 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 					for (int jj = 0, len2jj = map->map->at(ii)->size(); jj < len2jj; ++jj) {
 
 						if (map->map->at(ii)->at(jj) != '/') {
+
+							for (
+								int charMapIndex = 0, exitPointsIndex = exitPointsIndexLast, len = (sizeof(exitPoints) / sizeof(*exitPoints));
+								charMapIndex < len;
+								++charMapIndex, exitPointsIndex += 2
+								) {
+
+								if (map->map->at(ii)->at(jj) == exitPoints[charMapIndex] || map->map->at(ii)->at(jj) == tolower(exitPoints[charMapIndex])) {
+									int index = map->map->at(ii)->at(jj) == exitPoints[charMapIndex] ? (exitPointsIndex + 1) : exitPointsIndex;
+									exitPositions.insert(
+										it,
+										std::pair<int, MyVector*>(
+											index,
+											new MyVector(
+												jj * wallDiferencial, 
+												floor * floorDiferencial, 
+												(firstWall + generationZ) * wallDiferencial
+											)
+										)
+									);
+
+									this->pathToFind->push_back(new Wall(
+										exitPositions.at(index),
+										wallSize90,
+										0
+									));
+								}
+
+								exitPointsIndexLast = exitPointsIndex;
+
+							}
 
 							if ((map->map->at(ii)->at(jj) == '+' || map->map->at(ii)->at(jj) == '|' || map->map->at(ii)->at(jj) == '-') && !firstCross) {
 								firstCross = true;
@@ -164,11 +195,40 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 			}
 
 			if (this->floor == 0) {
+
 				if (map->map->at(i)->at(j) == 'G' || map->map->at(i)->at(j) == 'g') {
 					this->generatePositions->push_back(
 						glm::vec3(j * wallDiferencial, floor * floorDiferencial, i * wallDiferencial)
 					);
 				}
+
+				for (
+					int charMapIndex = 0, exitPointsIndex = 1, len = (sizeof(exitPoints) / sizeof(*exitPoints));
+					charMapIndex < len;
+					++charMapIndex, exitPointsIndex += 2
+					) {
+
+					if (map->map->at(i)->at(j) == exitPoints[charMapIndex] || map->map->at(i)->at(j) == tolower(exitPoints[charMapIndex])) {
+						int index = map->map->at(i)->at(j) == exitPoints[charMapIndex] ? (exitPointsIndex + 1) : exitPointsIndex;
+						exitPositions.insert(
+							it,
+							std::pair<int, MyVector*>(
+								index,
+								new MyVector(j * wallDiferencial, floor * floorDiferencial, i * wallDiferencial)
+								)
+						);
+
+						this->pathToFind->push_back(new Wall(
+							exitPositions.at(index),
+							wallSize90,
+							0
+						));
+					}
+
+					exitPointsIndexLast = exitPointsIndex;
+
+				}
+
 			}
 
 			if (isdigit(map->map->at(i)->at(j))) {
@@ -201,32 +261,6 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 					0
 				));
 			}
-
-			for (
-				int charMapIndex = 0, exitPointsIndex = 1, len = (sizeof(exitPoints) / sizeof(*exitPoints)); 
-				charMapIndex < len; 
-				++charMapIndex, exitPointsIndex += 2
-				) {
-
-				if (map->map->at(i)->at(j) == exitPoints[charMapIndex] || map->map->at(i)->at(j) == tolower(exitPoints[charMapIndex])) {
-					int index = map->map->at(i)->at(j) == exitPoints[charMapIndex] ? (exitPointsIndex + 1) : exitPointsIndex;
-					exitPositions.insert(
-						it,
-						std::pair<int, MyVector*>(
-							index,
-							new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
-							)
-					);
-
-					this->pathToFind->push_back(new Wall(
-						exitPositions.at(index),
-						wallSize90,
-						0
-					));
-				}
-
-			}
-
 
 		}
 
@@ -403,13 +437,19 @@ void Walls::loadModels(void) {
 
 void Walls::drawWalls(Shader *shader)
 {
-	this->ISWall->shader = shader;
-	this->ISFloor->shader = shader;
+	this->ISWall->shader = this->ISPath->shader = this->ISFloor->shader = shader;
 	this->ISFloor->activeFloor = controls->activatedFloor;
 	this->ISFloor->transparency = 0.1;
 	this->ISWall->activeFloor = controls->activatedFloor;
 	this->ISWall->transparency = 0.1;
-	this->ISPath->shader = shader;
+	this->ISPath->activeFloor = controls->activatedFloor;
+	this->ISPath->transparency = 0.1;
+
+	for (int i = 0, len = this->pathToFind->size(); i < len; ++i) {
+		this->ISPath->isExitPath = true;
+		this->ISPath->walls = this->pathToFind->at(i);
+		this->exitModel->Draw(this->ISPath);
+	}
 
 	for (int i = 0; i < this->countOfWalls; ++i) {
 		this->ISWall->walls = this->walls->at(i);
@@ -419,11 +459,6 @@ void Walls::drawWalls(Shader *shader)
 	for (int i = 0; i < this->countOfFloors; ++i) {
 		this->ISFloor->walls = this->floors->at(i);
 		this->floorsModel[i]->Draw(this->ISFloor);
-	}
-
-	for (int i = 0, len = this->pathToFind->size(); i < len; ++i) {
-		this->ISPath->walls = this->pathToFind->at(i);
-		this->exitModel->Draw(this->ISPath);
 	}
 }
 

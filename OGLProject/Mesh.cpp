@@ -122,12 +122,18 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 			float size = 20;
 			glm::vec3 position;
 
-			position = glm::vec3(instanceStorage->walls->location->vec.x, 220, instanceStorage->walls->location->vec.z);
+			position = glm::vec3(
+				instanceStorage->walls->location->vec.x, 
+				instanceStorage->walls->location->vec.y + 220, 
+				instanceStorage->walls->location->vec.z
+			);
 			model = glm::translate(model, position);
 			model = glm::rotate(model, instanceStorage->walls->angle, glm::vec3(0, 1, 0));
 			model = glm::translate(model, glm::vec3(size, size, size));
 			model = glm::scale(model, glm::vec3(size, size + 250, size));
-			instanceStorage->shader->setFloat("transparent", 0.7);
+
+			this->setTransparency(instanceStorage);
+
 			instanceStorage->shader->setMat4("Model", model);
 
 		}
@@ -218,14 +224,31 @@ void Mesh::setupMesh(void) {
 void Mesh::setTransparency(InstanceStorage *instanceStorage) {
 
 	if (instanceStorage->walls != NULL) {
-		if ((instanceStorage->walls->floor == instanceStorage->activeFloor) && instanceStorage->activeFloor != 98) {
-			instanceStorage->shader->setFloat("transparent", 1.0);
-		}
-		else if (instanceStorage->activeFloor == 99) {
-			instanceStorage->shader->setFloat("transparent", 1.0);
+		if (!instanceStorage->isExitPath) {
+
+			if ((instanceStorage->walls->floor == instanceStorage->activeFloor) && instanceStorage->activeFloor != 98) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else if (instanceStorage->activeFloor == 99) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else {
+				instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
+			}
+
 		}
 		else {
-			instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
+
+			if (instanceStorage->activeFloor == (instanceStorage->walls->location->vec.y / instanceStorage->floorDiferencial) && instanceStorage->activeFloor != 98) {
+				instanceStorage->shader->setFloat("transparent", 1.0);
+			}
+			else if (instanceStorage->activeFloor == 90 || instanceStorage->activeFloor == 99) {
+				instanceStorage->shader->setFloat("transparent", 0.8);
+			}
+			else {
+				instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
+			}
+
 		}
 	}
 	else if (instanceStorage->boidPosition != NULL) {

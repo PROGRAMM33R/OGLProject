@@ -19,7 +19,9 @@ public:
 	Boids *Boidss;
 	Wall *walls;
 	MyVector *boidPosition;
+	MyVector *exitPathPosition;
 	int floorDiferencial;
+	bool isExitPath;
 
 	int activeFloor = 0;
 	float transparency = 0.0;

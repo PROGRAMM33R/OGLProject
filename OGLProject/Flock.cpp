@@ -103,7 +103,6 @@ void Flock::flocking(Shader *shader)
 
 		this->flock->at(i)->run(flock);
 		this->ISBoid->Boidss = this->flock->at(i);
-		this->ISBoid->boidPosition = this->flock->at(i)->location;
 		this->ISBoid->activeFloor = this->walls->controls->activatedFloor;
 		boidsModel[i]->Draw(this->ISBoid);
 

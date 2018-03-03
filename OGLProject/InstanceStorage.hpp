@@ -18,7 +18,6 @@ public:
 	int objType;
 	Boids *Boidss;
 	Wall *walls;
-	MyVector *boidPosition;
 	MyVector *exitPathPosition;
 	int floorDiferencial;
 	bool isExitPath;

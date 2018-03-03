@@ -122,6 +122,10 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 			float size = 20;
 			glm::vec3 position;
 
+			/*if (instanceStorage->walls->location->vec.y != 0) {
+				cout << instanceStorage->walls->location->vec.y << endl;
+			}*/
+
 			position = glm::vec3(
 				instanceStorage->walls->location->vec.x, 
 				instanceStorage->walls->location->vec.y + 220, 
@@ -251,8 +255,8 @@ void Mesh::setTransparency(InstanceStorage *instanceStorage) {
 
 		}
 	}
-	else if (instanceStorage->boidPosition != NULL) {
-		if (instanceStorage->activeFloor == (instanceStorage->boidPosition->vec.y / instanceStorage->floorDiferencial) && instanceStorage->activeFloor != 98) {
+	else if (instanceStorage->Boidss != NULL) {
+		if (instanceStorage->activeFloor == (instanceStorage->Boidss->location->vec.y / instanceStorage->floorDiferencial) && instanceStorage->activeFloor != 98) {
 			instanceStorage->shader->setFloat("transparent", 1.0);
 		}
 		else if (instanceStorage->activeFloor == 90 || instanceStorage->activeFloor == 99) {

@@ -25,10 +25,10 @@ namespace Hud {
 			TwAddSeparator(myBar, "", NULL);
 
 			TwAddVarRO(myBar, "Boids", TW_TYPE_INT32, &(_cfg->BOID_NUMBER_OF_BOIDS), NULL);
-			TwAddVarRO(myBar, "Separation enabled", TW_TYPE_INT32, &(_cfg->SEPARATION_ENABLED), NULL);
-			TwAddVarRO(myBar, "Alignment enabled", TW_TYPE_INT32, &(_cfg->ALIGNMENT_ENABLED), NULL);
-			TwAddVarRO(myBar, "Cohesion enabled", TW_TYPE_INT32, &(_cfg->COHESION_ENABLED), NULL);
-			TwAddVarRO(myBar, "Path finding enabled", TW_TYPE_INT32, &(_cfg->PATH_FINDING_ENABLED), NULL);
+			TwAddVarRO(myBar, "Separation", TW_TYPE_INT32, &(_cfg->SEPARATION_ENABLED), NULL);
+			TwAddVarRO(myBar, "Alignment", TW_TYPE_INT32, &(_cfg->ALIGNMENT_ENABLED), NULL);
+			TwAddVarRO(myBar, "Cohesion", TW_TYPE_INT32, &(_cfg->COHESION_ENABLED), NULL);
+			TwAddVarRO(myBar, "Simulation", TW_TYPE_INT32, &(_cfg->PATH_FINDING_ENABLED), NULL);
 			TwAddVarRO(myBar, "Escape sensitivity", TW_TYPE_FLOAT, &(_cfg->ESCAPE_SENSITIVITY), NULL);
 
 			TwAddSeparator(myBar, "", NULL);

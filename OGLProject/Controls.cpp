@@ -69,6 +69,15 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS) {
 		this->activatedFloor = 5;
 	}
+	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS) {
+		this->activatedFloor = 6;
+	}
+	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) {
+		this->activatedFloor = 7;
+	}
+	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS) {
+		this->activatedFloor = 8;
+	}
 
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS 
 		|| glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {

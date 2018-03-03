@@ -268,12 +268,25 @@ MyVector *Boids::arriveTo(MyVector *v) {
 MyVector *Boids::getArriveVector(void) {
 
 	if (!this->getArriveVectorFirstTime) {
+
+		int floorIndex = 0;
 		
-		for (int i = 0, j = 1; i < 24; ++i, j += 2) { // 25 for whole EN alphabet
+		for (int i = 1, len = walls->exitPositions.size(); i <= len; ++i) {
+
+			if (walls->exitPositions.at(i) != NULL) {
+				if ((walls->exitPositions.at(i)->vec.y / walls->floorDiferencial) == this->floor) {
+					floorIndex = i;
+					break;
+				}
+			}
+			
+		}
+		
+		for (int i = floorIndex, j = floorIndex; i < 24; ++i, j += 2) { // 24 for whole EN alphabet
 			if (walls->exitPositions[j] != NULL) {
 				float d = location->distance(walls->exitPositions[j]);
 
-				if (i == 0) {
+				if (i == floorIndex) {
 					this->minDistance = d;
 					this->minIndex = j;
 				}
@@ -311,12 +324,13 @@ MyVector *Boids::getArriveVector(void) {
 	}
 	else {
 
-		if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS && !this->incrementedOnce) {
-			++minIndex;
-			this->incrementedOnce = true;
-		}
-
 		if ((walls->exitPositions.at(minIndex)->vec.y / walls->floorDiferencial) == this->floor) {
+
+			if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS && !this->incrementedOnce) {
+				++minIndex;
+				this->incrementedOnce = true;
+			}
+
 			return walls->exitPositions.at(minIndex);
 		}
 		else {

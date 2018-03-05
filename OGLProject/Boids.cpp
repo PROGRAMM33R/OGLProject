@@ -269,7 +269,7 @@ MyVector *Boids::getArriveVector(void) {
 
 	if (!this->getArriveVectorFirstTime) {
 
-		int floorIndex = 0;
+		int floorIndex = 1;
 		
 		for (int i = 1, len = walls->exitPositions.size(); i <= len; ++i) {
 
@@ -282,24 +282,27 @@ MyVector *Boids::getArriveVector(void) {
 			
 		}
 		
-		for (int i = floorIndex, j = floorIndex; i < 24; ++i, j += 2) { // 24 for whole EN alphabet
+		for (int i = 0, j = floorIndex; j < 24; ++i, j += 2) { // 24 for whole EN alphabet
 			if (walls->exitPositions[j] != NULL) {
-				float d = location->distance(walls->exitPositions[j]);
 
-				if (i == floorIndex) {
-					this->minDistance = d;
-					this->minIndex = j;
-				}
-				else {
-					if (d < this->minDistance) {
+				if ((walls->exitPositions.at(j)->vec.y / walls->floorDiferencial) == this->floor) {
+					float d = location->distance(walls->exitPositions[j]);
+
+					if (i == 0) {
 						this->minDistance = d;
 						this->minIndex = j;
 					}
+					else if (d < this->minDistance) {
+						this->minDistance = d;
+						this->minIndex = j;
+					}
+					
 				}
+
 			}
 		}
 
-		if (this->minDistance != 0 && this->minIndex != 0) {
+		if (this->minDistance != 0) {
 			this->getArriveVectorFirstTime = true;
 		}
 	}
@@ -317,18 +320,10 @@ MyVector *Boids::getArriveVector(void) {
 
 		}
 
-		if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS) {
-			this->finishedPoints->push_back(minIndex);
-		}
+		if (walls->exitPositions.at(minIndex) != NULL) {
 
-	}
-	else {
-
-		if ((walls->exitPositions.at(minIndex)->vec.y / walls->floorDiferencial) == this->floor) {
-
-			if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS && !this->incrementedOnce) {
-				++minIndex;
-				this->incrementedOnce = true;
+			if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS) {
+				this->finishedPoints->push_back(minIndex);
 			}
 
 			return walls->exitPositions.at(minIndex);
@@ -336,6 +331,28 @@ MyVector *Boids::getArriveVector(void) {
 		else {
 			return NULL;
 		}
+		
+	}
+	else {
+
+		if (walls->exitPositions.at(minIndex) != NULL) {
+			if ((walls->exitPositions.at(minIndex)->vec.y / walls->floorDiferencial) == this->floor) {
+
+				if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS && !this->incrementedOnce) {
+					++minIndex;
+					this->incrementedOnce = true;
+				}
+
+				return walls->exitPositions.at(minIndex);
+			}
+			else {
+				return NULL;
+			}
+		}
+		else {
+			return NULL;
+		}
+		
 
 	}
 

@@ -16,7 +16,7 @@ private:
 	int cubeSize;
 	const double PI = 3.141592635;
 	float AxisY;
-	float minDistance = 0, minIndex = 0;
+	float minDistance = 0, minIndex = 1;
 	bool getArriveVectorFirstTime = false;
 	bool incrementedOnce = false;
 	int floor;

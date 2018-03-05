@@ -34,6 +34,8 @@ private:
 	InstanceStorage *ISFloor;
 	InstanceStorage *ISPath;
 
+	int isInArray(char arr[], int size, char c);
+
 public:
 	vector<glm::vec3> *generatePositions;
 	map<int, MyVector*> exitPositions;

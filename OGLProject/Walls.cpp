@@ -61,14 +61,19 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 
 						if (map->map->at(ii)->at(jj) != '/') {
 
+							int size = sizeof(exitPoints) / sizeof(*exitPoints);
+
 							for (
-								int charMapIndex = 0, exitPointsIndex = exitPointsIndexLast, len = (sizeof(exitPoints) / sizeof(*exitPoints));
+								int charMapIndex = 0, exitPointsIndex = exitPointsIndexLast, len = size;
 								charMapIndex < len;
 								++charMapIndex, exitPointsIndex += 2
 								) {
 
 								if (map->map->at(ii)->at(jj) == exitPoints[charMapIndex] || map->map->at(ii)->at(jj) == tolower(exitPoints[charMapIndex])) {
+								/*if (this->isInArray(exitPoints, size, map->map->at(ii)->at(jj)) != -1) {*/
+									//int returnedIndex = this->isInArray(exitPoints, map->map->at(ii)->at(jj));
 									int index = map->map->at(ii)->at(jj) == exitPoints[charMapIndex] ? (exitPointsIndex + 1) : exitPointsIndex;
+									//int index = isupper(map->map->at(ii)->at(jj)) ? (exitPointsIndexLast + 1) : exitPointsIndexLast;
 									exitPositions.insert(
 										it,
 										std::pair<int, MyVector*>(
@@ -87,8 +92,6 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 										0
 									));
 								}
-
-								//exitPointsIndexLast = exitPointsIndex;
 
 							}
 
@@ -202,19 +205,28 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 					);
 				}
 
+				int size = (sizeof(exitPoints) / sizeof(*exitPoints));
+
 				for (
-					int charMapIndex = 0, exitPointsIndexLast = 1, len = (sizeof(exitPoints) / sizeof(*exitPoints));
+					int charMapIndex = 0, exitPointsIndexLast = 1, len = size;
 					charMapIndex < len;
 					++charMapIndex, exitPointsIndexLast += 2
 					) {
 
 					if (map->map->at(i)->at(j) == exitPoints[charMapIndex] || map->map->at(i)->at(j) == tolower(exitPoints[charMapIndex])) {
+					//int result = this->isInArray(exitPoints, size, map->map->at(i)->at(j));
+					//if (result != -1) {
+						//int returnedIndex = this->isInArray(exitPoints, map->map->at(i)->at(j));
+						
+						//int index = isupper(map->map->at(i)->at(j)) ? (exitPointsIndexLast + 1) : exitPointsIndexLast;
+
 						int index = map->map->at(i)->at(j) == exitPoints[charMapIndex] ? (exitPointsIndexLast + 1) : exitPointsIndexLast;
+
 						exitPositions.insert(
 							it,
 							std::pair<int, MyVector*>(
 								index,
-								new MyVector(j * wallDiferencial, floor * floorDiferencial, i * wallDiferencial)
+								new MyVector(j * wallDiferencial, 0, i * wallDiferencial)
 								)
 						);
 
@@ -411,6 +423,15 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 	this->ISFloor = new InstanceStorage(NULL, DRAW_TYPE_FLOOR, NULL, NULL);
 	this->ISPath = new InstanceStorage(NULL, DRAW_TYPE_EXIT, NULL, NULL);
 
+}
+
+int Walls::isInArray(char arr[], int size, char c) 
+{
+	for (int i = 0; i < size; ++i) {
+		if (tolower(arr[i]) == c || tolower(arr[i]) == c)
+			return i;
+	}
+	return -1;
 }
 
 void Walls::addWall(Wall *w)

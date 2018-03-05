@@ -43,6 +43,21 @@ Flock::Flock(Config *cfg, Walls *walls)
 		}
 		else {
 			for (int j = 0, val = walls->generatePositions->size(); j < val; ++j) {
+
+				/*for (int index = 0; index < (cfg->BOID_NUMBER_OF_BOIDS / val); ++index) {
+					addBoid(new Boids(
+						new MyVector(
+							(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).x,
+							walls->generatePositions->at(j).y,
+							(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).z
+						),
+						this->cfg,
+						walls,
+						false, (walls->generatePositions->at(j).y / walls->floorDiferencial)
+					)
+					);
+				}*/
+
 				addBoid(new Boids(
 					new MyVector(
 						(float)(rand() % this->cfg->BOID_GENERATE_SPACE) + walls->generatePositions->at(j).x,
@@ -54,6 +69,7 @@ Flock::Flock(Config *cfg, Walls *walls)
 					false, (walls->generatePositions->at(j).y / walls->floorDiferencial)
 				)
 				);
+
 			}
 		}
 		

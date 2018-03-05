@@ -2,22 +2,26 @@
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(10): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(88): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(135): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(319): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(331): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(342): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(347): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(359): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(373): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(378): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(390): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(401): warning C4018: '<': signed/unsigned mismatch
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(406): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(418): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(469): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(471): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(126): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(163): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(184): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(252): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(267): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(305): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(317): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(328): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(333): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(345): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(359): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(364): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(376): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(387): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(392): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(404): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(463): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(465): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(467): warning C4305: '=': truncation from 'double' to 'float'
   main.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
@@ -27,34 +31,37 @@ c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(45): warning C4244: '=
   Controls.cpp
   Config.hpp
   Scene.cpp
+  MyVector2D.cpp
   MyVector.cpp
   Model.cpp
   Mesh.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(48): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(107): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(108): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(146): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(166): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(177): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(99): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(160): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(171): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(250): warning C4305: 'argument': truncation from 'double' to 'float'
   Flock.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\flock.cpp(69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\flock.cpp(115): warning C4305: '=': truncation from 'double' to 'float'
   Camera.cpp
   Boids.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(252): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(257): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(275): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(281): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(282): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(285): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(290): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(295): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(292): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(297): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(316): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(322): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(323): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(340): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(342): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(347): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
   Generating Code...
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(355): warning C4715: 'Boids::getArriveVector': not all control paths return a value
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
 SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(stb_image_aug.obj)' or at 'C:\Users\adam\Desktop\BachelorProject\Debug\SOIL.pdb'; linking object as if no debug info
   OGLProject.vcxproj -> C:\Users\adam\Desktop\BachelorProject\Debug\OGLProject.exe

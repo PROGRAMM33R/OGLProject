@@ -20,6 +20,9 @@ private:
 	bool getArriveVectorFirstTime = false;
 	bool incrementedOnce = false;
 	int floor;
+	std::clock_t start;
+	double escapeDuration;
+	bool startMovingToNextFloor = false;
 
 	MyVector *oppositeVector;
 	MyVector *steer, *steerMem, *sum, *desired;

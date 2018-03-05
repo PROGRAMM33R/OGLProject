@@ -343,6 +343,27 @@ MyVector *Boids::getArriveVector(void) {
 					this->incrementedOnce = true;
 				}
 
+				if (this->floor > 0) {
+
+					if (this->startMovingToNextFloor) {
+
+						
+						escapeDuration = ((std::clock() - start) / (double)CLOCKS_PER_SEC) - (3 * this->floor); // escape time minus time for one floor
+
+						if (escapeDuration > 7) {
+							location->vec.y = walls->generatePositions->at(0).y;
+							this->floor = 0;
+							this->getArriveVectorFirstTime = false;
+							this->incrementedOnce = false;
+						}
+
+					}
+					if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS && !this->startMovingToNextFloor) {
+						this->startMovingToNextFloor = true;
+						start = std::clock();
+					}
+				}
+
 				return walls->exitPositions.at(minIndex);
 			}
 			else {

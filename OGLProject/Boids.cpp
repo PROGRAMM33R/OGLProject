@@ -267,7 +267,7 @@ MyVector *Boids::arriveTo(MyVector *v) {
 
 MyVector *Boids::getArriveVector(void) {
 
-	if (!this->getArriveVectorFirstTime) {
+	if (!this->getArriveVectorFirstTime && !walls->labyrint) {
 
 		int floorIndex = 1;
 		

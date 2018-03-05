@@ -42,6 +42,7 @@ public:
 	const float wallDiferencial = 250;
 	const int floorDiferencial = 570;
 	Controls *controls;
+	bool labyrint = false;
 
 	Walls(Map *map, Config *cfg, Controls *controls);
 	~Walls() {}

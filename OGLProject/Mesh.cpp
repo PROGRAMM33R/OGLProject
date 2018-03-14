@@ -30,9 +30,11 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 			model = glm::rotate(model, instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity), glm::vec3(0, 1, 0));
 		}
 		else {
-			//model = glm::rotate(model, hovno, glm::vec3(0.1, 0, 0));
-			//model = glm::rotate(model, Boidss->angleY(Boidss->velocity), glm::vec3(0, 1, 0));
-			//model = glm::rotate(model, Boidss->angleZ(Boidss->velocity), glm::vec3(0, 0, 1));
+			
+			//model = glm::rotate(model, instanceStorage->Boidss->angleX(instanceStorage->Boidss->velocity), glm::vec3(1, 0, 0));
+			model = glm::rotate(model, instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity), glm::vec3(0, 1, 0));
+			model = glm::rotate(model, instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity), glm::vec3(0, 0, 1));
+
 		}
 		
 		model = glm::translate(
@@ -121,10 +123,6 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 			glm::mat4 model;
 			float size = 20;
 			glm::vec3 position;
-
-			/*if (instanceStorage->walls->location->vec.y != 0) {
-				cout << instanceStorage->walls->location->vec.y << endl;
-			}*/
 
 			position = glm::vec3(
 				instanceStorage->walls->location->vec.x, 

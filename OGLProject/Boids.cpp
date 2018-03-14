@@ -348,7 +348,7 @@ MyVector *Boids::getArriveVector(void) {
 					if (this->startMovingToNextFloor) {
 
 						
-						escapeDuration = ((std::clock() - start) / (double)CLOCKS_PER_SEC) - (3 * this->floor); // escape time minus time for one floor
+						escapeDuration = ((std::clock() - start) / (double)CLOCKS_PER_SEC) - (cfg->FLOOR_TIME_DURATION * this->floor); // escape time minus time for one floor
 
 						if (escapeDuration > 7) {
 							location->vec.y = walls->generatePositions->at(0).y;
@@ -381,7 +381,7 @@ MyVector *Boids::getArriveVector(void) {
 
 void Boids::update()
 {
-	acceleration->mulScalar((float)(.4));
+	acceleration->mulScalar((float)(.9));
 	velocity->addVector(acceleration);
 	velocity->limit(maxSpeed);
 	location->addVector(velocity);
@@ -564,15 +564,15 @@ float Boids::angle(MyVector *v) const
 
 float Boids::angleX(MyVector *v) const
 {
-	return (float)(atan2(v->vec.y, v->vec.x));
+	return (float)(atan2(v->vec.z, v->vec.y));
 }
 
 float Boids::angleY(MyVector *v) const
 {
-	return (float)(atan2(v->vec.x, v->vec.z));
+	return (float)(atan2(v->vec.z, v->vec.x));
 }
 
 float Boids::angleZ(MyVector *v) const
 {
-	return (float)(atan2(v->vec.x, v->vec.z));
+	return (float)(atan2(v->vec.y, v->vec.x));
 }

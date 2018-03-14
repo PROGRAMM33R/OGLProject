@@ -27,13 +27,14 @@ public:
 		int				ALIGNMENT_ENABLED;
 		int				COHESION_ENABLED;
 		int				PATH_FINDING_ENABLED;
+		int				FLOOR_TIME_DURATION;
 
 		float			ESCAPE_SENSITIVITY;
 		int				PATH_TO_FIND_RADIUS;
 		int				WALL_AVOID_RADIUS;
 
 		int				BOID_CUBE_SIZE;
-		int				BOID_OBJ_SIZE;
+		float				BOID_OBJ_SIZE;
 		int				BOID_NUMBER_OF_BOIDS;
 		int				BOID_NUMBER_OF_PREDATORS;
 		int				BOID_GENERATE_SPACE;
@@ -126,6 +127,9 @@ public:
 				if (keys->at(i).find("PATH_FINDING_ENABLED") != std::string::npos) {
 					PATH_FINDING_ENABLED = std::stoi(values->at(i));
 				}
+				if (keys->at(i).find("FLOOR_TIME_DURATION") != std::string::npos) {
+					FLOOR_TIME_DURATION = std::stoi(values->at(i));
+				}
 				if (keys->at(i).find("ESCAPE_SENSITIVITY") != std::string::npos) {
 					ESCAPE_SENSITIVITY = std::stof(values->at(i));
 				}
@@ -139,7 +143,7 @@ public:
 					int cubeSize = std::stoi(values->at(i));
 				}
 				if (keys->at(i).find("BOID_OBJ_SIZE") != std::string::npos) {
-					BOID_OBJ_SIZE = std::stoi(values->at(i));
+					BOID_OBJ_SIZE = std::stof(values->at(i));
 				}
 				if (keys->at(i).find("BOID_NUMBER_OF_BOIDS") != std::string::npos) {
 					BOID_NUMBER_OF_BOIDS = std::stoi(values->at(i));
@@ -192,8 +196,8 @@ public:
 					if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {
 						BOID_CUBE_SIZE = BOID_CUBE_SIZE + (BOID_GENERATE_SPACE - BOID_CUBE_SIZE);
 					}
-					if ((BOID_NUMBER_OF_BOIDS * 40) > cubeSize) {
-						BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 40;
+					if ((BOID_NUMBER_OF_BOIDS * 10) > cubeSize) {
+						BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 10;
 					}
 				}
 				else {

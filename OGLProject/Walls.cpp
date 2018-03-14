@@ -33,6 +33,8 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 	char exitPoints[] = { 'A', 'B', 'C', 'D', 'E', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 	int exitPointsIndexLast = 1;
 
+	int outputCountOfWalls = 0;
+
 	for (int i = 0, floorIndex = -1, len = map->map->size(); i < len; ++i) {
 
 		if (this->floor != 0) {
@@ -41,6 +43,9 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 		
 		for (int j = 0, len2 = map->map->at(i)->size(); j < len2; ++j) {
 
+			if (map->map->at(i)->at(j) == '|' || map->map->at(i)->at(j) == '-' || map->map->at(i)->at(j) == '+') {
+				++outputCountOfWalls;
+			}
 			if (map->map->at(i)->at(j) == '=') {
 				floorIndex = -1;
 				++this->floor;
@@ -424,6 +429,8 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 	this->ISFloor = new InstanceStorage(NULL, DRAW_TYPE_FLOOR, NULL, NULL);
 	this->ISPath = new InstanceStorage(NULL, DRAW_TYPE_EXIT, NULL, NULL);
 
+	cout << "Count of walls: " << outputCountOfWalls << endl;
+
 }
 
 int Walls::isInArray(char arr[], int size, char c) 
@@ -459,28 +466,30 @@ void Walls::loadModels(void) {
 
 void Walls::drawWalls(Shader *shader)
 {
-	this->ISWall->shader = this->ISPath->shader = this->ISFloor->shader = shader;
-	this->ISFloor->activeFloor = controls->activatedFloor;
-	this->ISFloor->transparency = 0.1;
-	this->ISWall->activeFloor = controls->activatedFloor;
-	this->ISWall->transparency = 0.1;
-	this->ISPath->activeFloor = controls->activatedFloor;
-	this->ISPath->transparency = 0.1;
+	if (cfg->SCENE_TYPE == "2D") {
+		this->ISWall->shader = this->ISPath->shader = this->ISFloor->shader = shader;
+		this->ISFloor->activeFloor = controls->activatedFloor;
+		this->ISFloor->transparency = 0.1;
+		this->ISWall->activeFloor = controls->activatedFloor;
+		this->ISWall->transparency = 0.1;
+		this->ISPath->activeFloor = controls->activatedFloor;
+		this->ISPath->transparency = 0.1;
 
-	for (int i = 0, len = this->pathToFind->size(); i < len; ++i) {
-		this->ISPath->isExitPath = true;
-		this->ISPath->walls = this->pathToFind->at(i);
-		this->exitModel->Draw(this->ISPath);
-	}
+		for (int i = 0, len = this->pathToFind->size(); i < len; ++i) {
+			this->ISPath->isExitPath = true;
+			this->ISPath->walls = this->pathToFind->at(i);
+			this->exitModel->Draw(this->ISPath);
+		}
 
-	for (int i = 0; i < this->countOfWalls; ++i) {
-		this->ISWall->walls = this->walls->at(i);
-		this->wallsModel[i]->Draw(this->ISWall);		
-	}
+		for (int i = 0; i < this->countOfWalls; ++i) {
+			this->ISWall->walls = this->walls->at(i);
+			this->wallsModel[i]->Draw(this->ISWall);
+		}
 
-	for (int i = 0; i < this->countOfFloors; ++i) {
-		this->ISFloor->walls = this->floors->at(i);
-		this->floorsModel[i]->Draw(this->ISFloor);
+		for (int i = 0; i < this->countOfFloors; ++i) {
+			this->ISFloor->walls = this->floors->at(i);
+			this->floorsModel[i]->Draw(this->ISFloor);
+		}
 	}
 }
 

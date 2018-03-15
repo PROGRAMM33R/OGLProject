@@ -4,19 +4,21 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include <glm/vec3.hpp> // glm::vec3
 #include <iostream>
 
-using namespace glm;
 using namespace std;
 
 class Config {
 
 public:
+		struct vec3 {
+			float x, y, z;
+		};
+
 		std::string     WINDOW_LABEL = "Bachelor";
 		int				WINDOW_WIDTH;
 		int				WINDOW_HEIGHT;
-		glm::vec3		INIT_CAMERA_POSITION;
+		vec3			INIT_CAMERA_POSITION;
 		float			FOV;
 		float			PLAYER_SPEED;
 		float			MOUSE_SPEED;
@@ -191,7 +193,10 @@ public:
 					OBJ_EXIT = values->at(i);
 				}
 
-				INIT_CAMERA_POSITION = glm::vec3(cameraX, cameraY, cameraZ);
+				INIT_CAMERA_POSITION.x = cameraX;
+				INIT_CAMERA_POSITION.y = cameraY;
+				INIT_CAMERA_POSITION.z = cameraZ;
+
 				if (SCENE_TYPE == "3D") {
 					if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {
 						BOID_CUBE_SIZE = BOID_CUBE_SIZE + (BOID_GENERATE_SPACE - BOID_CUBE_SIZE);

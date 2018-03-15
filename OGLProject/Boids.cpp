@@ -381,7 +381,7 @@ MyVector *Boids::getArriveVector(void) {
 
 void Boids::update()
 {
-	acceleration->mulScalar((float)(.9));
+	acceleration->mulScalar((float)(.4));
 	velocity->addVector(acceleration);
 	velocity->limit(maxSpeed);
 	location->addVector(velocity);
@@ -569,7 +569,7 @@ float Boids::angleX(MyVector *v) const
 
 float Boids::angleY(MyVector *v) const
 {
-	return (float)(atan2(v->vec.z, v->vec.x));
+	return (float)(atan2(v->vec.x, v->vec.z));
 }
 
 float Boids::angleZ(MyVector *v) const

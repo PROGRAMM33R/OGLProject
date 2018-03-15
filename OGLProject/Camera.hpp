@@ -23,7 +23,11 @@ public:
 		verticalAngle(-0.4f),
 		cfg(cfg)
 	{
-		this->position = this->cfg->INIT_CAMERA_POSITION;
+		this->position = glm::vec3(
+			this->cfg->INIT_CAMERA_POSITION.x,
+			this->cfg->INIT_CAMERA_POSITION.y,
+			this->cfg->INIT_CAMERA_POSITION.z
+		);
 		this->initialFoV = this->cfg->FOV;
 	}
 	~Camera() {}

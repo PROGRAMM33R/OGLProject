@@ -22,6 +22,8 @@ public:
 		float			FOV;
 		float			PLAYER_SPEED;
 		float			MOUSE_SPEED;
+		int				OGL_MAJOR_VERSION;
+		int				OGL_MINOR_VERSION;
 
 		std::string		SCENE_TYPE;
 
@@ -113,6 +115,12 @@ public:
 				}
 				if (keys->at(i).find("MOUSE_SPEED") != std::string::npos) {
 					MOUSE_SPEED = std::stof(values->at(i));
+				}
+				if (keys->at(i).find("OGL_MAJOR_VERSION") != std::string::npos) {
+					OGL_MAJOR_VERSION = std::stoi(values->at(i));
+				}
+				if (keys->at(i).find("OGL_MINOR_VERSION") != std::string::npos) {
+					OGL_MINOR_VERSION = std::stoi(values->at(i));
 				}
 				if (keys->at(i).find("SCENE_TYPE") != std::string::npos) {
 					SCENE_TYPE = values->at(i);

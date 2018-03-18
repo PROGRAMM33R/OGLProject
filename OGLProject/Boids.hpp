@@ -23,6 +23,7 @@ private:
 	std::clock_t start;
 	double escapeDuration;
 	bool startMovingToNextFloor = false;
+	int alignmentSensitivity = 1.0;
 
 	MyVector *oppositeVector;
 	MyVector *steer, *steerMem, *sum, *desired;

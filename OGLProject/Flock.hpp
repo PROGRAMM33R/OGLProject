@@ -22,6 +22,7 @@ private:
 	inline void addBoid(Boids *b);
 
 	InstanceStorage *ISBoid;
+	InstanceStorage *ISPredator;
 
 public:
 	

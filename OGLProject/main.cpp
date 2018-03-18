@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
 		flock->flocking(shader);
 		walls->drawWalls(shader);
 
-		Hud::draw();
+		if (cfg->HUD_ENABLED == 1) Hud::draw();
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();

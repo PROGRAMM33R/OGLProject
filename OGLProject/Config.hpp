@@ -27,6 +27,7 @@ public:
 
 		std::string		SCENE_TYPE;
 
+		int				HUD_ENABLED;
 		int				SEPARATION_ENABLED;
 		int				ALIGNMENT_ENABLED;
 		int				COHESION_ENABLED;
@@ -38,7 +39,8 @@ public:
 		int				WALL_AVOID_RADIUS;
 
 		int				BOID_CUBE_SIZE;
-		float				BOID_OBJ_SIZE;
+		float			BOID_OBJ_SIZE;
+		float			BOID_PREDATOR_SIZE;
 		int				BOID_NUMBER_OF_BOIDS;
 		int				BOID_NUMBER_OF_PREDATORS;
 		int				BOID_GENERATE_SPACE;
@@ -125,6 +127,9 @@ public:
 				if (keys->at(i).find("SCENE_TYPE") != std::string::npos) {
 					SCENE_TYPE = values->at(i);
 				}
+				if (keys->at(i).find("HUD_ENABLED") != std::string::npos) {
+					HUD_ENABLED = std::stoi(values->at(i));
+				}
 				if (keys->at(i).find("SEPARATION_ENABLED") != std::string::npos) {
 					SEPARATION_ENABLED = std::stoi(values->at(i));
 				}
@@ -150,10 +155,13 @@ public:
 					WALL_AVOID_RADIUS = std::stoi(values->at(i));
 				}
 				if (keys->at(i).find("BOID_CUBE_SIZE") != std::string::npos) {
-					int cubeSize = std::stoi(values->at(i));
+					cubeSize = std::stoi(values->at(i));
 				}
 				if (keys->at(i).find("BOID_OBJ_SIZE") != std::string::npos) {
 					BOID_OBJ_SIZE = std::stof(values->at(i));
+				}
+				if (keys->at(i).find("BOID_PREDATOR_SIZE") != std::string::npos) {
+					BOID_PREDATOR_SIZE = std::stof(values->at(i));
 				}
 				if (keys->at(i).find("BOID_NUMBER_OF_BOIDS") != std::string::npos) {
 					BOID_NUMBER_OF_BOIDS = std::stoi(values->at(i));
@@ -206,12 +214,15 @@ public:
 				INIT_CAMERA_POSITION.z = cameraZ;
 
 				if (SCENE_TYPE == "3D") {
-					if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {
-						BOID_CUBE_SIZE = BOID_CUBE_SIZE + (BOID_GENERATE_SPACE - BOID_CUBE_SIZE);
+					if (BOID_GENERATE_SPACE >= cubeSize) {
+						BOID_CUBE_SIZE = BOID_GENERATE_SPACE + 1000;
 					}
-					if ((BOID_NUMBER_OF_BOIDS * 10) > cubeSize) {
+					else {
+						BOID_CUBE_SIZE = cubeSize;
+					}
+					/*if ((BOID_NUMBER_OF_BOIDS * 10) > cubeSize) {
 						BOID_CUBE_SIZE = BOID_NUMBER_OF_BOIDS * 10;
-					}
+					}*/
 				}
 				else {
 					if (BOID_GENERATE_SPACE >= BOID_CUBE_SIZE) {

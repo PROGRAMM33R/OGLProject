@@ -31,7 +31,7 @@ Boids::Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck = 
 	this->floor = floor;
 	float angle = (float)(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * PI * 2;
 
-	if (predCheck == true) {
+	if (this->predator) {
 
 		this->maxSpeed = cfg->BOID_MAX_SPEED_PREDATOR;
 		this->maxForce = cfg->BOID_MAX_FORCE_PREDATOR;
@@ -64,15 +64,28 @@ Boids::Boids(MyVector *newLocation, Config *cfg, Walls *walls, bool predCheck = 
 	if (cfg->SCENE_TYPE == "3D") {
 		location = new MyVector(newLocation->vec.x, newLocation->vec.y, newLocation->vec.z);
 		acceleration = new MyVector();
+
+		if (this->predator) {
+			size.x = (float)(cfg->BOID_PREDATOR_SIZE);
+			size.y = size.x;
+			size.z = size.x;
+		}
+		else {
+			size.x = (float)(cfg->BOID_OBJ_SIZE);
+			size.y = size.x;
+			size.z = size.x;
+		}
+		
 	}
 	else {
 		location = new MyVector2D(newLocation->vec.x, newLocation->vec.y, newLocation->vec.z);
 		acceleration = new MyVector2D();
+		size.x = (float)(cfg->BOID_OBJ_SIZE);
+		size.y = size.x;
+		size.z = size.x;
 	}
 
-	size.x = (float)(cfg->BOID_OBJ_SIZE);
-	size.y = size.x;
-	size.z = size.x;
+	
 	this->cubeSize = cfg->BOID_CUBE_SIZE / 2;
 
 	if (cfg->SCENE_TYPE == "3D") {
@@ -139,11 +152,11 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 				++count;
 			}
 
-			if ((d > 0) && (d < this->desiredseparation) && predator == true
+			if ((d > 0) && (this->desiredseparation + (this->desiredseparation + this->cfg->BOID_PREDATOR_SIZE * 10)) && predator == true
 				&& Boidss->at(i)->predator == true) {
 				this->tmpVector->set();
 				this->tmpVectorMem = this->tmpVector;
-				this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
+				this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
 				this->tmpVector->normalize();
 				this->tmpVector->divScalar(d);
 				this->steer->addVector(this->tmpVector);
@@ -151,17 +164,17 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 				this->tmpVector = this->tmpVectorMem;
 				++count;
 			}
-
-			else if ((d > 0) && (d < (this->desiredseparation + 300)) && Boidss->at(i)->predator == true) {
+			else if ((d > 0) && (d < (this->desiredseparation + this->cfg->BOID_PREDATOR_SIZE * 10)) && Boidss->at(i)->predator == true) {
 				this->tmpVector->set();
 				this->tmpVectorMem = this->tmpVector;
-				this->tmpVector = this->tmpVector->subTwoVector(Boidss->at(i)->location, location);
+				this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
 				this->tmpVector->mulScalar(900);
 				this->steer->addVector(this->tmpVector);
 				delete this->tmpVector;
 				this->tmpVector = this->tmpVectorMem;
 				++count;
 			}
+			
 		}
 	}
 	
@@ -350,7 +363,7 @@ MyVector *Boids::getArriveVector(void) {
 						
 						escapeDuration = ((std::clock() - start) / (double)CLOCKS_PER_SEC) - (cfg->FLOOR_TIME_DURATION * this->floor); // escape time minus time for one floor
 
-						if (escapeDuration > 7) {
+						if (escapeDuration > cfg->FLOOR_TIME_DURATION) {
 							location->vec.y = walls->generatePositions->at(0).y;
 							this->floor = 0;
 							this->getArriveVectorFirstTime = false;
@@ -405,7 +418,7 @@ void Boids::flock(vector<Boids*> *v)
 		);
 	}
 
-	if (cfg->ALIGNMENT_ENABLED == 1) {
+	if (cfg->ALIGNMENT_ENABLED == 1 && !this->predator) {
 		this->tmpVectorMem = Alignment(v);
 		this->aligmentResult->set(
 			this->tmpVectorMem->vec.x,
@@ -414,7 +427,7 @@ void Boids::flock(vector<Boids*> *v)
 		);
 	}
 
-	if (cfg->COHESION_ENABLED == 1) {
+	if (cfg->COHESION_ENABLED == 1 && !this->predator) {
 		this->tmpVectorMem = Cohesion(v);
 		this->cohesionResult->set(
 			this->tmpVectorMem->vec.x,
@@ -430,8 +443,10 @@ void Boids::flock(vector<Boids*> *v)
 		this->tmpVectorMem->vec.z
 	);
 
-	this->tmpVectorMem = getArriveVector();
-	this->arriveToResult->set();
+	if (cfg->SCENE_TYPE == "2D") {
+		this->tmpVectorMem = getArriveVector();
+		this->arriveToResult->set();
+	}
 
 	if (this->tmpVectorMem != NULL) {
 		this->tmpVectorMem = arriveTo(this->tmpVectorMem);
@@ -444,8 +459,8 @@ void Boids::flock(vector<Boids*> *v)
 
 	if (cfg->SCENE_TYPE == "3D") {
 		this->separationResult->mulScalar(1.5);
-		this->aligmentResult->mulScalar(1.0);
-		this->cohesionResult->mulScalar(1.0);
+		this->aligmentResult->mulScalar( this->alignmentSensitivity );
+		this->cohesionResult->mulScalar(0.4);
 		applyForce(this->cohesionResult);
 	}
 	else {

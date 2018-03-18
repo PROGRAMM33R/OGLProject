@@ -7,14 +7,20 @@ Flock::Flock(Config *cfg, Walls *walls)
 	numberOfBoids = this->cfg->BOID_NUMBER_OF_BOIDS;
 	numberOfPredators = this->cfg->BOID_NUMBER_OF_PREDATORS;
 
-	this->boidsModel = new Model*[this->cfg->BOID_NUMBER_OF_BOIDS * walls->generatePositions->size()];
+	if (this->cfg->SCENE_TYPE == "3D") {
+		this->boidsModel = new Model*[this->numberOfBoids + this->numberOfPredators];
+	}
+	else {
+		this->boidsModel = new Model*[this->numberOfBoids * walls->generatePositions->size()];
+	}
+	
 	this->flock = new vector<Boids*>();
 	this->loadModels();
 
-	for (int i = 0; i < cfg->BOID_NUMBER_OF_BOIDS; ++i) {
+	for (int i = 0; i < (this->numberOfBoids + this->numberOfPredators); ++i) {
 
 		if (this->cfg->SCENE_TYPE == "3D") {
-			if (i < cfg->BOID_NUMBER_OF_PREDATORS) {
+			if (i < this->numberOfPredators) {
 				addBoid(new Boids(
 					new MyVector(
 						(float)(rand() % this->cfg->BOID_GENERATE_SPACE),
@@ -22,7 +28,7 @@ Flock::Flock(Config *cfg, Walls *walls)
 						(float)(rand() % this->cfg->BOID_GENERATE_SPACE)
 					),
 					this->cfg,
-					walls,
+					NULL,
 					true, 0
 				)
 				);
@@ -35,7 +41,7 @@ Flock::Flock(Config *cfg, Walls *walls)
 						(float)(rand() % this->cfg->BOID_GENERATE_SPACE)
 					),
 					this->cfg,
-					walls,
+					NULL,
 					false, 0
 				)
 				);
@@ -62,6 +68,7 @@ Flock::Flock(Config *cfg, Walls *walls)
 	}
 
 	this->ISBoid = new InstanceStorage(NULL, DRAW_TYPE_BOIDS, NULL, NULL);
+	this->ISPredator = new InstanceStorage(NULL, DRAW_TYPE_PREDATOR, NULL, NULL);
 
 }
 
@@ -80,7 +87,7 @@ void Flock::loadModels(void) {
 		tmpBoidsModelPredator = new Model(this->cfg->OBJ_PREDATOR, this->cfg);
 	}
 
-	for (int i = 0; i < this->numberOfBoids; ++i) {
+	for (int i = 0; i < (this->numberOfBoids + this->numberOfPredators); ++i) {
 
 		if (i < this->numberOfPredators) {
 			if (tmpBoidsModelPredator != NULL)
@@ -97,11 +104,11 @@ void Flock::loadModels(void) {
 
 void Flock::flocking(Shader *shader)
 {
-	this->ISBoid->shader = shader;
-	this->ISBoid->transparency = 0.1;
-	this->ISBoid->floorDiferencial = walls->floorDiferencial;
+	this->ISBoid->shader = this->ISPredator->shader = shader;
+	this->ISBoid->transparency = this->ISPredator->transparency = 0.1;
+	this->ISBoid->floorDiferencial = this->ISPredator->floorDiferencial = walls->floorDiferencial;
 
-	for (int i = 0; i < this->numberOfBoids; ++i) {
+	for (int i = 0; i < (this->numberOfBoids + this->numberOfPredators); ++i) {
 
 		this->flock->at(i)->run(flock);
 		this->ISBoid->Boidss = this->flock->at(i);
@@ -109,4 +116,5 @@ void Flock::flocking(Shader *shader)
 		boidsModel[i]->Draw(this->ISBoid);
 
 	}
+
 }

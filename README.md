@@ -14,10 +14,4 @@ http://www.kfish.org/boids/pseudocode.html
 https://github.com/ben-grid/Mechstorming/
 
 ## Screens
-![Rendered building](http://adam-lasak.xf.cz/web/images/bachelor_screen1.jpg)
 
-![Wall transparency](http://adam-lasak.xf.cz/web/images/bachelor_screen2.jpg)
-
-![Wall transparency - side](http://adam-lasak.xf.cz/web/images/bachelor_screen3.jpg)
-
-![Flock simulation](http://adam-lasak.xf.cz/web/images/bachelor_screen4.jpg)

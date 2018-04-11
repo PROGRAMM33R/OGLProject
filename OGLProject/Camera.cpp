@@ -13,6 +13,13 @@ void Camera::calculateCamera(GLFWwindow* window, float mouseSpeed) {
 	horizontalAngle += mouseSpeed * float(1024 / 2 - xpos);
 	verticalAngle += mouseSpeed * float(768 / 2 - ypos);
 
+	if (verticalAngle < -1.45) {
+		verticalAngle = -1.45;
+	}
+	if (verticalAngle > 1.25) {
+		verticalAngle = 1.25;
+	}
+
 	// Direction : Spherical coordinates to Cartesian coordinates conversion
 	direction = glm::vec3(
 		cos(verticalAngle) * sin(horizontalAngle),

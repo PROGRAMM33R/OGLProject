@@ -12,7 +12,7 @@
 
 int main(int argc, char **argv) {
 
-	Config		*cfg = new Config();
+	Config		*cfg = argc == 2 ? cfg = new Config(argv[1]) : cfg = new Config("config.cfg");;
 	Map         *map = new Map();
 	GLFWwindow  *window = NULL;
 	Scene       *scene = new Scene(cfg);
@@ -38,6 +38,13 @@ int main(int argc, char **argv) {
 	do {
 
 		shader->use();
+
+		if (controls->updateViewPort)
+		{
+			glfwGetFramebufferSize(window, &controls->_vpSize[0], &controls->_vpSize[1]);
+			glViewport(0, 0, controls->_vpSize[0], controls->_vpSize[1]);
+			controls->updateViewPort = false;
+		}
 
 		currentTime = glfwGetTime();
 		nbFrames++;

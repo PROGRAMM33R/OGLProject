@@ -2,6 +2,7 @@
 
 #include "Std.hpp"
 #include "Camera.hpp"
+#include <array>
 
 class Controls {
 
@@ -12,10 +13,18 @@ private:
 	Config *cfg;
 	std::clock_t start;
 	bool spacePressed, spaceReleased, startStopwatch;
+	bool FPressed, FReleased;
+	bool fullscreen;
+	const GLFWvidmode * mode;
 	
 public:
 	double escapeDuration;
 	int activatedFloor;
+	bool updateViewPort;
+	std::array< int, 2 > _wndPos{ 0, 0 };
+	std::array< int, 2 > _wndSize{ 0, 0 };
+	GLFWmonitor * _monitor = nullptr;
+	std::array< int, 2 > _vpSize{ 0, 0 };
 
 	Controls(Config *cfg)
 	:
@@ -29,6 +38,11 @@ public:
 			spacePressed = false;
 			spaceReleased = false;
 			startStopwatch = false;
+			FPressed = false;
+			FReleased = false;
+			fullscreen = false;
+			updateViewPort = false;
+			_monitor = glfwGetPrimaryMonitor();
 	}
 	~Controls();
 	void computeMatricesFromInputs(GLFWwindow* window);

@@ -25,6 +25,7 @@ c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(463): warning C4305: 
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(212): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(213): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(214): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(17): warning C4305: '=': truncation from 'double' to 'float'
   Flock.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(212): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(213): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -72,8 +73,8 @@ c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\boids.hpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(33): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(42): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Walls.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(212): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(213): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -123,14 +124,90 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\packages\AntTweakBar\lib\AntTweakBar.dll
   1 File(s) copied
-  Does C:\Users\adam\Desktop\BachelorProject\Release\Models specify a file name
-  or directory name on the target
-  (F = file, D = directory)? ?   ≈  }⌠Iµ0 tx{             ├{ ╚«{ ½{ x{ ⌡δΣ%δ0 	N°└{    ░ô√m ≈0 └≈0 ºT√m≡{                 T√m≡{                 ╕≈0 └≈0      ≈0         °└{ ÿ { |√mÿ {   { °µ0 Φ▀{ α¬{ Φ├z Φ«{ 
-     °├z )  ╨	& d              ▄µ0 ▄µ0 wQ√m@≡0 ═P√m  z     ╕»{ @Q√m     ≈0     H√m≡{ ╕»{           Φ▀{ H├{ H√mÿ { C : \   r╬τSL   $àwtΩz     M3⌡v└τS     z PΘ0 áΩ0     J         ñ'    j°v  ╬τSαφ0 αφ0   b╝⌠v  °Φz     ▄╝⌠vΘ0 ■╧⌡vl   l     ( T        z ⌠   ÷■  ÷   w   ≡▓{ ▐Θ0    ü■          &      z ▐Θ0  É╤r╪ì{ Ç├z ÷   ╠úz   z   & ─& <
-  &    w  └ z ╕úz Y⌡v     ( Ç    z é┴τS     ╤V╤s≈         Φ▀{    @& ü   ÷         êΦ0     U   w  £╢     áΦ0 Φ▓{ ,√mx{ êµ0                   v├τS               ╢╞s|√mÿ {    xúz   v   ÷  ÷v   8ez ε0    j°v  ■   HΘ0 ╖⌡v         4Θ0      z       .   0■  0   T   H├{       ■  lΘ0 ε⌡v£ôz       z ú⌡v╛├τS@├{   z    ¿úz   z           Ç     └ z ÷  ÷VO⌡v    ≡▓{ 0  0        ∙N'╨      J       ÷  ÷H   J■  :      Ç   
-  Does C:\Users\adam\Desktop\BachelorProject\Release\Models specify a file name
-  or directory name on the target
-  (F = file, D = directory)? C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cottage\test2.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\cube.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\cube.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\surface - Copy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\surface.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\untitled.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube\untitled.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\cube.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\cube.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\surface - Copy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\surface.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Fogel_Mat Diffuse Color.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\eagle.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\eagle.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.FBX
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle_D.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle_D.TGA
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\fish\koi.FBX
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\fish\koi.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\fish\koi_red.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\fish\koi_white.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\cilveks2.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\CILVEKS2.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\cilveks2.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\CILVEKS2.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\CILVEKS2.psd
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\cilveks_sarkanais.rar
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human1.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human1.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human1.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human1.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human2.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human2.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\human2.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\fulldome3.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skybox.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\bk.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\dn.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\ft.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\lt.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negx.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negz.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posx.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posz.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\rt.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\sky1.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\sky2.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\SkyBox.bmp
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox2.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox2.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\space1.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\up.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass - Copy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\surface.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\surface.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\OBJ.rar
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall - Copy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.obj
+  82 File(s) copied
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\map.txt
   1 File(s) copied

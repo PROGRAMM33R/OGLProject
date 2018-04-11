@@ -58,14 +58,14 @@ public:
 		std::string		OBJ_WALL;
 		std::string		OBJ_EXIT;
 
-		Config() {
+		Config(string path) {
 
 			vector<string> *keys = new vector<string>();
 			vector<string> *values = new vector<string>();
 
 			int cameraX = 0, cameraY = 0, cameraZ = 0;
 			int cubeSize = 0;
-			std::ifstream in("config.cfg");
+			std::ifstream in(path);
 			std::string contents((std::istreambuf_iterator<char>(in)),
 				std::istreambuf_iterator<char>());
 

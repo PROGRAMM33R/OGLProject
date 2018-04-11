@@ -15,12 +15,22 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 
 	spacePressed = false;
 	spaceReleased = false;
+	FPressed = false;
+	FReleased = false;
+	updateViewPort = false;
 
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
 		spacePressed = true;
 	}
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE) {
 		spaceReleased = true;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
+		FPressed = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE) {
+		FReleased = true;
 	}
 
 	if (spacePressed && spaceReleased) {
@@ -37,6 +47,30 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 		}
 		spacePressed = false;
 		spaceReleased = false;
+	}
+
+	if (FPressed && FReleased) {
+		fullscreen = !fullscreen;
+		mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		if (fullscreen) {
+			
+			//glfwSetWindowSize(window, mode->width, mode->height);
+			//glfwSetWindowPos(window, 0, 0);
+			
+			// backup windwo position and window size
+			glfwGetWindowPos(window, &_wndPos[0], &_wndPos[1]);
+			glfwGetWindowSize(window, &_wndSize[0], &_wndSize[1]);
+			glfwSetWindowMonitor(window, _monitor, 0, 0, mode->width, mode->height, 0);
+
+		}
+		else {
+			//glfwSetWindowSize(window, cfg->WINDOW_WIDTH, cfg->WINDOW_HEIGHT);
+			//glfwSetWindowPos(window, mode->width / 4, mode->height / 4);
+			glfwSetWindowMonitor(window, nullptr, _wndPos[0], _wndPos[1], _wndSize[0], _wndSize[1], 0);
+		}
+		updateViewPort = true;
+		FPressed = false;
+		FReleased = false;
 	}
 
 	if (startStopwatch) {

@@ -33,6 +33,12 @@ int main(int argc, char **argv) {
 	float lastTime = glfwGetTime(), currentTime = 0.0, fps = 0.0;
 	int nbFrames = 0;
 
+	InstanceStorage *ISSky = new InstanceStorage(shader, DRAW_TYPE_SKY, NULL, NULL);
+	InstanceStorage *ISSurface = new InstanceStorage(shader, DRAW_TYPE_SKY, NULL, NULL);
+	ISSky->sky = true;
+
+	Model *sky = new Model(cfg->OBJ_SKY, cfg);
+
 	Hud::init(cfg, &fps, &(controls->escapeDuration));
 
 	do {
@@ -81,8 +87,13 @@ int main(int argc, char **argv) {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		ISSky->cameraX = controls->camera->getPosition_().x;
+		ISSky->cameraY = controls->camera->getPosition_().y;
+		ISSky->cameraZ = controls->camera->getPosition_().z;
+
 		flock->flocking(shader);
 		walls->drawWalls(shader);
+		sky->Draw(ISSky);
 
 		if (cfg->HUD_ENABLED == 1) Hud::draw();
 		

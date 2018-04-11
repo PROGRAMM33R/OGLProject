@@ -21,6 +21,8 @@ public:
 	MyVector *exitPathPosition;
 	int floorDiferencial;
 	bool isExitPath;
+	int cameraX, cameraY, cameraZ;
+	bool sky = false;
 
 	int activeFloor = 0;
 	float transparency = 0.0;

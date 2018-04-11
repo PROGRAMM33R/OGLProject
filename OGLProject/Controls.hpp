@@ -9,7 +9,6 @@ class Controls {
 private:
 	float initialFoV;
 	float speed, mouseSpeed;
-	Camera *camera;
 	Config *cfg;
 	std::clock_t start;
 	bool spacePressed, spaceReleased, startStopwatch;
@@ -18,6 +17,7 @@ private:
 	const GLFWvidmode * mode;
 	
 public:
+	Camera * camera;
 	double escapeDuration;
 	int activatedFloor;
 	bool updateViewPort;

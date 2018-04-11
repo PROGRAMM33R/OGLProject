@@ -162,11 +162,14 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 
 	if (instanceStorage->objType == DRAW_TYPE_SKY) {
 
-		glm::mat4 model; int size = 190000;
-		glm::vec3 position = glm::vec3(-190000, -182000, -180000);
+		glm::mat4 model; int size = 10000;
+		//glm::vec3 position = glm::vec3(-190000, -182000, -180000);
+		glm::vec3 position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 11000, instanceStorage->cameraZ);
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
+
+		this->setTransparency(instanceStorage);
 		instanceStorage->shader->setMat4("Model", model);
 
 	}
@@ -263,6 +266,9 @@ void Mesh::setTransparency(InstanceStorage *instanceStorage) {
 		else {
 			instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
 		}
+	}
+	else if (instanceStorage->sky){
+		instanceStorage->shader->setFloat("transparent", 1.0);
 	}
 
 }

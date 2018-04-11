@@ -26,6 +26,7 @@ c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(212): warning C4244:
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(213): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(214): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(17): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(20): warning C4305: '=': truncation from 'double' to 'float'
   Flock.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(212): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(213): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -45,8 +46,8 @@ c:\users\adam\desktop\bachelorproject\oglproject\boids.hpp(26): warning C4244: '
 c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(102): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(158): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(169): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(248): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(170): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(251): warning C4305: 'argument': truncation from 'double' to 'float'
   Model.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(212): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(213): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -73,8 +74,11 @@ c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=
 c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\boids.hpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(33): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(55): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(58): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(90): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(91): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(92): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Walls.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(212): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(213): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -169,11 +173,20 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.fbx
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\mountain\25-rough-textures.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\mountain\256px-Dirttexture.gif
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\mountain\Dirt_Texture_by_Badaan.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\mountain\land.c4d
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\fulldome3.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skybox.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.blend
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\bk.png
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\dn.png
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\ft.png
@@ -194,6 +207,23 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox2.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\space1.png
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\up.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\fulldome.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\fulldome2.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\fulldome3.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\skybox.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\skydome.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\skydome.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\skydome.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\skydome.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\skydome.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\skydome.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\surface.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\cubemap\negx.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\cubemap\negy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\cubemap\negz.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\cubemap\posx.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\cubemap\posy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\cubemap\posz.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass - Copy.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\grass.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\surface.mtl
@@ -206,7 +236,7 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.obj
-  82 File(s) copied
+  108 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\map.txt

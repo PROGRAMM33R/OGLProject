@@ -16,8 +16,8 @@ void Camera::calculateCamera(GLFWwindow* window, float mouseSpeed) {
 	if (verticalAngle < -1.45) {
 		verticalAngle = -1.45;
 	}
-	if (verticalAngle > 1.25) {
-		verticalAngle = 1.25;
+	if (verticalAngle > 1.2) {
+		verticalAngle = 1.2;
 	}
 
 	// Direction : Spherical coordinates to Cartesian coordinates conversion

@@ -52,22 +52,17 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 	if (FPressed && FReleased) {
 		fullscreen = !fullscreen;
 		mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
 		if (fullscreen) {
-			
-			//glfwSetWindowSize(window, mode->width, mode->height);
-			//glfwSetWindowPos(window, 0, 0);
-			
-			// backup windwo position and window size
 			glfwGetWindowPos(window, &_wndPos[0], &_wndPos[1]);
 			glfwGetWindowSize(window, &_wndSize[0], &_wndSize[1]);
 			glfwSetWindowMonitor(window, _monitor, 0, 0, mode->width, mode->height, 0);
 
 		}
 		else {
-			//glfwSetWindowSize(window, cfg->WINDOW_WIDTH, cfg->WINDOW_HEIGHT);
-			//glfwSetWindowPos(window, mode->width / 4, mode->height / 4);
 			glfwSetWindowMonitor(window, nullptr, _wndPos[0], _wndPos[1], _wndSize[0], _wndSize[1], 0);
 		}
+
 		updateViewPort = true;
 		FPressed = false;
 		FReleased = false;

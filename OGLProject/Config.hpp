@@ -52,6 +52,7 @@ public:
 		float			BOID_MAX_FORCE_PREDATOR;
 
 		std::string		OBJ_SURFACE;
+		std::string		OBJ_LANDSCAPE;
 		std::string		OBJ_BOID;
 		std::string		OBJ_PREDATOR;
 		std::string		OBJ_SKY;
@@ -192,6 +193,9 @@ public:
 				}
 				if (keys->at(i).find("OBJ_SURFACE") != std::string::npos) {
 					OBJ_SURFACE = values->at(i);
+				}
+				if (keys->at(i).find("OBJ_LANDSCAPE") != std::string::npos) {
+					OBJ_LANDSCAPE = values->at(i);
 				}
 				if (keys->at(i).find("OBJ_BOID") != std::string::npos) {
 					OBJ_BOID = values->at(i);

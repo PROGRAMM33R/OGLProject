@@ -142,29 +142,30 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 
 	}
 
-	if (instanceStorage->objType == DRAW_TYPE_SURFACE){
+	if (instanceStorage->objType == DRAW_TYPE_LANDSCAPE){
 
 		glm::mat4 model; 
-		int size = cfg->BOID_CUBE_SIZE / 1300;
+		int size = 500;
 		glm::vec3 position;
 		if (this->cfg->SCENE_TYPE == "3D") {
 			position = glm::vec3(0, -(this->cfg->BOID_CUBE_SIZE / 2) - 100, 0);
 		}
 		else {
-			position = glm::vec3(0, -(this->cfg->BOID_OBJ_SIZE) - 50, 0);
+			position = glm::vec3(0, -500, 0);
 		}
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
+		this->setTransparency(instanceStorage);
 		instanceStorage->shader->setMat4("Model", model);
 
 	}
 
 	if (instanceStorage->objType == DRAW_TYPE_SKY) {
 
-		glm::mat4 model; int size = 10000;
+		glm::mat4 model; int size = 16000;
 		//glm::vec3 position = glm::vec3(-190000, -182000, -180000);
-		glm::vec3 position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 11000, instanceStorage->cameraZ);
+		glm::vec3 position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 27000, instanceStorage->cameraZ);
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
@@ -267,7 +268,7 @@ void Mesh::setTransparency(InstanceStorage *instanceStorage) {
 			instanceStorage->shader->setFloat("transparent", instanceStorage->transparency);
 		}
 	}
-	else if (instanceStorage->sky){
+	else if (instanceStorage->sky || instanceStorage->landscape){
 		instanceStorage->shader->setFloat("transparent", 1.0);
 	}
 

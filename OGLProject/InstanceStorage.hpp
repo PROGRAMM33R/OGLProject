@@ -22,7 +22,7 @@ public:
 	int floorDiferencial;
 	bool isExitPath;
 	int cameraX, cameraY, cameraZ;
-	bool sky = false;
+	bool sky = false, landscape = false;
 
 	int activeFloor = 0;
 	float transparency = 0.0;

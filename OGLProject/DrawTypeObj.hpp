@@ -7,3 +7,4 @@ const int DRAW_TYPE_PREDATOR = 4;
 const int DRAW_TYPE_WALL = 5;
 const int DRAW_TYPE_EXIT = 6;
 const int DRAW_TYPE_FLOOR = 7;
+const int DRAW_TYPE_LANDSCAPE = 8;

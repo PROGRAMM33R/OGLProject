@@ -34,10 +34,12 @@ int main(int argc, char **argv) {
 	int nbFrames = 0;
 
 	InstanceStorage *ISSky = new InstanceStorage(shader, DRAW_TYPE_SKY, NULL, NULL);
-	InstanceStorage *ISSurface = new InstanceStorage(shader, DRAW_TYPE_SKY, NULL, NULL);
+	InstanceStorage *ISSurface = new InstanceStorage(shader, DRAW_TYPE_LANDSCAPE, NULL, NULL);
 	ISSky->sky = true;
+	ISSurface->landscape = true;
 
 	Model *sky = new Model(cfg->OBJ_SKY, cfg);
+	Model *landscape = new Model(cfg->OBJ_LANDSCAPE, cfg);
 
 	Hud::init(cfg, &fps, &(controls->escapeDuration));
 
@@ -93,6 +95,7 @@ int main(int argc, char **argv) {
 
 		flock->flocking(shader);
 		walls->drawWalls(shader);
+		landscape->Draw(ISSurface);
 		sky->Draw(ISSky);
 
 		if (cfg->HUD_ENABLED == 1) Hud::draw();

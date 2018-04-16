@@ -1,4 +1,26 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (OGLProject.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Boids.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.hpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(306): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(310): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(330): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(336): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(338): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(339): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(342): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(351): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(352): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(354): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(374): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(380): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(462): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.cpp(463): warning C4305: 'argument': truncation from 'double' to 'float'
   Camera.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -7,6 +29,86 @@ c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(18): warning C4305: 
 c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(29): warning C4305: '=': truncation from 'double' to 'float'
 c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(39): warning C4305: '=': truncation from 'double' to 'float'
 c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(42): warning C4305: '=': truncation from 'double' to 'float'
+  Flock.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.hpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\flock.cpp(61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\flock.cpp(108): warning C4305: '=': truncation from 'double' to 'float'
+  Mesh.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.hpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(102): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(158): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(171): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(252): warning C4305: 'argument': truncation from 'double' to 'float'
+  Model.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  MyVector.cpp
+  MyVector2D.cpp
+  Scene.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Config.hpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Controls.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  main.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\boids.hpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(33): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(99): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(100): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\main.cpp(101): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Walls.cpp
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(10): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(88): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(131): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(168): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(189): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(212): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(311): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(323): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(334): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(339): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(351): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(365): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(370): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(382): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(393): warning C4018: '<': signed/unsigned mismatch
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(398): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(410): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(472): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(474): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\walls.cpp(476): warning C4305: '=': truncation from 'double' to 'float'
+  Generating Code...
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
 Boids.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
 LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
@@ -43,16 +145,6 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\surface.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\cube_predator\untitled.blend1
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.blend
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Eagle.fbx
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\Fogel_Mat Diffuse Color.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\eagle.blend
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\eagle.blend1
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.FBX
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.mtl
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle.obj
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle_D.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\eagle\old\Eagle_D.TGA
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\fish\koi.FBX
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\fish\koi.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\fish\koi_red.jpg
@@ -83,36 +175,45 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\untitled.blend
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\untitled.blend1
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\untitled.mtl
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\fulldome3.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skybox.obj
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.blend
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.obj
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.blend
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.blend1
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.fbx
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.mtl
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\skydome_.obj
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\bk.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\dn.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\ft.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\lt.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negx.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negy.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\negz.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posx.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posy.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\posz.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\rt.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\sky1.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\sky2.jpg
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\SkyBox.bmp
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox.mtl
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox.obj
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox2.mtl
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\skybox2.obj
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\space1.png
-  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\cubemap\up.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\fulldome.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\fulldome2.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\fulldome3.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\skybox.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\skydome.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\skydome.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\skydome.fbx
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\skydome.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\skydome.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\skydome.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\surface.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\cubemap\negx.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\cubemap\negy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\cubemap\negz.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\cubemap\posx.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\cubemap\posy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sea\sky\cubemap\posz.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\grass - Copy.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\grass.jpg
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\grass.png
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\landscape.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\landscape.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\landscape.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\landscape.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\seabed.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\seabed.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\surface.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\surface.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\untitled.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\untitled.blend1
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\seabed\untitled.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\shark\great white shark.max
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\shark\great_white_shark.rar
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\shark\Texture\greatwhiteshark.tga
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\shark\Texture\greatwhiteshark_Eye.tga
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\shark\Texture\greatwhiteshark_Eye_n.tga
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\shark\Texture\greatwhiteshark_n.tga
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\shark\Texture\greatwhiteshark_teeth.tga
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\shark\Texture\greatwhiteshark_teeth_n.tga
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\fulldome.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\fulldome2.png
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\sky\sky\fulldome3.png
@@ -137,12 +238,18 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.blend1
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\surface\untitled.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\custom.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\custom.blend1
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\OBJ.rar
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall - Copy.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.obj
-  114 File(s) copied
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall2.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall2.obj
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall3.mtl
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall3.obj
+  119 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\map.txt

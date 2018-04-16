@@ -68,11 +68,18 @@ int main(int argc, char **argv) {
 
 		shader->setVec3("light.position", glm::vec3(0.0f, 100.0f, 150.0f));
 		shader->setVec3("viewPos", controls->getCameraPosition());
-
-		shader->setVec3("light.ambient", 1.0f, 1.0f, 1.0f);
-		shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-		shader->setVec3("light.specular", 0.8f, 0.8f, 0.8f);
 		
+		if (cfg->SCENE_TYPE == "3D") {
+			shader->setVec3("light.ambient", 1.0f, 1.0f, 1.0f);
+			shader->setVec3("light.diffuse", 0.0f, 0.0f, 0.0f);
+			shader->setVec3("light.specular", 0.0f, 0.0f, 0.0f);
+		}
+		else {
+			shader->setVec3("light.ambient", 1.0f, 1.0f, 1.0f);
+			shader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+			shader->setVec3("light.specular", 0.8f, 0.8f, 0.8f);
+		}
+
 		shader->setVec3("material.specular", 0.6f, 0.6f, 0.6f);
 		shader->setFloat("material.shininess", 64.0f);
 

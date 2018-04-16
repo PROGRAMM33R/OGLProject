@@ -32,7 +32,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 		else {
 			
 			//model = glm::rotate(model, instanceStorage->Boidss->angleX(instanceStorage->Boidss->velocity), glm::vec3(1, 0, 0));
-			model = glm::rotate(model, -1 * (instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity)), glm::vec3(0, 1, 0));
+			model = glm::rotate(model,  (instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity)) + ((float)3.14 / (float)2) * -1 , glm::vec3(0, 1, 0));
 			model = glm::rotate(model, instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity), glm::vec3(0, 0, 1));
 
 		}
@@ -147,12 +147,14 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 		glm::mat4 model; 
 		int size = 500;
 		glm::vec3 position;
+
 		if (this->cfg->SCENE_TYPE == "3D") {
-			position = glm::vec3(0, -(this->cfg->BOID_CUBE_SIZE / 2) - 100, 0);
+			position = glm::vec3(0, -(this->cfg->BOID_CUBE_SIZE / 2) - cfg->BOID_CUBE_SIZE - 1500, 0);
 		}
 		else {
 			position = glm::vec3(0, -500, 0);
 		}
+
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));
@@ -164,8 +166,15 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 	if (instanceStorage->objType == DRAW_TYPE_SKY) {
 
 		glm::mat4 model; int size = 20000;
-		//glm::vec3 position = glm::vec3(-190000, -182000, -180000);
-		glm::vec3 position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 27000, instanceStorage->cameraZ);
+		glm::vec3 position;
+		
+		if (this->cfg->SCENE_TYPE == "3D") {
+			position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 38000, instanceStorage->cameraZ);
+		}
+		else {
+			position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 27000, instanceStorage->cameraZ);
+		}
+		
 		model = glm::translate(model, position);
 		model = glm::translate(model, glm::vec3(size, size, size));
 		model = glm::scale(model, glm::vec3(size));

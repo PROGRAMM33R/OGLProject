@@ -155,7 +155,7 @@ public:
 				if (keys->at(i).find("WALL_AVOID_RADIUS") != std::string::npos) {
 					WALL_AVOID_RADIUS = std::stoi(values->at(i));
 				}
-				if (keys->at(i).find("BOID_CUBE_SIZE") != std::string::npos) {
+				if (keys->at(i).find("BOID_SPHERE_SIZE") != std::string::npos) {
 					cubeSize = std::stoi(values->at(i));
 				}
 				if (keys->at(i).find("BOID_OBJ_SIZE") != std::string::npos) {

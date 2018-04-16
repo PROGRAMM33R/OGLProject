@@ -140,7 +140,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 	for (int i = 0, len = Boidss->size(); i < len; ++i) {
 		if (Boidss->at(i)->floor == this->floor) {
 			float d = location->distance(Boidss->at(i)->location);
-			if ((d > 0) && (d < this->desiredseparation) && predator == false) {
+			if ((d > 0) && (d < this->desiredseparation) /*&& predator == false*/) {
 				this->tmpVector->set();
 				this->tmpVectorMem = this->tmpVector;
 				this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
@@ -150,6 +150,20 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 				delete this->tmpVector;
 				this->tmpVector = this->tmpVectorMem;
 				++count;
+			}
+
+			if (this->predator) {
+				if ((d > 0) && (d < this->desiredseparation + (this->desiredseparation + this->cfg->BOID_PREDATOR_SIZE * 13))) {
+					this->tmpVector->set();
+					this->tmpVectorMem = this->tmpVector;
+					this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
+					this->tmpVector->normalize();
+					this->tmpVector->divScalar(d);
+					this->steer->addVector(this->tmpVector);
+					delete this->tmpVector;
+					this->tmpVector = this->tmpVectorMem;
+					++count;
+				}
 			}
 
 			if ((d > 0) && (this->desiredseparation + (this->desiredseparation + this->cfg->BOID_PREDATOR_SIZE * 10)) && predator == true
@@ -164,7 +178,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 				this->tmpVector = this->tmpVectorMem;
 				++count;
 			}
-			else if ((d > 0) && (d < (this->desiredseparation + this->cfg->BOID_PREDATOR_SIZE * 10)) && Boidss->at(i)->predator == true) {
+			else if ((d > 0) && (d < (this->desiredseparation + this->cfg->BOID_PREDATOR_SIZE * 12)) && Boidss->at(i)->predator == true) {
 				this->tmpVector->set();
 				this->tmpVectorMem = this->tmpVector;
 				this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
@@ -178,7 +192,7 @@ MyVector *Boids::Separation(vector<Boids*> *Boidss)
 		}
 	}
 	
-	if (this->steer->magnitude() > 0) {
+	if (this->steer->magnitude() > 0 ) {
 
 		this->steer->divScalar((float)count);
 		this->steer->normalize();
@@ -394,11 +408,20 @@ MyVector *Boids::getArriveVector(void) {
 
 void Boids::update()
 {
-	acceleration->mulScalar((float)(.4));
-	velocity->addVector(acceleration);
-	velocity->limit(maxSpeed);
-	location->addVector(velocity);
-	acceleration->mulScalar(0);
+	//if (!this->predator) {
+		acceleration->mulScalar((float)(.4));
+		velocity->addVector(acceleration);
+		velocity->limit(maxSpeed);
+		location->addVector(velocity);
+		acceleration->mulScalar(0);
+	//}
+	//else {
+		/*acceleration->mulScalar((float)(5.4));
+		velocity->addVector(acceleration);
+		velocity->limit(maxSpeed);
+		location->addVector(velocity);
+		acceleration->mulScalar(0);*/
+	//}
 }
 
 void Boids::run(vector <Boids*> *v)
@@ -418,7 +441,7 @@ void Boids::flock(vector<Boids*> *v)
 		);
 	}
 
-	if (cfg->ALIGNMENT_ENABLED == 1 && !this->predator) {
+	if (cfg->ALIGNMENT_ENABLED == 1 /*&& !this->predator*/) {
 		this->tmpVectorMem = Alignment(v);
 		this->aligmentResult->set(
 			this->tmpVectorMem->vec.x,
@@ -427,7 +450,7 @@ void Boids::flock(vector<Boids*> *v)
 		);
 	}
 
-	if (cfg->COHESION_ENABLED == 1 && !this->predator) {
+	if (cfg->COHESION_ENABLED == 1 /*&& !this->predator*/) {
 		this->tmpVectorMem = Cohesion(v);
 		this->cohesionResult->set(
 			this->tmpVectorMem->vec.x,
@@ -458,10 +481,18 @@ void Boids::flock(vector<Boids*> *v)
 	}
 
 	if (cfg->SCENE_TYPE == "3D") {
-		this->separationResult->mulScalar(1.5);
-		this->aligmentResult->mulScalar( this->alignmentSensitivity );
-		this->cohesionResult->mulScalar(0.4);
-		applyForce(this->cohesionResult);
+
+		/*if (this->predator) {
+			this->separationResult->mulScalar(10.5);
+			applyForce(this->separationResult);
+		}
+		else {*/
+			this->separationResult->mulScalar(1.5);
+			this->aligmentResult->mulScalar(this->alignmentSensitivity);
+			this->cohesionResult->mulScalar(0.4);
+			applyForce(this->cohesionResult);
+		//}
+		
 	}
 	else {
 		this->separationResult->mulScalar(0.75);
@@ -480,12 +511,12 @@ void Boids::flock(vector<Boids*> *v)
 	if (cfg->SEPARATION_ENABLED == 1) {
 		applyForce(this->separationResult);
 	}
-	if (cfg->ALIGNMENT_ENABLED == 1) {
+	if (cfg->ALIGNMENT_ENABLED == 1 /*&& !this->predator*/) {
 		if (this->wallRepelResult->vec.x == 0 && this->wallRepelResult->vec.y == 0) {
 			applyForce(this->aligmentResult);
 		}
 	}
-	if (cfg->COHESION_ENABLED == 1) {
+	if (cfg->COHESION_ENABLED == 1/* && !this->predator*/) {
 		applyForce(this->cohesionResult);
 	}
 
@@ -500,7 +531,7 @@ MyVector *Boids::WallRepel() {
 
 		if (location->distance(this->origin) > (cfg->BOID_CUBE_SIZE / 2)) {
 			this->oppositeVector->addVector(location);
-			this->oppositeVector->mulScalar(-.5);
+			this->oppositeVector->mulScalar(-.00005);
 			return this->oppositeVector;
 		}
 		else {

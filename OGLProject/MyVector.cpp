@@ -85,7 +85,10 @@ void MyVector::limit(float max)
 {
 	float size = magnitude();
 
-	if (size > max) {
+	if ((int)max == 0) {
+		set(0, 0, 0);
+	}
+	else if (size > max) {
 		set(vec.x / size, vec.y / size, vec.z / size);
 	}
 }

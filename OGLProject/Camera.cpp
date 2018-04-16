@@ -2,7 +2,7 @@
 #include "Std.hpp"
 #include "Camera.hpp"
 
-void Camera::calculateCamera(GLFWwindow* window, float mouseSpeed) {
+void Camera::calculateCamera(GLFWwindow* window, float mouseSpeed, bool fullscreen) {
 	double xpos, ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
 	
@@ -12,6 +12,28 @@ void Camera::calculateCamera(GLFWwindow* window, float mouseSpeed) {
 	// Compute new orientation
 	horizontalAngle += mouseSpeed * float(1024 / 2 - xpos);
 	verticalAngle += mouseSpeed * float(768 / 2 - ypos);
+
+	if (fullscreen && !setOriginFirstTime) {
+		verticalAngle = 0;
+		horizontalAngle = 3.14;
+		setOriginFirstTime = true;
+		this->position = glm::vec3(
+			this->cfg->INIT_CAMERA_POSITION.x,
+			this->cfg->INIT_CAMERA_POSITION.y,
+			this->cfg->INIT_CAMERA_POSITION.z
+		);
+	}
+
+	if (!fullscreen && setOriginFirstTime) {
+		verticalAngle = 0;
+		horizontalAngle = 3.14;
+		setOriginFirstTime = false;
+		this->position = glm::vec3(
+			this->cfg->INIT_CAMERA_POSITION.x,
+			this->cfg->INIT_CAMERA_POSITION.y,
+			this->cfg->INIT_CAMERA_POSITION.z
+		);
+	}
 
 	if (verticalAngle < -1.45) {
 		verticalAngle = -1.45;

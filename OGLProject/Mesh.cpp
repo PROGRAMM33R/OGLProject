@@ -163,7 +163,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 
 	if (instanceStorage->objType == DRAW_TYPE_SKY) {
 
-		glm::mat4 model; int size = 16000;
+		glm::mat4 model; int size = 20000;
 		//glm::vec3 position = glm::vec3(-190000, -182000, -180000);
 		glm::vec3 position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 27000, instanceStorage->cameraZ);
 		model = glm::translate(model, position);

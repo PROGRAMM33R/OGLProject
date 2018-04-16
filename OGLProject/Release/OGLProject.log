@@ -1,16 +1,12 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (OGLProject.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Mesh.cpp
+  Camera.cpp
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(216): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\adam\desktop\bachelorproject\oglproject\config.hpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\wall.hpp(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\boids.hpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(102): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(158): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(171): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\adam\desktop\bachelorproject\oglproject\mesh.cpp(252): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(18): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(29): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(39): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\adam\desktop\bachelorproject\oglproject\camera.cpp(42): warning C4305: '=': truncation from 'double' to 'float'
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
 Boids.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
 LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
@@ -79,6 +75,7 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\human\zombie.png
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\grass.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\landscape.blend
+  C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\landscape.blend1
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\landscape.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\landscape.obj
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\landscape\surface.mtl
@@ -145,7 +142,7 @@ SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.jpg
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.mtl
   C:\Users\adam\Desktop\BachelorProject\OGLProject\Models\wall\wall.obj
-  113 File(s) copied
+  114 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\config.cfg
   1 File(s) copied
   C:\Users\adam\Desktop\BachelorProject\OGLProject\map.txt

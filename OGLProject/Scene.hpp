@@ -13,5 +13,6 @@ public:
 		cfg(cfg) {}
 	~Scene();
 	GLFWwindow *initScene(void) const;
+	static void error_callback(int error, const char* description);
 
 };

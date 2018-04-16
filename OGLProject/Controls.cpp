@@ -72,7 +72,7 @@ void Controls::computeMatricesFromInputs(GLFWwindow* window) {
 		escapeDuration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
 	}
 
-	camera->calculateCamera(window, mouseSpeed);
+	camera->calculateCamera(window, mouseSpeed, fullscreen);
 
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
 		this->activatedFloor = 99;

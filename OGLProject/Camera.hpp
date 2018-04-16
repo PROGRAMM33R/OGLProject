@@ -15,13 +15,15 @@ private:
 	glm::vec3 right;
 	glm::vec3 direction;
 	Config *cfg;
+	bool setOriginFirstTime;
 
 public:
 	Camera(Config *cfg)
 	: 
 		horizontalAngle(3.14f),
 		verticalAngle(-0.4f),
-		cfg(cfg)
+		cfg(cfg),
+		setOriginFirstTime(true)
 	{
 		this->position = glm::vec3(
 			this->cfg->INIT_CAMERA_POSITION.x,
@@ -31,7 +33,7 @@ public:
 		this->initialFoV = this->cfg->FOV;
 	}
 	~Camera() {}
-	void calculateCamera(GLFWwindow* window, float mouseSpeed);
+	void calculateCamera(GLFWwindow* window, float mouseSpeed, bool fullscreen);
 	void calculateMVP(float initialFoV);
 	void setPosition(float position, string side);
 	glm::mat4 getMVP_(void) const;

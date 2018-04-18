@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Zdrojové soubory">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Hlavičkové soubory">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Soubory zdrojů">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Controls.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="MyVector.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Boids.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Flock.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Walls.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="MyVector2D.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="VertexShader.shader" />
+    <None Include="FragmentShader.shader" />
+    <None Include="app.config" />
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Controls.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Std.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVector.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Boids.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Flock.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawTypeObj.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Walls.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Hud.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="InstanceStorage.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVector2D.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

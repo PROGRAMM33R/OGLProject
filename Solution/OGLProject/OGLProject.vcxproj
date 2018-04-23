@@ -23,7 +23,7 @@
     <ProjectGuid>{C0AEE169-AC45-4030-8C4E-20D4642AD379}</ProjectGuid>
     <RootNamespace>OGLProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
-    <ProjectName>Bachelor</ProjectName>
+    <ProjectName>Boid</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -429,6 +429,8 @@ Walls::Walls(Map *map, Config *cfg, Controls *controls)
 	this->ISFloor = new InstanceStorage(NULL, DRAW_TYPE_FLOOR, NULL, NULL);
 	this->ISPath = new InstanceStorage(NULL, DRAW_TYPE_EXIT, NULL, NULL);
 
+	cout << "Count of walls: " << outputCountOfWalls << endl;
+
 }
 
 int Walls::isInArray(char arr[], int size, char c) 

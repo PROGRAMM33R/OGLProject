@@ -12,8 +12,26 @@
 
 int main(int argc, char **argv) {
 
-	Config		*cfg = argc == 2 ? cfg = new Config(argv[1]) : cfg = new Config("config.cfg");;
-	Map         *map = new Map();
+	Config		*cfg;
+	Map         *map;
+
+	if (argc == 2) {
+		cfg = new Config(argv[1]);
+		map = new Map("map.txt");
+	}
+	else {
+
+		if (argc == 3) {
+			cfg = new Config(argv[1]);
+			map = new Map(argv[2]);
+		}
+		else {
+			cfg = new Config("config.cfg");
+			map = new Map("map.txt");
+		}
+
+	}
+
 	GLFWwindow  *window = NULL;
 	Scene       *scene = new Scene(cfg);
 	Controls    *controls = new Controls(cfg);

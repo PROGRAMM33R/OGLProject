@@ -3,6 +3,8 @@
 #include "Mesh.hpp"
 #include "Boids.hpp"
 #include "Wall.hpp"
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Config *cfg) {
 	this->vertices = vertices;
@@ -17,6 +19,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 	if (instanceStorage->Boidss != NULL && (instanceStorage->objType == DRAW_TYPE_BOIDS || instanceStorage->objType == DRAW_TYPE_PREDATOR)) {
 
 		glm::mat4 model;
+		mat4 rotationMatrix;
 		glm::vec3 position = glm::vec3(
 			instanceStorage->Boidss->location->vec.x, 
 			instanceStorage->Boidss->location->vec.y, 
@@ -32,11 +35,34 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 		else {
 			
 			//model = glm::rotate(model, instanceStorage->Boidss->angleX(instanceStorage->Boidss->velocity), glm::vec3(1, 0, 0));
-			model = glm::rotate(model,  (instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity)) + ((float)3.14 / (float)2) * -1 , glm::vec3(0, 1, 0));
-			model = glm::rotate(model, instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity), glm::vec3(0, 0, 1));
+			//model = glm::rotate(model,  (instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity)) + ((float)3.14 / (float)2) * -1 , glm::vec3(0, 1, 0));
 
+			/*float result = instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity);
+			if (result >= 0)
+				model = glm::rotate(model, result, glm::vec3(0, 0, 1));
+			else {
+				model = glm::rotate(model, (float)3.14, glm::vec3(1, 0, 0));
+				model = glm::rotate(model, result, glm::vec3(0, 0, 1));
+			}*/
+				
+
+			//cout << instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity) << endl;
+
+			quat MyQuaternion;
+
+			vec3 EulerAngles(
+				//instanceStorage->Boidss->angleX(instanceStorage->Boidss->velocity),
+				0,
+				(instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity)) + ((float)3.14 / (float)2) * -1, 
+				//0,
+				instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity) 
+			);
+			MyQuaternion = quat(EulerAngles);
+
+			rotationMatrix = glm::toMat4(MyQuaternion);
+			
 		}
-		
+
 		model = glm::translate(
 			model, 
 			glm::vec3(
@@ -45,7 +71,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 				instanceStorage->Boidss->size.z
 			)
 		);
-		model = glm::scale(model, glm::vec3(instanceStorage->Boidss->size));
+		model = glm::scale(model, glm::vec3(instanceStorage->Boidss->size)) * rotationMatrix;
 
 		this->setTransparency(instanceStorage);
 		instanceStorage->shader->setMat4("Model", model);
@@ -169,7 +195,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 		glm::vec3 position;
 		
 		if (this->cfg->SCENE_TYPE == "3D") {
-			position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 38000, instanceStorage->cameraZ);
+			position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 50000, instanceStorage->cameraZ);
 		}
 		else {
 			position = glm::vec3(instanceStorage->cameraX, instanceStorage->cameraY - 27000, instanceStorage->cameraZ);

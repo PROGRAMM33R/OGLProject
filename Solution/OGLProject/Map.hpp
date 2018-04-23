@@ -11,9 +11,9 @@ class Map {
 public:
 	vector<vector<char>*> *map;
 
-	Map() {
+	Map(string path) {
 
-		std::ifstream in("map.txt");
+		std::ifstream in(path);
 		std::string contents((std::istreambuf_iterator<char>(in)),
 			std::istreambuf_iterator<char>());
 

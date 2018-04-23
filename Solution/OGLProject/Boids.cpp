@@ -529,14 +529,38 @@ MyVector *Boids::WallRepel() {
 
 	if (cfg->SCENE_TYPE == "3D") {
 
-		if (location->distance(this->origin) > (cfg->BOID_CUBE_SIZE / 2)) {
+		if (cfg->BOID_SPACE_TYPE == "cube") {
+
+			if (
+				location->vec.x <= -this->cubeSize ||
+				location->vec.x >= this->cubeSize ||
+				location->vec.y <= -this->cubeSize ||
+				location->vec.y >= this->cubeSize ||
+				location->vec.z <= -this->cubeSize ||
+				location->vec.z >= this->cubeSize
+				) {
+				this->oppositeVector->addVector(location);
+				this->oppositeVector->mulScalar(-.0005);
+				return this->oppositeVector;
+			}
+			else {
+				this->oppositeVector->set();
+				return this->oppositeVector;
+			}
+
+		}
+		else if (cfg->BOID_SPACE_TYPE == "sphere") {
+
+			if (location->distance(this->origin) > (cfg->BOID_CUBE_SIZE / 2)) {
 			this->oppositeVector->addVector(location);
 			this->oppositeVector->mulScalar(-.00005);
 			return this->oppositeVector;
-		}
-		else {
+			}
+			else {
 			this->oppositeVector->set();
 			return this->oppositeVector;
+			}
+
 		}
 
 	}

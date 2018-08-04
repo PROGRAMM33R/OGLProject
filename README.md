@@ -17,17 +17,13 @@ https://github.com/ben-grid/Mechstorming/
 
 ## Screens
 
-Rendered building
+<b>Rendered building</b><br>
 <a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg" align="left" width="500" ></a>
 
-Rendered building - side perspective
+<br>
+<b>Rendered building - side perspective</b><br>
 <a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen3.jpg" align="left" width="500" ></a>
 
-Flock simulation with object avoiding
+<br>
+<b>Flock simulation with object avoiding</b><br>
 <a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/new_fish4.jpg" align="left" width="500" ></a>
-
-[//]: <> (![Rendered building](http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg))
-
-[//]: <> (![Rendered building - side perspective](http://adam-lasak.xf.cz/w/bachelor-images/newscreen3.jpg))
-
-[//]: <> (![Flock simulation with object avoiding](http://adam-lasak.xf.cz/w/bachelor-images/new_fish4.jpg))

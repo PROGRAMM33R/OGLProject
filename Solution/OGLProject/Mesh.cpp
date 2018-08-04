@@ -35,31 +35,15 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 		else {
 			
 			//model = glm::rotate(model, instanceStorage->Boidss->angleX(instanceStorage->Boidss->velocity), glm::vec3(1, 0, 0));
-			//model = glm::rotate(model,  (instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity)) + ((float)3.14 / (float)2) * -1 , glm::vec3(0, 1, 0));
+			//model = glm::rotate(model,  (instanceStorage->Boidss->angleFi(instanceStorage->Boidss->velocity)) + ((float)3.14 / (float)2) * -1 , glm::vec3(0, 1, 0));
+			//model = glm::rotate(model, instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity), glm::vec3(0, 0, 1));
 
-			/*float result = instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity);
-			if (result >= 0)
-				model = glm::rotate(model, result, glm::vec3(0, 0, 1));
-			else {
-				model = glm::rotate(model, (float)3.14, glm::vec3(1, 0, 0));
-				model = glm::rotate(model, result, glm::vec3(0, 0, 1));
-			}*/
-				
+			float result = instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity);
+			if (result > 0)
+				model = glm::rotate(model, result - (float)1.75, glm::vec3(0, 1, 0));
 
-			//cout << instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity) << endl;
-
-			quat MyQuaternion;
-
-			vec3 EulerAngles(
-				//instanceStorage->Boidss->angleX(instanceStorage->Boidss->velocity),
-				0,
-				(instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity)) + ((float)3.14 / (float)2) * -1, 
-				//0,
-				instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity) 
-			);
-			MyQuaternion = quat(EulerAngles);
-
-			rotationMatrix = glm::toMat4(MyQuaternion);
+			model = glm::rotate(model, instanceStorage->Boidss->angleZ(instanceStorage->Boidss->velocity), glm::vec3(0, 0, 1));
+			//cout << instanceStorage->Boidss->angleY(instanceStorage->Boidss->velocity) << endl;
 			
 		}
 
@@ -71,7 +55,7 @@ void Mesh::Draw(InstanceStorage *instanceStorage) {
 				instanceStorage->Boidss->size.z
 			)
 		);
-		model = glm::scale(model, glm::vec3(instanceStorage->Boidss->size)) * rotationMatrix;
+		model = glm::scale(model, glm::vec3(instanceStorage->Boidss->size));
 
 		this->setTransparency(instanceStorage);
 		instanceStorage->shader->setMat4("Model", model);

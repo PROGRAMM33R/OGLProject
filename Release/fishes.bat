@@ -1,1 +1,0 @@
-Bachelor.exe configFish.cfg

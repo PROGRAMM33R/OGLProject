@@ -1,0 +1,1 @@
+Boid.exe configEscapeLabyrinth2.cfg map_variant_labyrinth_2.txt

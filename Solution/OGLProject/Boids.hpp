@@ -77,4 +77,8 @@ public:
 	float angleY(MyVector *v) const;
 	float angleZ(MyVector *v) const;
 
+	float angleR(MyVector *v) const;
+	float angleFi(MyVector *v) const;
+	float angleTheta(MyVector *v) const;
+
 };

@@ -553,7 +553,7 @@ MyVector *Boids::WallRepel() {
 
 			if (location->distance(this->origin) > (cfg->BOID_CUBE_SIZE / 2)) {
 			this->oppositeVector->addVector(location);
-			this->oppositeVector->mulScalar(-.00005);
+			this->oppositeVector->mulScalar(-.0001);
 			return this->oppositeVector;
 			}
 			else {
@@ -645,4 +645,21 @@ float Boids::angleY(MyVector *v) const
 float Boids::angleZ(MyVector *v) const
 {
 	return (float)(atan2(v->vec.y, v->vec.x));
+}
+
+float Boids::angleR(MyVector *v) const
+{
+	return (float)(sqrt(v->vec.x*v->vec.x + v->vec.y*v->vec.y + v->vec.z*v->vec.z));
+}
+
+float Boids::angleFi(MyVector *v) const
+{
+	return (float)(atan2(v->vec.x, v->vec.z));
+}
+
+float Boids::angleTheta(MyVector *v) const
+{
+	/*float r = angleR(v);
+	return (float)(acos(v->vec.z / r));*/
+	return (float)(atan2(hypot(v->vec.x, v->vec.z), v->vec.y));
 }

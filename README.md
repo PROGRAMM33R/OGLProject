@@ -17,6 +17,8 @@ https://github.com/ben-grid/Mechstorming/
 
 ## Screens
 
+<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg" align="left" height="48" width="48" ></a>
+
 ![Rendered building](http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg | width=500)
 
 ![Rendered building - side perspective](http://adam-lasak.xf.cz/w/bachelor-images/newscreen3.jpg | width=500)

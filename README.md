@@ -17,10 +17,17 @@ https://github.com/ben-grid/Mechstorming/
 
 ## Screens
 
-<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg" align="left" height="48" width="48" ></a>
+Rendered building
+<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg" align="left" width="500" ></a>
 
-![Rendered building](http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg | width=500)
+Rendered building - side perspective
+<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen3.jpg" align="left" width="500" ></a>
 
-![Rendered building - side perspective](http://adam-lasak.xf.cz/w/bachelor-images/newscreen3.jpg | width=500)
+Flock simulation with object avoiding
+<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/new_fish4.jpg" align="left" width="500" ></a>
 
-![Flock simulation with object avoiding](http://adam-lasak.xf.cz/w/bachelor-images/new_fish4.jpg | width=500)
+[//]: <> (![Rendered building](http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg))
+
+[//]: <> (![Rendered building - side perspective](http://adam-lasak.xf.cz/w/bachelor-images/newscreen3.jpg))
+
+[//]: <> (![Flock simulation with object avoiding](http://adam-lasak.xf.cz/w/bachelor-images/new_fish4.jpg))

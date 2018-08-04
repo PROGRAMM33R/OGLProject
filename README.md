@@ -19,16 +19,16 @@ https://github.com/ben-grid/Mechstorming/
 
 **Rendered building**
 
-<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg" align="left" width="600" ></a>
+<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen2.jpg" width="600" ></a>
 
 
 
 **Rendered building - side perspective**
 
-<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen3.jpg" align="left" width="600" ></a>
+<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/newscreen3.jpg" width="600" ></a>
 
 
 
 **Flock simulation with object avoiding**
 
-<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/new_fish4.jpg" align="left" width="600" ></a>
+<a href="url"><img src="http://adam-lasak.xf.cz/w/bachelor-images/new_fish4.jpg" width="600" ></a>
